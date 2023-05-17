@@ -49,7 +49,8 @@ def findTopX(boss_hiscore : json, x : int):
     topX = []
     for entry in boss_hiscore:
         player, data = entry['player'], entry['data']
-        topX.append({ 'displayName': player['displayName'], 'kills': data['kills'] })
+        topX.append({ 'displayName': player['displayName'], 
+                     'kills': "{:,}".format(data['kills']).replace(",", " ") })
         if(len(topX) >= x):
             break
     return topX
