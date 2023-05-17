@@ -8,6 +8,6 @@ A **secrets.json** file should be created in the root folder with the following 
     "WOM_API_KEY": "",
     "WOM_GROUP": 1234,
     "UPDATE_HS_EVERY_X_MIN": 10,
-    "HS_CHANNEL_ID": ""
+    "HS_CHANNEL_ID": 123456789
 }
 ```

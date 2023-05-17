@@ -75,7 +75,7 @@ def formatBossesTopX(all_bosses_topX : list):
 
 class BotClient(discord.Client):
     @tasks.loop(minutes=secrets['UPDATE_HS_EVERY_X_MIN'])
-    async def update_hs_channel():
+    async def update_hs_channel(self):
         print("Updating HS")
         try:
             channel = client.get_channel(secrets['HS_CHANNEL_ID'])
