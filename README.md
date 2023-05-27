@@ -1,5 +1,5 @@
-# Pcote's OSRS Discord Bot
-**A Discord bot with some OSRS utilities.**
+# Pcote's Discord Bot
+**A Discord bot with some utilities.**
 
 ## Features
 
@@ -9,7 +9,6 @@
 * Top X leaderboard
 ![Top3.png](./images/Top3.png)
 
-
 ## Installation
 [Install Python](https://www.python.org/downloads/)
 
@@ -17,27 +16,40 @@ Install PIP
 ```
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python get-pip.py
-del ./get-pip.py
+del get-pip.py
 ```
 
 Install the necessary packages 
 ```
-pip install discord
-pip install requests
+pip3 install -r requirements.txt
 ```
 
 ## Configuration
 
-A **secrets.json** file should be created in the root folder with the following content filled properly.
+A **config.json** file should be created in the root folder with the following content filled properly.
 ```JSON
 {
-    "BOT_TOKEN": "",
-    "WOM_API_KEY": "",
-    "WOM_GROUP": 1234,
-    "UPDATE_HS_EVERY_X_MIN": 30,
-    "HS_CHANNEL_ID": 123456789,
-    "TOP_X": 3
+    "BOT_DESCRIPTION": "",
+    "DATABASE": false,
+    "BOT_PREFIX": "!",
+    "HISCORES": [
+        {
+            "server_name": "",
+            "wom_group": 1234,
+            "discord_channel": 12345567890,
+            "update_frequency_min": 30,
+            "displayed_top_x": 3
+        }
+    ]
 }
+```
+
+A **.env** file should be created in the root folder for your sensitive configurations and tokens. Any key-value pair in it will overwrite the *config.json*'s equivalent. The following content should be filled properly.
+```
+BOT_TOKEN=""
+MONGO_CONNECTION_STRING=""
+MONGO_DATABASE_NAME=""
+WOM_API_KEY=""
 ```
 
 ## Execution
@@ -46,3 +58,6 @@ Simply run this command from the root directory.
 ```
 python main.py
 ```
+
+## Bot invitation link
+https://discord.com/api/oauth2/authorize?client_id=1100974700949159986&permissions=2419452944&scope=bot
