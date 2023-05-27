@@ -1,5 +1,5 @@
 import traceback
-import datetime
+from datetime import datetime
 import nextcord as discord
 from nextcord.ext import commands
 
