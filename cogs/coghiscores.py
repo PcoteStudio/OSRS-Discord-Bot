@@ -18,9 +18,12 @@ class CogHiscores(commands.Cog):
             self.hiscores.append(Hiscores(config.get('WOM_API_KEY'),
                                           entry['wom_group'],
                                           entry['discord_channel'],
-                                          entry['update_frequency_min'],
                                           entry['displayed_top_x'],
-                                          entry['server_name']))
+                                          entry['update_frequency_min'],
+                                          entry['server_name'],
+                                          entry['display_boss'],
+                                          entry['display_clue'],
+                                          entry['display_activity']))
 
     async def update_hs_channel(self, hs):
         logging.info(f"Updating HS for {hs.server_name}...")
@@ -30,9 +33,7 @@ class CogHiscores(commands.Cog):
             async for msg in channel.history():
                 if (msg.author.id == self.bot.user.id):
                     botMsgs.insert(0, msg)
-            topX = await hs.getAllBossesTopX(hs.displayed_top_x)
-            content = hs.formatBosses(topX)
-            content = hs.splitContentInMessages(content, 1600)
+            content = await hs.getUpdatedHiscoresToPost(1600)
 
             i = 0
             for msg in botMsgs:
