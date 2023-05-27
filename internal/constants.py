@@ -1,3 +1,4 @@
+EMOJI_DICE = '🎲'
 EMOJI_CONFIRM = '🟩'
 EMOJI_CANCEL = '🟥'
 EMOJI_LOADING = '⏳'
