@@ -9,16 +9,6 @@ class ErrorHandler(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-        @bot.event
-        async def on_application_command_error(interaction: nextcord.Interaction, error):
-            classname = error.__class__
-            if classname in self._error_messages.keys():
-                msg = self._error_messages.get(classname, None)
-                if isinstance(msg, str):
-                    await interaction.send(":x: " + msg.format(err=error))
-            else:
-                logging.error("TODO Handle application command errors")
-
     # Extend this dict with your custom errors. Put the error class as key and the message you want to send as value.
     # The message can be formatted with the context referred as "ctx" and the error object as "err".
     # For more info on formatting, read https://pyformat.info/
@@ -69,6 +59,16 @@ class ErrorHandler(commands.Cog):
             await channel.send(embed=embed)
         except:
             pass
+
+    @commands.Cog.listener()
+    async def on_application_command_error(self, interaction: nextcord.Interaction, error):
+        classname = error.__class__
+        if classname in self._error_messages.keys():
+            msg = self._error_messages.get(classname, None)
+            if isinstance(msg, str):
+                await interaction.send(":x: " + msg.format(err=error))
+        else:
+            logging.error("TODO Handle application command errors")
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx: commands.Context, error):
