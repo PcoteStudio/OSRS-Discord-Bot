@@ -15,6 +15,8 @@ class CogHiscores(commands.Cog):
         config = configmanager.instance
         hs_config = config.get('HISCORES')
         for entry in hs_config:
+            if entry['enabled'] == False:
+                continue
             self.hiscores.append(Hiscores(config.get('WOM_API_KEY'),
                                           entry['wom_group'],
                                           entry['discord_channel'],
