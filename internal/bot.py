@@ -1,7 +1,6 @@
-import asyncio
 import datetime
 import logging
-import nextcord as discord
+import nextcord
 from nextcord.ext import commands
 from pathlib import Path
 
@@ -40,7 +39,7 @@ class Bot(commands.Bot):
 
     async def on_ready(self):
         self.app_info = await self.application_info()
-        logging.info(f'Using nextcord version: {discord.__version__}')
+        logging.info(f'Using nextcord version: {nextcord.__version__}')
         logging.info(f'Logged in as: {self.user.name}')
         logging.info(f'Owner: {self.app_info.owner}')
 

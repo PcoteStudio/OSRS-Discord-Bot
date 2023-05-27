@@ -93,7 +93,7 @@ class Hiscores():
                 post += f"{act['displayName']}```"
                 for i, data in enumerate(act['topX']):
                     post += f"\n{i+1}. {data['displayName']}: {data['kills']}"
-                post += " ```"
+                post += " ```\n"
         return post
 
     async def getUpdatedHiscoresToPost(self, split_length):

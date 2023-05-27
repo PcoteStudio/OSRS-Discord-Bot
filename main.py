@@ -1,5 +1,5 @@
 from internal.bot import Bot
-import nextcord as discord
+import nextcord
 import logging
 import asyncio
 
@@ -24,7 +24,7 @@ async def run():
         databasemanager.init(config.get('MONGO_CONNECTION_STRING'),
                              config.get('MONGO_DATABASE_NAME'))
 
-    intents = discord.Intents.default()
+    intents = nextcord.Intents.default()
     intents.message_content = True
     bot = Bot(
         config=config,

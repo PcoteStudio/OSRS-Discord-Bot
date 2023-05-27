@@ -1,10 +1,10 @@
-import nextcord as discord
+import nextcord
 import asyncio
 from nextcord.ext import commands
 from internal import constants
 
 
-async def confirm(ctx: commands.Context, message: discord.Message):
+async def confirm(ctx: commands.Context, message: nextcord.Message):
 
     def check(r, u):
         return str(r.emoji) in (constants.EMOJI_CONFIRM, constants.EMOJI_CANCEL) and u.id == ctx.author.id and r.message.id == message.id

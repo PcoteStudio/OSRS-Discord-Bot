@@ -1,4 +1,4 @@
-import nextcord as discord
+import nextcord
 from internal.hiscores import Hiscores
 from nextcord.ext import commands, tasks
 from internal import confirmation, constants
