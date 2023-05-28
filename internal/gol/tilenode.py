@@ -1,7 +1,11 @@
+from bson.objectid import ObjectId
+
 
 class TileNode:
-    def __init__(self, id: int, task: str):
-        self.id = id
+    def __init__(self, game_id: ObjectId, index: int, task: str = '', _id: ObjectId = None):
+        self._id = _id or ObjectId()
+        self.game_id = game_id
+        self.index = index
         self.task = task
         self.pawn_location = (0, 0)
         self.pawn_direction = 0

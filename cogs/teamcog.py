@@ -1,5 +1,5 @@
 import nextcord
-from nextcord.ext import commands, application_checks
+from nextcord.ext import commands
 from internal import constants, utils
 from internal.gol.team import Team
 
@@ -8,22 +8,12 @@ class TeamCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    def is_gol_admin():
-        def predicate(interaction: nextcord.Interaction):
-            return True  # Until implemented
-        return application_checks.check(predicate)
-
     @nextcord.slash_command(guild_ids=[933103168374583417])
     async def team(self, interaction):
-        role = nextcord.utils.get(interaction.guild.roles, name="Wololo")
-        if role not in interaction.user.roles:
-            await interaction.send(f'{constants.EMOJI_CANCEL} You do not have the rights to use this command.')
-            return
+        pass
 
-        await interaction.send('You have the rights to use this command')
-
-    @is_gol_admin()
     @team.subcommand()
+    @utils.is_gol_admin()
     async def create(self, interaction: nextcord.Interaction, name: str, emoji: str, users: str):
         team = Team(name, emoji, await utils.convert_mentions_string_into_members(interaction.guild, users))
 
