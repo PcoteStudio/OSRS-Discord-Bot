@@ -4,7 +4,7 @@ from internal import constants, utils
 from internal.gol.team import Team
 
 
-class CogGolTeam(commands.Cog):
+class TeamCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -34,4 +34,4 @@ class CogGolTeam(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(CogGolTeam(bot))
+    bot.add_cog(TeamCog(bot))

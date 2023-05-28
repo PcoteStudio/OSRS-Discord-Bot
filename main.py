@@ -1,7 +1,7 @@
-from internal.bot import Bot
 import nextcord
 import logging
 import asyncio
+from internal.bot import Bot
 
 
 def load_config():

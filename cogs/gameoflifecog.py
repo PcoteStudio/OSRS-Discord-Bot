@@ -4,7 +4,7 @@ from nextcord.ext import commands
 from internal import constants, choiceform
 
 
-class CogGameOfLife(commands.Cog):
+class GameOfLifeCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -26,4 +26,4 @@ class CogGameOfLife(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(CogGameOfLife(bot))
+    bot.add_cog(GameOfLifeCog(bot))

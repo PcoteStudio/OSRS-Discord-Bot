@@ -4,5 +4,5 @@ from internal.databasemanager import instance
 
 
 @instance.register
-class GameOfLife(Document):
+class GameOfLifeDoc(Document):
     attribute = StringField(required=True, max_length=200)

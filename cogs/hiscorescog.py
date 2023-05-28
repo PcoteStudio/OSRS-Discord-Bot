@@ -1,11 +1,10 @@
-import nextcord
 from internal.hiscores import Hiscores
 from nextcord.ext import commands, tasks
-from internal import confirmation, constants
+from internal import constants
 import logging
 
 
-class CogHiscores(commands.Cog):
+class HiscoresCog(commands.Cog):
     started_tasks = []
 
     def __init__(self, bot):
@@ -73,4 +72,4 @@ class CogHiscores(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(CogHiscores(bot))
+    bot.add_cog(HiscoresCog(bot))
