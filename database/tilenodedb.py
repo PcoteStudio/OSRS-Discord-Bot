@@ -4,7 +4,7 @@ from collections.abc import Iterable
 
 
 async def get_all_by_game_id(game_id: int, limit=1000):
-    docs = await instance.tile_node_doc.find({'game_id': game_id}).sort('index').to_list(length=limit)
+    docs = await instance.tile_node.find({'game_id': game_id}).sort('index').to_list(length=limit)
     if docs is None:
         return []
 
@@ -38,7 +38,7 @@ async def insert_many(tiles: Iterable[TileNode]):
         for exit in tile.exits:
             doc['exits'].append(exit._id)
         docs.append(doc)
-    return await instance.tile_node_doc.insert_many(docs)
+    return await instance.tile_node.insert_many(docs)
 
 
 def doc_to_tile(doc):

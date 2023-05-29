@@ -21,7 +21,7 @@ del get-pip.py
 
 Install the necessary packages 
 ```
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Configuration

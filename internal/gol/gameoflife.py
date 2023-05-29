@@ -9,6 +9,12 @@ def init():
     games = {}
 
 
+def get_game(guild_id: int):
+    if guild_id in games:
+        return games[guild_id]
+    return None
+
+
 class GameOfLife:
     def __init__(self, guild_id: int, name: str, _id=None):
         self._id = _id or ObjectId()
@@ -24,7 +30,7 @@ class GameOfLife:
 
     def add_team(self, team: Team):
         if team not in self.teams:
-            self.team.append(team)
+            self.teams.append(team)
 
     def remove_team(self, team: Team):
         if team in self.teams:

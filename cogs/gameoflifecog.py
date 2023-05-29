@@ -11,17 +11,16 @@ class GameOfLifeCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    @utils.is_in_guild()
     @nextcord.slash_command(guild_ids=[933103168374583417])
     async def gol(self, interaction):
         pass
 
     @gol.subcommand()
-    @utils.is_in_guild()
     @utils.is_gol_admin()
     async def create(self, interaction: nextcord.Interaction, name: str):
         game_was_archived = False
-        game = None if interaction.guild.id not in gameoflife.games else gameoflife.games[
-            interaction.guild.id]
+        game = gameoflife.get_game(interaction.guild.id)
         if game is not None:
             await interaction.send(f'A GoL session already exists for this server. Do you wish to overwrite **{game.name}**?')
             choice = await choiceform.slash_choose(self.bot, interaction, [constants.EMOJI_CONFIRM, constants.EMOJI_CANCEL])
@@ -44,9 +43,30 @@ class GameOfLifeCog(commands.Cog):
         gameoflife.games[game.guild_id] = game
         content = f"A GoL session **{name}** was successfully created for this server."
         if game_was_archived:
-            await interaction.edit_original_message(content=content)
+            await interaction.edit_original_message(content)
         else:
-            await interaction.send(content=content)
+            await interaction.send(content)
+
+    @gol.subcommand()
+    @utils.is_gol_admin()
+    async def archive(self, interaction: nextcord.Interaction):
+        game = None if interaction.guild.id not in gameoflife.games else gameoflife.games[
+            interaction.guild.id]
+        if game is None:
+            await interaction.send(f':x: There is no active GoL session on this server to archive.')
+            return
+        await interaction.send(f'Do you really wish to archive the GoL session **{game.name}** from this server?')
+        choice = await choiceform.slash_choose(self.bot, interaction, [constants.EMOJI_CONFIRM, constants.EMOJI_CANCEL])
+        if choice == None:
+            await interaction.edit_original_message(content='The GoL session archiving has been canceled after no reaction from the user.')
+            return
+        elif choice == 1:
+            await interaction.edit_original_message(content='The GoL session archiving has been canceled by the user.')
+            return
+        else:
+            await gameoflifedb.archive(game)
+            gameoflife.games[game.guild_id] = None
+            await interaction.edit_original_message(content=f'The existing GoL session **{game.name}** has been archived.')
 
     @commands.command(name="roll")
     @commands.bot_has_permissions(add_reactions=True)

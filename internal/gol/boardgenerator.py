@@ -31,7 +31,7 @@ def generate_board(game_id):
     nodes = []
 
     nodes.append(TileNode(game_id, index=len(nodes)))  # End node
-    generate_line(game_id, nodes, nodes[-1], 25)
+    generate_line(game_id, nodes, nodes[-1], 26)
     n_forking = generate_branch(game_id, nodes, nodes[-1], 2, 3)
     generate_line(game_id, nodes, n_forking, 11)
     n_forking = generate_branch(game_id, nodes, nodes[-1], 3, 3)

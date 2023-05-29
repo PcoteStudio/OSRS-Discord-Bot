@@ -35,7 +35,7 @@ class Bot(commands.Bot):
             except Exception as e:
                 error = f'{extension}\n {type(e).__name__} : {e}'
                 logging.error(f'Failed to load extension {error}')
-        self.load_extension('onami')
+        # self.load_extension('onami')
 
     async def on_ready(self):
         self.app_info = await self.application_info()
