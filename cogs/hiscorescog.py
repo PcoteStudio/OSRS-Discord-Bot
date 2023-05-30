@@ -16,7 +16,7 @@ class HiscoresCog(commands.Cog):
         for entry in hs_config:
             if entry['enabled'] == False:
                 continue
-            self.hiscores.append(Hiscores(config.get('WOM_API_KEY'),
+            self.hiscores.append(Hiscores(config.get('PCOTE_WOM_API_KEY'),
                                           entry['wom_group'],
                                           entry['discord_channel'],
                                           entry['displayed_top_x'],
@@ -67,8 +67,6 @@ class HiscoresCog(commands.Cog):
                 await ctx.message.add_reaction(constants.EMOJI_LOADING)
                 await self.update_hs_channel(hs)
                 await ctx.message.delete()
-                return
-        await ctx.message.add_reaction(constants.EMOJI_CANCEL)
 
 
 def setup(bot):

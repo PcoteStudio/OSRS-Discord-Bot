@@ -46,10 +46,10 @@ A **config.json** file should be created in the root folder with the following c
 
 A **.env** file should be created in the root folder for your sensitive configurations and tokens. Any key-value pair in it will overwrite the *config.json*'s equivalent. The following content should be filled properly.
 ```
-BOT_TOKEN=""
-MONGO_CONNECTION_STRING=""
-MONGO_DATABASE_NAME=""
-WOM_API_KEY=""
+PCOTE_BOT_TOKEN=""
+PCOTE_MONGO_CONNECTION_STRING=""
+PCOTE_MONGO_DATABASE_NAME=""
+PCOTE_WOM_API_KEY=""
 ```
 
 ## Execution

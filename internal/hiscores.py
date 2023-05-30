@@ -3,10 +3,10 @@ from internal import constants
 
 
 class Hiscores():
-    def __init__(self, wom_api_key: str, wom_group: int, channel_id: int,
+    def __init__(self, PCOTE_WOM_API_KEY: str, wom_group: int, channel_id: int,
                  displayed_top_x: int, update_frequency_min: int, server_name: str,
                  display_boss: bool, display_clue: bool, display_activity: bool):
-        self.wom_api_key = wom_api_key
+        self.PCOTE_WOM_API_KEY = PCOTE_WOM_API_KEY
         self.wom_group = wom_group
         self.channel_id = channel_id
         self.update_frequency_min = update_frequency_min
@@ -17,7 +17,7 @@ class Hiscores():
         self.display_activity = display_activity
 
     async def getHiscore(self, metric: str, top_x: int):
-        async with aiohttp.ClientSession(headers={"x-api-key": self.wom_api_key}) as session:
+        async with aiohttp.ClientSession(headers={"x-api-key": self.PCOTE_WOM_API_KEY}) as session:
             async with session.get(f"https://api.wiseoldman.net/v2/groups/{self.wom_group}/hiscores?metric={metric}&limit={top_x}") as resp:
                 boss_hiscore = await resp.json()
                 return boss_hiscore
