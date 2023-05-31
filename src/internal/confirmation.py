@@ -1,7 +1,7 @@
 import nextcord
 import asyncio
 from nextcord.ext import commands
-from src.internal import constants
+from internal import constants
 
 
 async def confirm(ctx: commands.Context, message: nextcord.Message):

@@ -1,4 +1,4 @@
-from src.internal.gol.tilenode import TileNode
+from internal.gol.tilenode import TileNode
 
 
 def generate_line(game_id, nodes, n_forking, length):

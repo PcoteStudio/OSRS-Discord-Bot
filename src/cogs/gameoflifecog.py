@@ -3,10 +3,10 @@ import os
 import json
 import nextcord
 from nextcord.ext import commands
-from src.internal import choiceform, utils, constants
-from src.internal.gol import gameoflife
-from src.internal.gol.gameoflife import GameOfLife
-from src.database import tilenodedb, gameoflifedb
+from internal import choiceform, utils, constants
+from internal.gol import gameoflife
+from internal.gol.gameoflife import GameOfLife
+from database import tilenodedb, gameoflifedb
 
 
 class GameOfLifeCog(commands.Cog):
@@ -81,7 +81,6 @@ class GameOfLifeCog(commands.Cog):
             content = json.load(doc)
             game.load_tiles(content)
             await interaction.send(f"Tiles loaded successfully.")
-            
 
     @commands.command(name="roll")
     @commands.bot_has_permissions(add_reactions=True)

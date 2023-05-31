@@ -1,7 +1,7 @@
 import nextcord
 import asyncio
 from nextcord.ext import commands
-from src.internal.bot import Bot
+from internal.bot import Bot
 
 
 async def slash_choose(bot: Bot, interaction: nextcord.Interaction, emojis: list):

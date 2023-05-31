@@ -1,9 +1,9 @@
 import nextcord
 from nextcord.ext import commands
-from src.internal import utils
-from src.internal.gol.team import Team
-from src.internal.gol import gameoflife
-from src.database import teamdb
+from internal import utils
+from internal.gol.team import Team
+from internal.gol import gameoflife
+from database import teamdb
 
 
 class TeamCog(commands.Cog):

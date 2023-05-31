@@ -1,5 +1,5 @@
 import aiohttp
-from src.internal import constants
+from internal import constants
 
 
 class Hiscores():

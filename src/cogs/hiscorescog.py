@@ -1,6 +1,6 @@
-from src.internal.hiscores import Hiscores
+from internal.hiscores import Hiscores
 from nextcord.ext import commands, tasks
-from src.internal import constants
+from internal import constants
 import logging
 
 
@@ -8,7 +8,7 @@ class HiscoresCog(commands.Cog):
     started_tasks = []
 
     def __init__(self, bot):
-        from src.internal import configmanager
+        from internal import configmanager
         self.bot = bot
         self.hiscores = []
         config = configmanager.instance

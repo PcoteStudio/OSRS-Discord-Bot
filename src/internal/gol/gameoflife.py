@@ -1,6 +1,6 @@
-from src.internal.gol.team import Team
+from internal.gol.team import Team
 from bson.objectid import ObjectId
-from src.internal.gol import boardgenerator
+from internal.gol import boardgenerator
 
 games = {}
 
