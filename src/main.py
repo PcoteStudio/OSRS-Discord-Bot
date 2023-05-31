@@ -7,24 +7,19 @@ from internal.bot import Bot
 
 def load_config():
     from os.path import join, dirname
-    from dotenv import dotenv_values
     from internal import configmanager
 
-    dotenv_path = join(dirname(__file__), 'config/.env')
-    env_config = dotenv_values(dotenv_path)
-
     configmanager.init(join(dirname(__file__), 'config/serverSettings.json'), 'utf-8')
-    configmanager.instance = {**configmanager.instance, **env_config}
     return configmanager.instance
 
 
 async def run():
     config = load_config()
 
-    if config.get('PCOTE_DATABASE') is True:
+    if config.get('DATABASE') is True:
         from internal import databasemanager
-        databasemanager.init(config.get('PCOTE_MONGO_CONNECTION_STRING'),
-                             config.get('PCOTE_MONGO_DATABASE_NAME'))
+        databasemanager.init(config.get('MONGO_CONNECTION_STRING'),
+                             config.get('MONGO_DATABASE_NAME'))
 
     intents = nextcord.Intents.default()
     intents.message_content = True
@@ -37,7 +32,7 @@ async def run():
     bot.config = config
 
     try:
-        token = config.get('PCOTE_BOT_TOKEN')
+        token = config.get('BOT_TOKEN')
         await bot.start(token)
     except KeyboardInterrupt:
         await bot.logout()
