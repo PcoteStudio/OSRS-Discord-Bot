@@ -1,5 +1,5 @@
-from internal.databasemanager import instance
-from internal.gol.team import Team
+from src.internal.databasemanager import instance
+from src.internal.gol.team import Team
 from collections.abc import Iterable
 
 

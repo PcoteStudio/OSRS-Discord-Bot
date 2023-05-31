@@ -1,6 +1,6 @@
-from internal.hiscores import Hiscores
+from src.internal.hiscores import Hiscores
 from nextcord.ext import commands, tasks
-from internal import constants
+from src.internal import constants
 import logging
 
 
@@ -8,7 +8,7 @@ class HiscoresCog(commands.Cog):
     started_tasks = []
 
     def __init__(self, bot):
-        from internal import configmanager
+        from src.internal import configmanager
         self.bot = bot
         self.hiscores = []
         config = configmanager.instance
@@ -16,7 +16,7 @@ class HiscoresCog(commands.Cog):
         for entry in hs_config:
             if entry['enabled'] == False:
                 continue
-            self.hiscores.append(Hiscores(config.get('PCOTE_WOM_API_KEY'),
+            self.hiscores.append(Hiscores(config.get('WOM_API_KEY'),
                                           entry['wom_group'],
                                           entry['discord_channel'],
                                           entry['displayed_top_x'],

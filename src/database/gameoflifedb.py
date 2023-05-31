@@ -1,6 +1,6 @@
-from database import tilenodedb, teamdb
-from internal.databasemanager import instance
-from internal.gol.gameoflife import GameOfLife
+from src.database import tilenodedb, teamdb
+from src.internal.databasemanager import instance
+from src.internal.gol.gameoflife import GameOfLife
 
 
 async def get_by_guild_id(guild_id: int):

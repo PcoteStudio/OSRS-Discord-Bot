@@ -1,4 +1,4 @@
-from internal.gol.team import Team
+from src.internal.gol.team import Team
 from bson.objectid import ObjectId
 
 games = {}
@@ -25,7 +25,7 @@ class GameOfLife:
         self.tiles = []
 
     async def generate_board(self):
-        from internal.gol import boardgenerator
+        from src.internal.gol import boardgenerator
         self.tiles = boardgenerator.generate_board(self._id)
 
     def add_team(self, team: Team):

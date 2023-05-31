@@ -1,10 +1,10 @@
 import random
 import nextcord
 from nextcord.ext import commands
-from internal import constants, choiceform, utils
-from internal.gol import gameoflife
-from internal.gol.gameoflife import GameOfLife
-from database import gameoflifedb, tilenodedb
+from src.internal import choiceform, utils, constants
+from src.internal.gol import gameoflife
+from src.internal.gol.gameoflife import GameOfLife
+from src.database import tilenodedb, gameoflifedb
 
 
 class GameOfLifeCog(commands.Cog):

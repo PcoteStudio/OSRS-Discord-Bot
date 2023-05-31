@@ -7,18 +7,14 @@ from internal.bot import Bot
 
 def load_config():
     from os.path import join, dirname
-    from dotenv import load_dotenv
+    from dotenv import dotenv_values
     from internal import configmanager
 
-    dotenv_path = join(dirname(__file__), '.env')
-    if os.path.isfile(dotenv_path):
-        load_dotenv(dotenv_path)
+    dotenv_path = join(dirname(__file__), 'config/.env')
+    env_config = dotenv_values(dotenv_path)
 
-    configmanager.init('config.json', 'utf-8')
-    configmanager.instance['PCOTE_MONGO_CONNECTION_STRING'] = os.environ['PCOTE_MONGO_CONNECTION_STRING']
-    configmanager.instance['PCOTE_MONGO_DATABASE_NAME'] = os.environ['PCOTE_MONGO_DATABASE_NAME']
-    configmanager.instance['PCOTE_BOT_TOKEN'] = os.environ['PCOTE_BOT_TOKEN']
-    configmanager.instance['PCOTE_WOM_API_KEY'] = os.environ['PCOTE_WOM_API_KEY']
+    configmanager.init('config/serverSettings.json', 'utf-8')
+    configmanager.instance = {**configmanager.instance, **env_config}
     return configmanager.instance
 
 
@@ -27,8 +23,8 @@ async def run():
 
     if config.get('DATABASE') is True:
         from internal import databasemanager
-        databasemanager.init(config.get('PCOTE_MONGO_CONNECTION_STRING'),
-                             config.get('PCOTE_MONGO_DATABASE_NAME'))
+        databasemanager.init(config.get('MONGO_CONNECTION_STRING'),
+                             config.get('MONGO_DATABASE_NAME'))
 
     intents = nextcord.Intents.default()
     intents.message_content = True
@@ -41,11 +37,12 @@ async def run():
     bot.config = config
 
     try:
-        token = config.get('PCOTE_BOT_TOKEN')
+        token = config.get('BOT_TOKEN')
         await bot.start(token)
     except KeyboardInterrupt:
         await bot.logout()
         exit()
+
 
 if __name__ == '__main__':
     logging.basicConfig(format='[%(asctime)s] [%(levelname)-4s] %(message)s',

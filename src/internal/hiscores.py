@@ -1,12 +1,12 @@
 import aiohttp
-from internal import constants
+from src.internal import constants
 
 
 class Hiscores():
-    def __init__(self, PCOTE_WOM_API_KEY: str, wom_group: int, channel_id: int,
+    def __init__(self, WOM_API_KEY: str, wom_group: int, channel_id: int,
                  displayed_top_x: int, update_frequency_min: int, server_name: str,
                  display_boss: bool, display_clue: bool, display_activity: bool):
-        self.PCOTE_WOM_API_KEY = PCOTE_WOM_API_KEY
+        self.WOM_API_KEY = WOM_API_KEY
         self.wom_group = wom_group
         self.channel_id = channel_id
         self.update_frequency_min = update_frequency_min
@@ -17,7 +17,7 @@ class Hiscores():
         self.display_activity = display_activity
 
     async def getHiscore(self, metric: str, top_x: int):
-        async with aiohttp.ClientSession(headers={"x-api-key": self.PCOTE_WOM_API_KEY}) as session:
+        async with aiohttp.ClientSession(headers={"x-api-key": self.WOM_API_KEY}) as session:
             async with session.get(f"https://api.wiseoldman.net/v2/groups/{self.wom_group}/hiscores?metric={metric}&limit={top_x}") as resp:
                 boss_hiscore = await resp.json()
                 return boss_hiscore
@@ -99,7 +99,8 @@ class Hiscores():
     async def getUpdatedHiscoresToPost(self, split_length):
         bosses_top_x = [] if (self.display_boss == False) else await self.getTopXFromMetrics(constants.BOSS_METRICS, constants.BOSS_DISPLAY_NAMES, self.displayed_top_x)
         clues_top_x = [] if (self.display_clue == False) else await self.getTopXFromMetrics(constants.CLUE_METRICS, constants.CLUE_DISPLAY_NAMES, self.displayed_top_x)
-        activities_top_x = [] if (self.display_activity == False) else await self.getTopXFromMetrics(constants.ACTIVITY_METRICS, constants.ACTIVITY_DISPLAY_NAMES, self.displayed_top_x)
+        activities_top_x = [] if (self.display_activity == False) else await self.getTopXFromMetrics(
+            constants.ACTIVITY_METRICS, constants.ACTIVITY_DISPLAY_NAMES, self.displayed_top_x)
         content = self.formatBosses(bosses_top_x, clues_top_x, activities_top_x)
         content = self.splitContentInMessages(content, split_length)
         return content

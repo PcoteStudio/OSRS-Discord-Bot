@@ -1,5 +1,5 @@
-from internal.databasemanager import instance
-from internal.gol.tilenode import TileNode
+from src.internal.databasemanager import instance
+from src.internal.gol.tilenode import TileNode
 from collections.abc import Iterable
 
 
