@@ -1,5 +1,6 @@
 from src.internal.gol.team import Team
 from bson.objectid import ObjectId
+from src.internal.gol import boardgenerator
 
 games = {}
 
@@ -24,9 +25,14 @@ class GameOfLife:
         self.teams = []
         self.tiles = []
 
+    def roll(self, team):
+        pass
+
     async def generate_board(self):
-        from src.internal.gol import boardgenerator
         self.tiles = boardgenerator.generate_board(self._id)
+
+    def load_tiles(self, tiles_content):
+        boardgenerator.load_tiles(self.tiles, tiles_content)
 
     def add_team(self, team: Team):
         if team not in self.teams:

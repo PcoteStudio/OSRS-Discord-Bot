@@ -25,22 +25,37 @@ async def get_all_by_game_id(game_id: int, limit=1000):
 async def insert_many(tiles: Iterable[TileNode]):
     docs = []
     for tile in tiles:
-        doc = {
-            '_id': tile._id,
-            'game_id': tile.game_id,
-            'index': tile.index,
-            'task': tile.task,
-            'pawn_location': tile.pawn_location,
-            'pawn_direction': tile.pawn_direction,
-            'pawn_offset': tile.pawn_offset,
-            'exits': []
-        }
-        for exit in tile.exits:
-            doc['exits'].append(exit._id)
+        doc = tile_to_doc(tile)
         docs.append(doc)
     return await instance.tile_node.insert_many(docs)
 
 
+async def update_many(tiles: Iterable[TileNode]):
+    requests = []
+    for tile in tiles:
+        r = {"updateOne": {{"_id": tile._id}, tile_to_doc(tile)}}
+        requests.append(r)
+    return await instance.test.bulk_write(requests, ordered=False)
+
+
 def doc_to_tile(doc):
-    node = TileNode(doc['game_id'], doc['index'], doc['task'], doc['_id'])
+    node = TileNode(doc.get('game_id'), doc.get('index'),
+                    doc.get('type'), doc.get('task'), doc.get('_id'))
     return node
+
+
+def tile_to_doc(tile: TileNode):
+    doc = {
+        '_id': tile._id,
+        'game_id': tile.game_id,
+        'index': tile.index,
+        'type': tile.type,
+        'task': tile.task,
+        'pawn_location': tile.pawn_location,
+        'pawn_direction': tile.pawn_direction,
+        'pawn_offset': tile.pawn_offset,
+        'exits': []
+    }
+    for exit in tile.exits:
+        doc['exits'].append(exit._id)
+    return doc

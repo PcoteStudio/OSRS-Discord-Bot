@@ -39,3 +39,8 @@ def generate_board(game_id):
     n_forking = generate_branch(game_id, nodes, nodes[-1], 6, 2)
 
     return nodes
+
+
+def load_tiles(nodes, tiles_content):
+    for t in tiles_content:
+        nodes[t.get('index')].partial_parse(t)
