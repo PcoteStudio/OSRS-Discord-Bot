@@ -28,8 +28,7 @@ class Bot(commands.Bot):
 
     async def load_all_extensions(self):
         from os.path import join, dirname
-        temp = Path(join(dirname(__file__), '..\\cogs'))
-        cogs = [x.stem for x in Path(join(dirname(__file__), '..\\cogs')).glob('*.py')]
+        cogs = [x.stem for x in Path(join(dirname(__file__), '../cogs')).glob('*.py')]
         for extension in cogs:
             try:
                 self.load_extension(f'cogs.{extension}')
