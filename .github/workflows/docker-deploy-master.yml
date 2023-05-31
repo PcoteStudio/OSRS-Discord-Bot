@@ -17,5 +17,5 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - run: |
-          docker build . -t nsignori/osrs-discord-bot:${{ github.sha }}
-          docker push nsignori/osrs-discord-bot:${{ github.sha }}
+          docker build . -t nsignori/osrs-discord-bot:latest
+          docker push nsignori/osrs-discord-bot:latest
