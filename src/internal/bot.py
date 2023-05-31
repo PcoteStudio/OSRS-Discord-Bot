@@ -27,7 +27,9 @@ class Bot(commands.Bot):
         return commands.when_mentioned_or(*prefix)(bot, message)
 
     async def load_all_extensions(self):
-        cogs = [x.stem for x in Path('cogs').glob('*.py')]
+        from os.path import join, dirname
+        temp = Path(join(dirname(__file__), '..\\cogs'))
+        cogs = [x.stem for x in Path(join(dirname(__file__), '..\\cogs')).glob('*.py')]
         for extension in cogs:
             try:
                 self.load_extension(f'cogs.{extension}')

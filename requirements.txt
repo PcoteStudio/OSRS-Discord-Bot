@@ -15,4 +15,3 @@ colorama==0.4.6
 astunparse==1.6.3
 wheel==0.40.0
 six==1.16.0
-python-dotenv==1.0.0
