@@ -1,0 +1,21 @@
+name: Build and push Docker on merging
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - run: |
+          docker build . -t nsignori/osrs-discord-bot:${{ github.sha }}
+          docker push nsignori/osrs-discord-bot:${{ github.sha }}
