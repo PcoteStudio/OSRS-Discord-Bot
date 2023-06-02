@@ -6,5 +6,10 @@
         "--max-line-length",
         "100"
     ],
-    "python.formatting.provider": "none"
+    "python.formatting.provider": "none",
+    "python.testing.pytestArgs": [
+        "test"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }
