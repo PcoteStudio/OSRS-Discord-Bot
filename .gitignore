@@ -1,4 +1,5 @@
 src/config/serverSettings.json
+tools/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
