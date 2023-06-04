@@ -1,3 +1,4 @@
+import logging
 from database import tilenodedb, teamdb
 from internal.databasemanager import instance
 from internal.gol.gameoflife import GameOfLife
@@ -15,20 +16,36 @@ async def insert(game: GameOfLife):
         '_id': game._id,
         'guild_id': game.guild_id,
         'name': game.name,
-        'is_archived': game.is_archived
+        'is_archived': game.is_archived,
+        'start_time': game.start_time,
+        'end_time': game.end_time,
     }
-    return await instance.game_of_life.insert_one(doc)
+    result = await instance.game_of_life.insert_one(doc)
+    logging.info(f"GoL session inserted (_id:{game._id}, name:{game.name})")
+    return result
 
 
-async def archive(game: GameOfLife):
-    game.is_archived = True
-    result = await instance.game_of_life.update_one({'_id': game._id}, {'$set': {'is_archived': game.is_archived}})
+async def update(game: GameOfLife):
+    result = await instance.game_of_life.update_one({'_id': game._id}, {'$set': game_to_doc(game)})
+    logging.info(f"GoL session updated (_id:{game._id}, name:{game.name})")
     return result
 
 
 async def doc_to_game(doc):
-    game = GameOfLife(doc['guild_id'], doc['name'], doc['_id'])
-    game.is_archived = doc['is_archived']
+    game = GameOfLife(doc['guild_id'], doc['name'], doc)
     game.tiles = await tilenodedb.get_all_by_game_id(game._id)
     game.teams = await teamdb.get_all_by_game_id(game._id)
     return game
+
+
+def game_to_doc(game: GameOfLife):
+    doc = {
+        '_id': game._id,
+        'guild_id': game.guild_id,
+        'name': game.name,
+        'is_archived': game.is_archived,
+        'start_time': game.start_time,
+        'end_time': game.end_time,
+        'start_index': game.start_index,
+    }
+    return doc

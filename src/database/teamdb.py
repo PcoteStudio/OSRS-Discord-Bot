@@ -1,5 +1,7 @@
+import logging
 from internal.databasemanager import instance
 from internal.gol.team import Team
+from pymongo import UpdateOne
 from collections.abc import Iterable
 
 
@@ -18,7 +20,9 @@ async def get_all_by_game_id(game_id: int, limit=1000):
 
 async def insert(team: Team):
     doc = team_to_doc(team)
-    return await instance.team.insert_one(doc)
+    result = await instance.team.insert_one(doc)
+    logging.info(f"Team inserted (_id:{team._id}, name:{team.name})")
+    return result
 
 
 async def insert_many(teams: Iterable[Team]):
@@ -26,11 +30,30 @@ async def insert_many(teams: Iterable[Team]):
     for team in teams:
         doc = team_to_doc(team)
         docs.append(doc)
-    return await instance.team.insert_many(docs)
+        
+    result = await instance.team.insert_many(docs)
+    logging.info(f"Multiple teams inserted (len:{len(teams)})")
+    return result
+
+async def update(team: Team):
+    result = await instance.team.update_one({'_id': team._id}, {'$set': team_to_doc(team)})
+    logging.info(f"Team updated (_id:{team._id}, name:{team.name})")
+    return result
+
+async def update_many(teams: Iterable[Team]):
+    requests = []
+    for team in teams:
+        r = UpdateOne({"_id": team._id}, {'$set': team_to_doc(team)})
+        requests.append(r)
+    if len(requests) > 0:
+        result = await instance.team.bulk_write(requests, ordered=False)
+        logging.info(f"Multiple teams updated (len:{len(teams)})")
+        return result
 
 
 async def delete(team: Team):
     result = await instance.team.delete_one({'_id': team._id})
+    logging.info(f"Team deleted (_id:{team._id}, name:{team.name})")
     return result
 
 
@@ -40,11 +63,14 @@ def team_to_doc(team: Team):
         'game_id': team.game_id,
         'name': team.name,
         'emoji': team.emoji,
+        'seed': team.seed,
+        'buffs': team.buffs,
+        'history_index': team.history_index,
+        'history': team.history,
         'members': team.members,
     }
 
 
 def doc_to_team(doc):
-    team = Team(doc['game_id'], doc['name'], doc['emoji'], doc['_id'])
-    team.members = doc['members']
+    team = Team(doc['game_id'], doc['name'], doc['emoji'], doc)
     return team

@@ -4,18 +4,18 @@ from nextcord.ext import commands
 from internal.bot import Bot
 
 
-async def slash_choose(bot: Bot, interaction: nextcord.Interaction, emojis: list):
+async def slash_choose(bot: Bot, interaction: nextcord.Interaction, emojis: list, authorized_ids: list = []):
     message = await interaction.original_message()
 
     def check(r, u):
-        return str(r.emoji) in emojis and u.id == interaction.user.id and r.message.id == message.id
+        return str(r.emoji) in emojis and r.message.id == message.id and (u.id == interaction.user.id or u.id in authorized_ids)
 
     for e in emojis:
         await message.add_reaction(e)
 
     while True:
         try:
-            reaction, user = await bot.wait_for('reaction_add', timeout=120.0, check=check)
+            reaction, user = await bot.wait_for('reaction_add', timeout=300.0, check=check)
             emoji = str(reaction.emoji)
             if emoji not in emojis:
                 continue

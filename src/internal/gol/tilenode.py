@@ -1,8 +1,8 @@
 from bson.objectid import ObjectId
-from enum import Enum
+from enum import IntEnum
 
 
-class TileType(Enum):
+class TileType(IntEnum):
     ORANGE = 0
     GREEN = 1
     RED = 2
@@ -11,30 +11,34 @@ class TileType(Enum):
 
 
 class TileNode:
-    def __init__(self, game_id: ObjectId, index: int, type: TileType = TileType.ORANGE, task: str = '', _id: ObjectId = None):
-        self._id = _id or ObjectId()
+    task = ""
+    type = TileType(0)
+    move = 0
+    buff = 0
+    start = False
+    examples = None
+    pawn_location = [0, 0]
+    pawn_direction = 0
+    pawn_offset = 0
+
+    def __init__(self, game_id: ObjectId, index: int, doc={}):
+        self._id = doc.get("_id", ObjectId())
         self.game_id = game_id
         self.index = index
-        self.task = task
-        self.type = type
-        self.pawn_location = (0, 0)
-        self.pawn_direction = 0
-        self.pawn_offset = 10
         self.exits = []
         self.entrances = []
+        self.partial_parse(doc)
 
     def partial_parse(self, json):
-        self.task = json.get('task', self.task)
-        self.type = json.get('type', self.type)
-
-    def get_options(self, node: "TileNode", depth: int):
-        if depth <= 0:
-            return [node]
-
-        options = []
-        for e in node.exits:
-            options += self.get_options(e, depth - 1)
-        return options
+        self.task = json.get("task", self.task)
+        self.type = TileType(json.get("type", self.type))
+        self.move = json.get("move", self.move)
+        self.buff = json.get("buff", self.buff)
+        self.start = json.get("start", self.start)
+        self.examples = json.get("examples", self.examples)
+        self.pawn_location = json.get("pawn_location", self.pawn_location)
+        self.pawn_direction = json.get("pawn_direction", self.pawn_direction)
+        self.pawn_offset = json.get("pawn_offset", self.pawn_offset)
 
     def add_exit(self, tile: "TileNode"):
         if tile not in self.exits:
@@ -51,3 +55,25 @@ class TileNode:
     def remove_entrance(self, tile: "TileNode"):
         if tile in self.entrances:
             self.entrances.remove(tile)
+
+    @staticmethod
+    def get_moved_to(node: "TileNode", depth: int, initial_tile=True):
+        if depth == 0 or len(node.exits) == 0 or len(node.entrances) == 0 or (node.type == TileType.RED and initial_tile == False) or node.type == TileType.GRAY:
+            return [node]
+        if (depth > 0):
+            return TileNode.get_moved_to(node.exits[0], depth - 1, False)
+        if (depth < 0):
+            return TileNode.get_moved_to(node.entrances[0], depth + 1, False)
+
+    @staticmethod
+    def get_options(node: "TileNode", depth: int, initial_tile=True):
+        if depth <= 0 or len(node.exits) == 0 or (node.type == TileType.RED and initial_tile == False) or node.type == TileType.GRAY:
+            node.early = depth
+            return [node]
+
+        options = []
+        for e in node.exits:
+            options += TileNode.get_options(e, depth - 1, False)
+
+        # Remove duplicates
+        return list(dict.fromkeys(options))

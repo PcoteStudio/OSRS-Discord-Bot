@@ -1,6 +1,7 @@
 from internal.databasemanager import instance
 from internal.gol.tilenode import TileNode
 from collections.abc import Iterable
+from pymongo import UpdateOne
 
 
 async def get_all_by_game_id(game_id: int, limit=1000):
@@ -33,14 +34,14 @@ async def insert_many(tiles: Iterable[TileNode]):
 async def update_many(tiles: Iterable[TileNode]):
     requests = []
     for tile in tiles:
-        r = {"updateOne": {{"_id": tile._id}, tile_to_doc(tile)}}
+        r = UpdateOne({"_id": tile._id}, {'$set': tile_to_doc(tile)})
         requests.append(r)
-    return await instance.test.bulk_write(requests, ordered=False)
+    if len(requests) > 0:
+        return await instance.tile_node.bulk_write(requests, ordered=False)
 
 
 def doc_to_tile(doc):
-    node = TileNode(doc.get('game_id'), doc.get('index'),
-                    doc.get('type'), doc.get('task'), doc.get('_id'))
+    node = TileNode(doc.get('game_id'), doc.get('index'), doc)
     return node
 
 
@@ -51,6 +52,11 @@ def tile_to_doc(tile: TileNode):
         'index': tile.index,
         'type': tile.type,
         'task': tile.task,
+        'examples': tile.examples,
+        'type': tile.type,
+        'move': tile.move,
+        'buff': tile.buff,
+        'start': tile.start,
         'pawn_location': tile.pawn_location,
         'pawn_direction': tile.pawn_direction,
         'pawn_offset': tile.pawn_offset,

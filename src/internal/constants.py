@@ -1,9 +1,28 @@
+EMOJI_INCORRECT = '❌'
 EMOJI_DICE = '🎲'
-EMOJI_CONFIRM = '🟩'
-EMOJI_CANCEL = '🟥'
+EMOJI_CONFIRM = '✅'
+EMOJI_CANCEL = '❌'
 EMOJI_LOADING = '⏳'
+EMOJI_UP_ARROW='⬆️'
+EMOJI_UPPER_LEFT_ARROW='↖️'
+EMOJI_UPPER_RIGHT_ARROW='↗️'
 EMOJI_LEFT_ARROW='⬅️'
 EMOJI_RIGHT_ARROW='➡️'
+
+MIN_ROLL=1
+MAX_ROLL=6
+TEXT_THAT_TEAM_CANNOT_BE_ROLLED_BACK_ANY_FURTHER='That team cannot be rolled back any further.'
+TEXT_THAT_TEAM_IS_CURRENTLY_ROLLING='That team is currently rolling.'
+TEXT_YOUR_TEAM_IS_ALREADY_ROLLING='Your team is already rolling.'
+TEXT_THE_COMMAND_HAS_BEEN_CANCELED_BY_USER='The command has been canceled by the user.'
+TEXT_THE_COMMAND_HAS_BEEN_CANCELED_BY_TEAM_MEMBER='The command has been canceled by a team member.'
+TEXT_THE_COMMAND_HAS_BEEN_CANCELED_AFTER_NO_INTERACTION_FROM_USER='The command has been canceled after no reaction from the user.'
+TEXT_HAVE_YOU_COMPLETED_YOUR_PREVIOUS_TASK='Have you completed your previous task?'
+TEXT_NO_ACTIVE_GOL_SESSION_ON_SERVER='There is no active GoL session on this server.'
+TEXT_YOU_ARE_NOT_MEMBER_OF_ANY_TEAM='You are not a member of any team.'
+TEXT_THIS_PLAYER_IS_NOT_IN_ANY_TEAM='This player is not in any team.'
+TEXT_REACT_TO_THIS_MESSAGE_WITH_CHOICE_DROP_WONT_COUNT="React to this message with your choice. Any drop obtained before making this choice won't count."
+
 BOSS_DISPLAY_NAMES = ['Abyssal Sire', 'Alchemical Hydra', 'Artio', 'Barrows Chests', 'Bryophyta',
                       'Callisto', 'Calvar\'ion', 'Cerberus', 'Chambers of Xeric',
                       'Chambers of Xeric: Challenge Mode', 'Chaos Elemental', 'Chaos Fanatic',

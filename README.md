@@ -61,3 +61,6 @@ python main.py
 
 ## Bot invitation link
 https://discord.com/api/oauth2/authorize?client_id=1100974700949159986&permissions=2419452944&scope=bot
+
+## Devbot invitation link
+https://discord.com/api/oauth2/authorize?client_id=1114612816062730351&permissions=2419452944&scope=bot

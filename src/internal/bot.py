@@ -16,7 +16,7 @@ class Bot(commands.Bot):
         self.app_info = None
 
         self.loop.create_task(self.track_start())
-        self.loop.create_task(self.load_all_extensions())
+        self.load_all_extensions()
 
     async def track_start(self):
         await self.wait_until_ready()
@@ -26,7 +26,7 @@ class Bot(commands.Bot):
         prefix = [bot.config['BOT_PREFIX']]
         return commands.when_mentioned_or(*prefix)(bot, message)
 
-    async def load_all_extensions(self):
+    def load_all_extensions(self):
         from os.path import join, dirname
         cogs = [x.stem for x in Path(join(dirname(__file__), '../cogs')).glob('*.py')]
         for extension in cogs:
