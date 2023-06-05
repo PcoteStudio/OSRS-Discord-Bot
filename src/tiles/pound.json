@@ -27,8 +27,8 @@
     },
     {
         "index": 5,
-        "task": "Complete a god book",
-        "examples": "Saradomin pages 1 to 4 or ancient pages 1 to 4, etc.",
+        "task": "Obtain a unique from General Graador",
+        "examples": "Bandos chestplate/tassets/boots/hilt",
         "type": 0
     },
     {
@@ -39,8 +39,8 @@
     },
     {
         "index": 7,
-        "task": "Obtain a unique from General Graador",
-        "examples": "Bandos chestplate/tassets/boots/hilt",
+        "task": "Complete a god book",
+        "examples": "Saradomin pages 1 to 4 or ancient pages 1 to 4, etc.",
         "type": 0
     },
     {
@@ -139,7 +139,7 @@
     },
     {
         "index": 24,
-        "task": "Any piece o elegant clothing",
+        "task": "Obtain any piece of elegant clothing",
         "examples": "Black/blue/gold/green/pink/purple/red/white elegant shirt/blouse/legs/skirt",
         "type": 0
     },
@@ -427,7 +427,7 @@
     {
         "index": 74,
         "task": "Advance 2 tiles",
-        "move": 1,
+        "move": 2,
         "type": 0,
         "_comment": "Branch #1, right path, tile #2"
     },

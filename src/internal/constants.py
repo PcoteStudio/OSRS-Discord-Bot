@@ -11,6 +11,7 @@ EMOJI_RIGHT_ARROW='➡️'
 
 MIN_ROLL=1
 MAX_ROLL=6
+TEXT_YOUR_TEAM_HAS_ALREADY_COMPLETED_BOARD='Your team has already completed the board.'
 TEXT_THAT_TEAM_CANNOT_BE_ROLLED_BACK_ANY_FURTHER='That team cannot be rolled back any further.'
 TEXT_THAT_TEAM_IS_CURRENTLY_ROLLING='That team is currently rolling.'
 TEXT_YOUR_TEAM_IS_ALREADY_ROLLING='Your team is already rolling.'

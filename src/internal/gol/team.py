@@ -2,7 +2,7 @@ import random
 from collections.abc import Iterable
 from bson.objectid import ObjectId
 from internal import constants
-from internal.gol.tilenode import TileNode
+from internal.gol.tilenode import TileNode, TileType
 
 
 class Team:
@@ -19,10 +19,16 @@ class Team:
 
         self.is_rolling = False
 
+    def has_finished(self, tiles):
+        tile = self.get_current_tile(tiles)
+        return tile != None and tile.type == TileType.GRAY
+
     def has_start_tile(self):
         return len(self.history) > 0
 
     def set_start_tile(self, tile):
+        if self.has_start_tile():
+            return
         tile.base_roll = 0
         tile.roll = 0
         tile.early = 0

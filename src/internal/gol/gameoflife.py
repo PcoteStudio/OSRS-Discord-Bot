@@ -29,6 +29,9 @@ class GameOfLife:
         self.teams = []
         self.tiles = []
 
+    def has_finished(self, team: Team):
+        return team.has_finished(self.tiles)
+
     def set_start_index(self, tile_index):
         if tile_index is None:
             return

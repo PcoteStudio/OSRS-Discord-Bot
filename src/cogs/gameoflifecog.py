@@ -106,6 +106,10 @@ class GameOfLifeCog(commands.Cog):
             await interaction.send(f'{constants.EMOJI_INCORRECT} {constants.TEXT_YOU_ARE_NOT_MEMBER_OF_ANY_TEAM}')
             return
 
+        if game.has_finished(team) == True:
+            await interaction.send(f'{constants.EMOJI_INCORRECT} {constants.TEXT_YOUR_TEAM_HAS_ALREADY_COMPLETED_BOARD}')
+            return
+
         if team.is_rolling:
             await interaction.send(f'{constants.EMOJI_INCORRECT} {constants.TEXT_YOUR_TEAM_IS_ALREADY_ROLLING}')
             return

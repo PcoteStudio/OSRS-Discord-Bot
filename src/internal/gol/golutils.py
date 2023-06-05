@@ -17,7 +17,7 @@ def format_team(team: Team):
 def format_task(tile: TileNode):
     content = f"**{tile.task}**"
     if tile.examples:
-        content += f"(ex: *{tile.examples}*)"
+        content += f" (ex: *{tile.examples}*)"
     return content
 
 
