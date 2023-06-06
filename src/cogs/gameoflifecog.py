@@ -188,6 +188,25 @@ class GameOfLifeCog(commands.Cog):
         finally:
             team.is_rolling = False
 
+    @utils.is_in_guild()
+    @nextcord.slash_command(guild_ids=[1114607456304246784])
+    async def current(self, interaction: nextcord.Interaction):
+        game = gameoflife.get_game(interaction.guild.id)
+        if game is None:
+            await interaction.send(f'{constants.EMOJI_INCORRECT} {constants.TEXT_NO_ACTIVE_GOL_SESSION_ON_SERVER}')
+            return
+
+        team = game.get_team_by_player_id(interaction.user.id)
+        if team is None:
+            await interaction.send(f'{constants.EMOJI_INCORRECT} {constants.TEXT_YOU_ARE_NOT_MEMBER_OF_ANY_TEAM}')
+            return
+
+        if game.has_finished(team) == True:
+            await interaction.send(f'{constants.EMOJI_INCORRECT} {constants.TEXT_YOUR_TEAM_HAS_ALREADY_COMPLETED_BOARD}')
+            return
+
+        await interaction.send(f"Your team's current task is:\n{golutils.format_task_multiline(game.get_current_tile(team))}")
+
     @commands.Cog.listener()
     async def on_ready(self):
         # Load games in a global variable for each guild
