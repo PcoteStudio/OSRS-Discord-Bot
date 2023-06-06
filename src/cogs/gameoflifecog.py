@@ -116,8 +116,9 @@ class GameOfLifeCog(commands.Cog):
         team.is_rolling = True
 
         try:
+            cur_tile = game.get_current_tile(team)
             content = f"{constants.TEXT_HAVE_YOU_COMPLETED_YOUR_PREVIOUS_TASK}\n"
-            content += golutils.format_task_multiline(game.get_current_tile(team))
+            content += golutils.format_task_multiline(cur_tile)
             await interaction.send(content)
             choice = await choiceform.slash_choose(self.bot, interaction, [constants.EMOJI_CONFIRM, constants.EMOJI_CANCEL], team.get_members_id())
             if choice == None:
@@ -131,12 +132,14 @@ class GameOfLifeCog(commands.Cog):
             destinations = destinations[::-1]  # Set left and right properly
             traveled = []
             choice = 0
-            content = f"Team {golutils.format_team(team)} rolled a {golutils.format_roll(destinations[0].base_roll, destinations[0].roll)}!\n"
+            content = golutils.format_roll_sentence(
+                team, destinations[0].base_roll, destinations[0].roll)
             if len(destinations) == 1:
-                traveled = game.choose_destination(team, destinations[0])
+                traveled = game.choose_destination(team, destinations[choice])
                 content += golutils.format_travel(team, destinations[choice], traveled)
                 await interaction.edit_original_message(content=content)
                 await teamdb.update(team)
+                await self.log_update_on_channel(game, golutils.format_roll_log(team, cur_tile, destinations[choice], traveled[-1]))
             if len(destinations) >= 2:
                 content += golutils.format_branch(destinations)
                 await interaction.edit_original_message(content=content)
@@ -150,6 +153,7 @@ class GameOfLifeCog(commands.Cog):
                 content += golutils.format_travel(team, destinations[choice], traveled)
                 await teamdb.update(team)
                 await interaction.followup.send(content)
+                await self.log_update_on_channel(game, golutils.format_roll_log(team, cur_tile, destinations[choice], traveled[-1]))
         finally:
             team.is_rolling = False
 
@@ -180,6 +184,7 @@ class GameOfLifeCog(commands.Cog):
             content += f"{golutils.format_task_multiline(destination)}"
             await teamdb.update(team)
             await interaction.send(content)
+            await self.log_update_on_channel(game, content + "\n" + constants.TEXT_MESSAGE_SEPARATOR)
         finally:
             team.is_rolling = False
 
@@ -190,6 +195,11 @@ class GameOfLifeCog(commands.Cog):
         for g in self.bot.guilds:
             gameoflife.games[g.id] = await gameoflifedb.get_by_guild_id(g.id)
         logging.info("GoL sessions loaded")
+
+    async def log_update_on_channel(self, game, content):
+        if game and game.channel_logs:
+            channel = self.bot.get_channel(game.channel_logs)
+            await channel.send(content)
 
 
 def setup(bot):

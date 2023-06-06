@@ -1,7 +1,7 @@
 import logging
 import nextcord
 from nextcord.ext import commands
-from internal import utils
+from internal import utils, constants
 from internal.gol.team import Team
 from internal.gol import gameoflife, golutils
 from database import teamdb
@@ -20,7 +20,7 @@ class TeamCog(commands.Cog):
     async def list(self, interaction: nextcord.Interaction):
         game = gameoflife.get_game(interaction.guild.id)
         if game is None:
-            await interaction.send(f":x: There is no active GoL session on this server.")
+            await interaction.send(f"{constants.EMOJI_INCORRECT} {constants.TEXT_NO_ACTIVE_GOL_SESSION_ON_SERVER}")
             return
         if len(game.teams) == 0:
             await interaction.send(f":x: There is no team in the GoL session **{game.name}**.")

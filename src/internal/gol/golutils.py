@@ -10,6 +10,10 @@ def format_roll(base_roll: int, roll: int):
     return f"**{roll}** ({base_roll}+{roll-base_roll})"
 
 
+def format_roll_sentence(team: Team, base_roll: int, roll: int):
+    return f"Team {format_team(team)} rolled a {format_roll(base_roll, roll)}!\n"
+
+
 def format_team(team: Team):
     return f"**{team.name}** {team.emoji}"
 
@@ -55,7 +59,16 @@ def format_travel(team, destination, traveled):
 def format_buff(destination):
     if destination.buff == 0:
         return ""
-    return f"The team has stopped on a blue tile, **your minimum roll is buffed by 1**!\n"
+    return f"The team has stopped on a blue tile, **their minimum roll is buffed by 1**!\n"
+
+
+def format_roll_log(team, old_tile, destination, new_tile):
+    content = f"Team {format_team(team)} has completed the following task: {format_task(old_tile)}\n"
+    content += f"They then rolled {format_roll(destination.base_roll, destination.roll)} and landed on the following task:\n"
+    content += f"{format_task_multiline(new_tile)}\n"
+    content += format_buff(new_tile)
+    content += constants.TEXT_MESSAGE_SEPARATOR
+    return content
 
 
 def get_branch_reactions(destinations):

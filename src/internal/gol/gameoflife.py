@@ -26,6 +26,8 @@ class GameOfLife:
         self.start_time = doc.get('start_time', datetime.min)
         self.end_time = doc.get('end_time', datetime.max)
         self.start_index = doc.get('start_index', None)
+        self.channel_logs = doc.get('channel_logs', None)
+        self.channel_board = doc.get('channel_board', None)
         self.teams = []
         self.tiles = []
 

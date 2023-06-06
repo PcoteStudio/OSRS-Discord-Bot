@@ -11,6 +11,10 @@ EMOJI_RIGHT_ARROW='➡️'
 
 MIN_ROLL=1
 MAX_ROLL=6
+TEXT_MESSAGE_SEPARATOR='⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯✧⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯'
+TEXT_SET_CHANNELS_HAVE_BEEN_SUCCESSFULLY_CLEARED='The set channels have been successfully cleared.'
+TEXT_BOARD_CHANNEL_HAS_BEEN_SUCCESSFULLY_SET="The live board channel has been successfully set."
+TEXT_LOGS_CHANNEL_HAS_BEEN_SUCCESSFULLY_SET="The logs channel has been successfully set."
 TEXT_YOUR_TEAM_HAS_ALREADY_COMPLETED_BOARD='Your team has already completed the board.'
 TEXT_THAT_TEAM_CANNOT_BE_ROLLED_BACK_ANY_FURTHER='That team cannot be rolled back any further.'
 TEXT_THAT_TEAM_IS_CURRENTLY_ROLLING='That team is currently rolling.'

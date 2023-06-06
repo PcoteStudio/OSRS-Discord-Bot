@@ -12,15 +12,7 @@ async def get_by_guild_id(guild_id: int):
 
 
 async def insert(game: GameOfLife):
-    doc = {
-        '_id': game._id,
-        'guild_id': game.guild_id,
-        'name': game.name,
-        'is_archived': game.is_archived,
-        'start_time': game.start_time,
-        'end_time': game.end_time,
-    }
-    result = await instance.game_of_life.insert_one(doc)
+    result = await instance.game_of_life.insert_one(game_to_doc(game))
     logging.info(f"GoL session inserted (_id:{game._id}, name:{game.name})")
     return result
 
@@ -47,5 +39,7 @@ def game_to_doc(game: GameOfLife):
         'start_time': game.start_time,
         'end_time': game.end_time,
         'start_index': game.start_index,
+        'channel_logs': game.channel_logs,
+        'channel_board': game.channel_board,
     }
     return doc
