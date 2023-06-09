@@ -31,6 +31,8 @@ class GameOfLife:
         self.teams = []
         self.tiles = []
 
+        self.is_board_updated = False
+
     def has_finished(self, team: Team):
         return team.has_finished(self.tiles)
 
@@ -54,7 +56,7 @@ class GameOfLife:
     def choose_destination(self, team, destination):
         return team.choose_destination(destination)
 
-    async def generate_board(self):
+    def generate_board(self):
         self.tiles = boardgenerator.generate_board(self._id)
 
     def load_tiles(self, tiles_content):

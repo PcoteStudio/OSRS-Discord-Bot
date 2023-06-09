@@ -6,7 +6,7 @@ from internal.gol.tilenode import TileNode, TileType
 
 
 class Team:
-    def __init__(self, game_id: ObjectId, name, emoji: str, doc={}):
+    def __init__(self, game_id: ObjectId, name: str, emoji: str, doc={}):
         self._id = doc.get("_id", ObjectId())
         self.game_id = game_id
         self.name = name
@@ -14,6 +14,7 @@ class Team:
         self.seed = doc.get("seed", random.randint(1000, 100000000000))
         self.history_index = doc.get("history_index", -1)
         self.buffs = doc.get("buffs", 0)
+        self.color = doc.get("color", [0, 0, 0])
         self.history = doc.get("history", [])
         self.members = doc.get("members", [])
 

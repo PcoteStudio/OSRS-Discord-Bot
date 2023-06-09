@@ -2,459 +2,1965 @@
     {
         "index": 0,
         "task": "Congratulations! You have completed the game",
-        "type": 4
+        "type": 4,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                720,
+                2446
+            ],
+            [
+                830,
+                2446
+            ],
+            [
+                720,
+                2556
+            ],
+            [
+                830,
+                2556
+            ]
+        ]
     },
     {
         "index": 1,
         "task": "Complete a malediction ward or an odium ward",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                393,
+                2751
+            ],
+            [
+                493,
+                2748
+            ],
+            [
+                593,
+                2746
+            ]
+        ]
     },
     {
         "index": 2,
         "task": "Get a purple from the Chambers of Xeric",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                285,
+                2955
+            ],
+            [
+                235,
+                2855
+            ],
+            [
+                285,
+                2755
+            ]
+        ]
     },
     {
         "index": 3,
         "task": "Obtain a unique from Kree'arra",
         "examples": "Armadyl helmet/chestplate/chainskirt/hilt",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                410,
+                3228
+            ],
+            [
+                464,
+                3142
+            ],
+            [
+                458,
+                3057
+            ],
+            [
+                402,
+                2985
+            ]
+        ]
     },
     {
         "index": 4,
         "task": "Obtain dragon knives",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                90,
+                3207
+            ],
+            [
+                190,
+                3237
+            ],
+            [
+                290,
+                3240
+            ]
+        ]
     },
     {
         "index": 5,
         "task": "Obtain a unique from General Graador",
         "examples": "Bandos chestplate/tassets/boots/hilt",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                38,
+                2873
+            ],
+            [
+                39,
+                2981
+            ],
+            [
+                42,
+                3088
+            ]
+        ]
     },
     {
         "index": 6,
         "task": "Obtain a purple from the Tombs of Amascut",
         "type": 1,
-        "_comment": "[Green tile] Bond #10"
+        "_comment": "[Green tile] Bond #10",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                36,
+                2535
+            ],
+            [
+                37,
+                2640
+            ],
+            [
+                38,
+                2745
+            ]
+        ]
     },
     {
         "index": 7,
         "task": "Complete a god book",
         "examples": "Saradomin pages 1 to 4 or ancient pages 1 to 4, etc.",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                35,
+                2190
+            ],
+            [
+                36,
+                2300
+            ],
+            [
+                35,
+                2410
+            ]
+        ]
     },
     {
         "index": 8,
         "task": "Obtain any prayer scroll from the Chambers of Xeric",
         "examples": "Arcane/Dexterous/Torn prayer scroll",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                210,
+                1945
+            ],
+            [
+                110,
+                1985
+            ],
+            [
+                37,
+                2075
+            ]
+        ]
     },
     {
         "index": 9,
         "task": "Go back 1 tile",
         "move": -1,
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                360,
+                1975
+            ]
+        ]
     },
     {
         "index": 10,
         "task": "Fish a golden tench",
         "type": 3,
         "buff": 1,
-        "_comment": "[Blue tile] Buff #2"
+        "_comment": "[Blue tile] Buff #2",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                750,
+                1942
+            ],
+            [
+                640,
+                1995
+            ],
+            [
+                530,
+                2005
+            ]
+        ]
     },
     {
         "index": 11,
         "task": "Go back 1 tile",
         "move": -1,
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                829,
+                1770
+            ],
+            [
+                820,
+                1850
+            ]
+        ]
     },
     {
         "index": 12,
         "task": "Obtain a crystal armor seed",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                560,
+                1435
+            ],
+            [
+                660,
+                1410
+            ],
+            [
+                760,
+                1395
+            ],
+            [
+                839,
+                1490
+            ]
+        ]
     },
     {
         "index": 13,
         "task": "Obtain any headband",
         "examples": "Black/blue/brown/gold/green/pink/red/white headband",
         "type": 1,
-        "_comment": "[Green tile] Bond #9"
+        "_comment": "[Green tile] Bond #9",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                410,
+                1280
+            ],
+            [
+                363,
+                1380
+            ],
+            [
+                454,
+                1453
+            ]
+        ]
     },
     {
         "index": 14,
         "task": "Obtain Sarachnis cudgel",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                805,
+                1117
+            ],
+            [
+                712,
+                1195
+            ],
+            [
+                619,
+                1227
+            ],
+            [
+                526,
+                1250
+            ]
+        ]
     },
     {
         "index": 15,
         "task": "Obtain any champion scroll",
         "examples": "Imp/Goblin/Skeleton/Zombie/Giant/Hobgoblin/Ghoul/Earth warrior/Jogre/Lesser demon champion scroll",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                845,
+                687
+            ],
+            [
+                848,
+                787
+            ],
+            [
+                846,
+                887
+            ],
+            [
+                839,
+                987
+            ]
+        ]
     },
     {
         "index": 16,
         "task": "Obtain any boater except the orange one",
         "examples": "Black/blue/green/pink/purple/red/white boater",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                873,
+                302
+            ],
+            [
+                863,
+                394
+            ],
+            [
+                857,
+                486
+            ],
+            [
+                850,
+                577
+            ]
+        ]
     },
     {
         "index": 17,
         "task": "Obtain a blood shard",
         "type": 1,
-        "_comment": "[Green tile] Bond #8"
+        "_comment": "[Green tile] Bond #8",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1285,
+                91
+            ],
+            [
+                1190,
+                94
+            ],
+            [
+                1090,
+                110
+            ]
+        ]
     },
     {
         "index": 18,
         "task": "Advance 1 tile",
         "move": 1,
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1605,
+                95
+            ],
+            [
+                1500,
+                93
+            ],
+            [
+                1397,
+                91
+            ]
+        ]
     },
     {
         "index": 19,
         "task": "Obtain a piece of the obsidian armor set",
         "examples": "Obsidian helmet/platebody/platelegs",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1910,
+                345
+            ],
+            [
+                1813,
+                288
+            ],
+            [
+                1810,
+                188
+            ],
+            [
+                1712,
+                95
+            ]
+        ]
     },
     {
         "index": 20,
         "task": "Obtain any revenant sculpture",
         "examples": "Ancient emblem/totem/statuette/medallion/effigy/relic",
         "type": 0,
-        "_comment": "[Green tile] Bond #7"
+        "_comment": "[Green tile] Bond #7",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2290,
+                625
+            ],
+            [
+                2212,
+                543
+            ],
+            [
+                2142,
+                455
+            ]
+        ]
     },
     {
         "index": 21,
         "task": "Obtain a dragon chainbody",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2430,
+                950
+            ],
+            [
+                2430,
+                855
+            ],
+            [
+                2430,
+                760
+            ],
+            [
+                2400,
+                665
+            ]
+        ]
     },
     {
         "index": 22,
         "task": "Obtain some gold locks",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2241,
+                925
+            ],
+            [
+                2252,
+                1025
+            ],
+            [
+                2352,
+                1080
+            ]
+        ]
     },
     {
         "index": 23,
         "task": "Obtain a dragon spear",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2064,
+                809
+            ],
+            [
+                2143,
+                769
+            ],
+            [
+                2230,
+                812
+            ]
+        ]
     },
     {
         "index": 24,
         "task": "Obtain any piece of elegant clothing",
         "examples": "Black/blue/gold/green/pink/purple/red/white elegant shirt/blouse/legs/skirt",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2022,
+                1155
+            ],
+            [
+                2054,
+                1045
+            ],
+            [
+                2056,
+                935
+            ]
+        ]
     },
     {
         "index": 25,
         "task": "Complete a dark totem",
         "examples": "Any 3 pieces of dark totem top/middle/base or a full dark totem drop",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1710,
+                1168
+            ],
+            [
+                1810,
+                1166
+            ],
+            [
+                1910,
+                1169
+            ]
+        ]
     },
     {
         "index": 26,
         "task": "Achieve the combat achievement 'Denying the Healers II'",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1263,
+                1207
+            ],
+            [
+                1373,
+                1169
+            ],
+            [
+                1483,
+                1165
+            ],
+            [
+                1593,
+                1166
+            ]
+        ]
     },
     {
         "index": 27,
         "task": "Obtain a venator shard",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1185,
+                1356
+            ],
+            [
+                1303,
+                1352
+            ]
+        ]
     },
     {
         "index": 28,
         "task": "Obtain a Venenatis or Spindel unique",
         "examples": "Dragon 2h/pickaxe, voidwaker gem, fangs of Venenatis or treasonous ring",
         "type": 0,
-        "_comment": "Branch #3, right path, tile #2"
+        "_comment": "Branch #3, right path, tile #2",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1645,
+                1359
+            ],
+            [
+                1545,
+                1358
+            ],
+            [
+                1445,
+                1360
+            ]
+        ]
     },
     {
         "index": 29,
         "task": "Obtain any elder chaos druid robes piece",
         "examples": "Elder chaos hood/robe/top",
         "type": 0,
-        "_comment": "[Green tile] Bond #6, branch #3, right path, tile #1"
+        "_comment": "[Green tile] Bond #6, branch #3, right path, tile #1",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1967,
+                1430
+            ],
+            [
+                1862,
+                1360
+            ],
+            [
+                1758,
+                1359
+            ]
+        ]
     },
     {
         "index": 30,
         "task": "Obtain a granite longsword",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2027,
+                1549
+            ],
+            [
+                1925,
+                1548
+            ],
+            [
+                1822,
+                1547
+            ]
+        ]
     },
     {
         "index": 31,
         "task": "Advance 1 tile",
         "move": 1,
         "type": 0,
-        "_comment": "Branch #3, left path, tile #3"
+        "_comment": "Branch #3, left path, tile #3",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1060,
+                1530
+            ],
+            [
+                1024,
+                1443
+            ],
+            [
+                1062,
+                1360
+            ]
+        ]
     },
     {
         "index": 32,
         "task": "Obtain a Callisto or Artio unique",
         "examples": "Dragon 2h/pickaxe, voidwaker hilt, claws of Callisto or tyrannical ring",
         "type": 0,
-        "_comment": "Branch #3, left path, tile #2"
+        "_comment": "Branch #3, left path, tile #2",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1545,
+                1545
+            ],
+            [
+                1445,
+                1546
+            ],
+            [
+                1345,
+                1544
+            ],
+            [
+                1245,
+                1547
+            ],
+            [
+                1169,
+                1544
+            ]
+        ]
     },
     {
         "index": 33,
         "task": "Obtain an abyssal whip",
         "type": 1,
-        "_comment": "[Green tile] Bond #6, branch #3, left path, tile #1"
+        "_comment": "[Green tile] Bond #6, branch #3, left path, tile #1",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1710,
+                1548
+            ],
+            [
+                1658,
+                1545
+            ]
+        ]
     },
     {
         "index": 34,
         "task": "Obtain a Zamorak spear",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2346,
+                1550
+            ],
+            [
+                2243,
+                1549
+            ],
+            [
+                2140,
+                1548
+            ]
+        ]
     },
     {
         "index": 35,
         "task": "Obtain a Calvar'ion or Vet'ion unique",
         "examples": "Dragon 2h/pickaxe, voidwaker blade, skull of vet'ion or ring of the gods",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2615,
+                1485
+            ],
+            [
+                2537,
+                1548
+            ],
+            [
+                2453,
+                1551
+            ]
+        ]
     },
     {
         "index": 36,
         "task": "Obtain granite legs",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2620,
+                1300
+            ],
+            [
+                2623,
+                1375
+            ]
+        ]
     },
     {
         "index": 37,
         "task": "Obtain a Saradomin sword",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2614,
+                757
+            ],
+            [
+                2615,
+                862
+            ],
+            [
+                2616,
+                967
+            ],
+            [
+                2617,
+                1072
+            ],
+            [
+                2618,
+                1177
+            ]
+        ]
     },
     {
         "index": 38,
         "task": "Achieve the combat achievement 'Perfect Zalcano'",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2195,
+                276
+            ],
+            [
+                2295,
+                272
+            ],
+            [
+                2395,
+                288
+            ],
+            [
+                2495,
+                360
+            ],
+            [
+                2550,
+                460
+            ],
+            [
+                2585,
+                560
+            ]
+        ]
     },
     {
         "index": 39,
         "task": "Obtain a KBD head",
         "type": 1,
-        "_comment": "[Green tile] Bond #5"
+        "_comment": "[Green tile] Bond #5",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1990,
+                460
+            ],
+            [
+                2060,
+                365
+            ]
+        ]
     },
     {
         "index": 40,
         "task": "Achieve the combat achievement 'Facing Jad Head-on'",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1690,
+                633
+            ],
+            [
+                1795,
+                595
+            ],
+            [
+                1900,
+                538
+            ]
+        ]
     },
     {
         "index": 41,
         "task": "Obtain a Vorkath head",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1345,
+                643
+            ],
+            [
+                1458,
+                645
+            ],
+            [
+                1570,
+                646
+            ]
+        ]
     },
     {
         "index": 42,
         "task": "Obtain a nihil shard",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1150,
+                635
+            ],
+            [
+                1235,
+                640
+            ]
+        ]
     },
     {
         "index": 43,
         "task": "Go back 1 tile",
         "move": -1,
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1038,
+                450
+            ],
+            [
+                1056,
+                558
+            ]
+        ]
     },
     {
         "index": 44,
         "task": "Obtain a Zulrah unique",
         "examples": "Magic/Tanzanite fang, serpentine visage or uncut onyx",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                756,
+                90
+            ],
+            [
+                862,
+                117
+            ],
+            [
+                968,
+                180
+            ],
+            [
+                1025,
+                280
+            ],
+            [
+                730,
+                189
+            ],
+            [
+                686,
+                289
+            ]
+        ]
     },
     {
         "index": 45,
         "task": "Obtain any pyromancer outfit piece",
         "examples": "Pyromancer hood/garb/robe/boots",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                655,
+                633
+            ],
+            [
+                659,
+                523
+            ],
+            [
+                664,
+                414
+            ]
+        ]
     },
     {
         "index": 46,
         "task": "Obtain a zenyte shard",
         "type": 1,
-        "_comment": "[Green tile] Bond #4"
+        "_comment": "[Green tile] Bond #4",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                658,
+                929
+            ],
+            [
+                656,
+                839
+            ],
+            [
+                657,
+                749
+            ]
+        ]
     },
     {
         "index": 47,
         "task": "Obtain a Barrows weapon",
         "examples": "Ahrim's staff, Dharok's greataxe, Guthan's warspear, Karil's crossbow, Torag's hammers or Verac's flail",
-        "type": 1
+        "type": 1,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                320,
+                1104
+            ],
+            [
+                420,
+                1075
+            ],
+            [
+                520,
+                1045
+            ],
+            [
+                620,
+                1038
+            ]
+        ]
     },
     {
         "index": 48,
         "task": "Obtain a mud battlestaff",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                168,
+                1300
+            ],
+            [
+                170,
+                1197
+            ],
+            [
+                172,
+                1094
+            ],
+            [
+                169,
+                990
+            ]
+        ]
     },
     {
         "index": 49,
         "task": "Obtain a stange lockpick",
         "type": 0,
-        "_comment": "Branch #2, left path, tile #3"
+        "_comment": "Branch #2, left path, tile #3",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                512,
+                90
+            ],
+            [
+                625,
+                85
+            ]
+        ]
     },
     {
         "index": 50,
         "task": "Obtain a dragon battleaxe",
         "type": 1,
-        "_comment": "[Green tile] Bond #4, branch #2, left path, tile #2"
+        "_comment": "[Green tile] Bond #4, branch #2, left path, tile #2",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                370,
+                210
+            ],
+            [
+                410,
+                125
+            ]
+        ]
     },
     {
         "index": 51,
         "task": "Achieve the combat achievement 'Can't Touch Me'",
         "type": 0,
-        "_comment": "Branch #2, left path, tile #1"
+        "_comment": "Branch #2, left path, tile #1",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                150,
+                840
+            ],
+            [
+                143,
+                730
+            ],
+            [
+                143,
+                620
+            ],
+            [
+                175,
+                510
+            ],
+            [
+                229,
+                415
+            ],
+            [
+                280,
+                320
+            ]
+        ]
     },
     {
         "index": 52,
         "task": "Go back 1 tile",
         "move": -1,
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                310,
+                1608
+            ],
+            [
+                220,
+                1530
+            ],
+            [
+                165,
+                1422
+            ]
+        ]
     },
     {
         "index": 53,
         "task": "Obtain any ballista piece",
         "type": 0,
-        "examples": "Ballista limbs/spring, light/heavy frame or monkey tail"
+        "examples": "Ballista limbs/spring, light/heavy frame or monkey tail",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                645,
+                1642
+            ],
+            [
+                540,
+                1644
+            ],
+            [
+                437,
+                1639
+            ]
+        ]
     },
     {
         "index": 54,
         "task": "Obtain a leaf-bladed weapon",
         "type": 1,
         "examples": "Leaf-bladed battleaxe or leaf-bladed sword",
-        "_comment": "[Green tile] Bond #3"
+        "_comment": "[Green tile] Bond #3",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                985,
+                1710
+            ],
+            [
+                873,
+                1655
+            ],
+            [
+                760,
+                1640
+            ]
+        ]
     },
     {
         "index": 55,
         "task": "Obtain a magic seed",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1334,
+                1739
+            ],
+            [
+                1219,
+                1740
+            ],
+            [
+                1104,
+                1737
+            ]
+        ]
     },
     {
         "index": 56,
         "task": "Achieve the combat achievement 'From One Kine to Another'",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1670,
+                1740
+            ],
+            [
+                1560,
+                1743
+            ],
+            [
+                1455,
+                1741
+            ]
+        ]
     },
     {
         "index": 57,
         "task": "Obtain a granite maul",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1875,
+                1740
+            ],
+            [
+                1785,
+                1742
+            ]
+        ]
     },
     {
         "index": 58,
         "task": "Obtain dragon arrows",
         "type": 2,
-        "_comment": "[Red tile] Stop #2"
+        "_comment": "[Red tile] Stop #2",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2247,
+                1738
+            ],
+            [
+                2162,
+                1742
+            ],
+            [
+                2077,
+                1738
+            ],
+            [
+                1992,
+                1743
+            ]
+        ]
     },
     {
         "index": 59,
         "task": "Obtain a blue or an orange egg sac",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2563,
+                1777
+            ],
+            [
+                2463,
+                1740
+            ],
+            [
+                2362,
+                1738
+            ]
+        ]
     },
     {
         "index": 60,
         "task": "Obtain a black mask",
         "type": 1,
-        "_comment": "[Green tile] Bond #2"
+        "_comment": "[Green tile] Bond #2",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2625,
+                1953
+            ],
+            [
+                2629,
+                1860
+            ]
+        ]
     },
     {
         "index": 61,
         "task": "Obtain an ancient icon",
         "type": 3,
         "buff": 1,
-        "_comment": "[Blue tile] Buff #1"
+        "_comment": "[Blue tile] Buff #1",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2380,
+                2112
+            ],
+            [
+                2480,
+                2109
+            ],
+            [
+                2580,
+                2053
+            ]
+        ]
     },
     {
         "index": 62,
         "task": "Obtain a dragon longsword",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2135,
+                2300
+            ],
+            [
+                2200,
+                2210
+            ],
+            [
+                2270,
+                2130
+            ]
+        ]
     },
     {
         "index": 63,
         "task": "Obtain a Larran's key",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1990,
+                2700
+            ],
+            [
+                1968,
+                2600
+            ],
+            [
+                1995,
+                2500
+            ],
+            [
+                2050,
+                2400
+            ]
+        ]
     },
     {
         "index": 64,
         "task": "Obtain a fedora",
         "type": 2,
-        "_comment": "[Red tile] Stop #1"
+        "_comment": "[Red tile] Stop #1",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2235,
+                2750
+            ],
+            [
+                2165,
+                2780
+            ],
+            [
+                2085,
+                2768
+            ]
+        ]
     },
     {
         "index": 65,
         "task": "Obtain exactly 7 crystal shards in a single drop",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2435,
+                2485
+            ],
+            [
+                2370,
+                2580
+            ],
+            [
+                2305,
+                2675
+            ]
+        ]
     },
     {
         "index": 66,
         "task": "Obtain any mystic staff",
         "examples": "Mystic air/dust/earth/fire/lava/mist/mud/smoke/steam staff",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2623,
+                2440
+            ],
+            [
+                2520,
+                2395
+            ]
+        ]
     },
     {
         "index": 67,
         "task": "Obtain a brimstone key",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2562,
+                2740
+            ],
+            [
+                2564,
+                2647
+            ],
+            [
+                2623,
+                2556
+            ]
+        ]
     },
     {
         "index": 68,
         "task": "Obtain some chewed bones",
-        "type": 0
+        "type": 0,
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2480,
+                3190
+            ],
+            [
+                2570,
+                3140
+            ],
+            [
+                2608,
+                3045
+            ],
+            [
+                2613,
+                2952
+            ],
+            [
+                2590,
+                2858
+            ]
+        ]
     },
     {
         "index": 69,
         "task": "Obtain an elite clue scroll",
         "type": 1,
-        "_comment": "[Green tile] Merge #1, bond #2"
+        "_comment": "[Green tile] Merge #1, bond #2",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2220,
+                3190
+            ],
+            [
+                2310,
+                3194
+            ]
+        ]
     },
     {
         "index": 70,
         "task": "Achieve the combat achievement 'Praying to the Gods'",
         "type": 0,
-        "_comment": "Branch #1, right path, tile #6"
+        "_comment": "Branch #1, right path, tile #6",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1905,
+                3222
+            ],
+            [
+                1995,
+                3219
+            ],
+            [
+                2085,
+                3215
+            ]
+        ]
     },
     {
         "index": 71,
         "task": "Obtain a dragon defender",
         "type": 0,
-        "_comment": "Branch #1, right path, tile #5"
+        "_comment": "Branch #1, right path, tile #5",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1610,
+                3228
+            ],
+            [
+                1700,
+                3226
+            ],
+            [
+                1790,
+                3224
+            ]
+        ]
     },
     {
         "index": 72,
         "task": "Obtain a fire cape",
         "type": 0,
-        "_comment": "Branch #1, right path, tile #4"
+        "_comment": "Branch #1, right path, tile #4",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1305,
+                3235
+            ],
+            [
+                1395,
+                3233
+            ],
+            [
+                1485,
+                3230
+            ]
+        ]
     },
     {
         "index": 73,
         "task": "Obtain any combination battlestaff",
         "examples": "Dust/Lava/Mist/Mud/Smoke/Steam battlestaff",
         "type": 0,
-        "_comment": "Branch #1, right path, tile #3"
+        "_comment": "Branch #1, right path, tile #3",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1000,
+                3235
+            ],
+            [
+                1090,
+                3235
+            ],
+            [
+                1180,
+                3235
+            ]
+        ]
     },
     {
         "index": 74,
         "task": "Advance 2 tiles",
         "move": 2,
         "type": 0,
-        "_comment": "Branch #1, right path, tile #2"
+        "_comment": "Branch #1, right path, tile #2",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                885,
+                2980
+            ],
+            [
+                815,
+                3070
+            ],
+            [
+                830,
+                3160
+            ],
+            [
+                890,
+                3225
+            ]
+        ]
     },
     {
         "index": 75,
         "task": "Obtain a crystal grail",
         "type": 0,
-        "_comment": "Branch #1, right path, tile #1"
+        "_comment": "Branch #1, right path, tile #1",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1000,
+                2980
+            ],
+            [
+                1080,
+                2980
+            ]
+        ]
     },
     {
         "index": 76,
         "task": "Obtain a crawling hand",
         "type": 0,
         "start": true,
-        "_comment": "Starting tile"
+        "_comment": "Starting tile",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1330,
+                2740
+            ],
+            [
+                1420,
+                2760
+            ],
+            [
+                1510,
+                2745
+            ],
+            [
+                1330,
+                2835
+            ],
+            [
+                1480,
+                2835
+            ],
+            [
+                1330,
+                2905
+            ],
+            [
+                1505,
+                2910
+            ],
+            [
+                1260,
+                2960
+            ],
+            [
+                1590,
+                2960
+            ],
+            [
+                1675,
+                2965
+            ],
+            [
+                1765,
+                2970
+            ],
+            [
+                1855,
+                2965
+            ],
+            [
+                1175,
+                2980
+            ]
+        ]
     },
     {
         "index": 77,
         "task": "Obtain any footwear from beginner clue scrolls",
         "examples": "Frog/mole slippers or bear/demon feet",
         "type": 0,
-        "_comment": "Branch #1, left path, tile #2"
+        "_comment": "Branch #1, left path, tile #2",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                2139,
+                2972
+            ],
+            [
+                2220,
+                3038
+            ]
+        ]
     },
     {
         "index": 78,
         "task": "Obtain a gnome scarf",
         "type": 0,
-        "_comment": "Branch #1, Left path, Tile #1"
+        "_comment": "Branch #1, Left path, Tile #1",
+        "pawn_offsets": [
+            30,
+            30
+        ],
+        "pawn_locations": [
+            [
+                1940,
+                2965
+            ],
+            [
+                2030,
+                2967
+            ]
+        ]
     }
 ]

@@ -57,9 +57,8 @@ def tile_to_doc(tile: TileNode):
         'move': tile.move,
         'buff': tile.buff,
         'start': tile.start,
-        'pawn_location': tile.pawn_location,
-        'pawn_direction': tile.pawn_direction,
-        'pawn_offset': tile.pawn_offset,
+        'pawn_locations': tile.pawn_locations,
+        'pawn_offsets': tile.pawn_offsets,
         'exits': []
     }
     for exit in tile.exits:

@@ -3,10 +3,9 @@ import logging
 import os
 import json
 import nextcord
-from nextcord.ext import commands
+from nextcord.ext import tasks, commands
 from internal import choiceform, utils, constants
-from internal.gol import gameoflife
-from internal.gol import golutils
+from internal.gol import gameoflife, golutils, liveboard
 from internal.gol.gameoflife import GameOfLife
 from database import teamdb, tilenodedb, gameoflifedb
 
@@ -14,6 +13,7 @@ from database import teamdb, tilenodedb, gameoflifedb
 class GameOfLifeCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        self.is_updating_boards = False
 
     @utils.is_in_guild()
     @nextcord.slash_command(guild_ids=[1114607456304246784])
@@ -42,15 +42,16 @@ class GameOfLifeCog(commands.Cog):
                 game_was_archived = True
 
         game = GameOfLife(interaction.guild.id, name)
-        await game.generate_board()
+        game.generate_board()
         await gameoflifedb.insert(game)
         await tilenodedb.insert_many(game.tiles)
         gameoflife.games[game.guild_id] = game
         content = f"A GoL session **{name}** was successfully created for this server."
         if game_was_archived:
-            await interaction.edit_original_message(content)
+            await interaction.edit_original_message(content=content)
         else:
             await interaction.send(content)
+        game.is_board_updated = False
 
     @gol.subcommand()
     @utils.is_gol_admin()
@@ -92,6 +93,7 @@ class GameOfLifeCog(commands.Cog):
             await teamdb.update_many(game.teams)
             await gameoflifedb.update(game)
             await interaction.send(f"Tiles loaded successfully.")
+            game.is_board_updated = False
 
     @utils.is_in_guild()
     @nextcord.slash_command(guild_ids=[1114607456304246784])
@@ -139,7 +141,8 @@ class GameOfLifeCog(commands.Cog):
                 content += golutils.format_travel(team, destinations[choice], traveled)
                 await interaction.edit_original_message(content=content)
                 await teamdb.update(team)
-                await self.log_update_on_channel(game, golutils.format_roll_log(team, cur_tile, destinations[choice], traveled[-1]))
+                await self.post_in_logs_channel(game, golutils.format_roll_log(team, cur_tile, destinations[choice], traveled[-1]))
+                game.is_board_updated = False
             if len(destinations) >= 2:
                 content += golutils.format_branch(destinations)
                 await interaction.edit_original_message(content=content)
@@ -153,7 +156,8 @@ class GameOfLifeCog(commands.Cog):
                 content += golutils.format_travel(team, destinations[choice], traveled)
                 await teamdb.update(team)
                 await interaction.followup.send(content)
-                await self.log_update_on_channel(game, golutils.format_roll_log(team, cur_tile, destinations[choice], traveled[-1]))
+                await self.post_in_logs_channel(game, golutils.format_roll_log(team, cur_tile, destinations[choice], traveled[-1]))
+                game.is_board_updated = False
         finally:
             team.is_rolling = False
 
@@ -184,7 +188,8 @@ class GameOfLifeCog(commands.Cog):
             content += f"{golutils.format_task_multiline(destination)}"
             await teamdb.update(team)
             await interaction.send(content)
-            await self.log_update_on_channel(game, content + "\n" + constants.TEXT_MESSAGE_SEPARATOR)
+            await self.post_in_logs_channel(game, content + "\n" + constants.TEXT_MESSAGE_SEPARATOR)
+            game.is_board_updated = False
         finally:
             team.is_rolling = False
 
@@ -214,11 +219,47 @@ class GameOfLifeCog(commands.Cog):
         for g in self.bot.guilds:
             gameoflife.games[g.id] = await gameoflifedb.get_by_guild_id(g.id)
         logging.info("GoL sessions loaded")
+        self.update_board_channel.start()
 
-    async def log_update_on_channel(self, game, content):
+    async def post_in_logs_channel(self, game, content):
         if game and game.channel_logs:
             channel = self.bot.get_channel(game.channel_logs)
             await channel.send(content)
+
+    @tasks.loop(seconds=2)
+    async def update_board_channel(self):
+        if self.is_updating_boards:
+            return
+        self.is_updating_boards = True
+        try:
+            for guild_id, game in gameoflife.games.items():
+                if game is None or game.channel_board is None or game.is_board_updated:
+                    continue
+                game.is_board_updated = None
+                original_board_path = os.path.join(os.getcwd() + "/src/boards/pound.webp")
+                updated_board_path = liveboard.draw_game(game)
+                channel = self.bot.get_channel(game.channel_board)
+
+                botMsgs = [msg async for msg in channel.history()]
+
+                content = ["Reference board", "Updated board"]
+                files = [nextcord.File(original_board_path), nextcord.File(updated_board_path)]
+
+                for i, msg in enumerate(reversed(botMsgs)):
+                    if (i >= len(content)):
+                        await msg.delete()
+                    else:
+                        await msg.edit(content=content[i], file=files[i])
+
+                i = len(botMsgs)
+                for j in range(i, len(content)):
+                    await channel.send(content[j], file=files[j])
+                if (game.is_board_updated == None):
+                    game.is_board_updated = True
+                logging.info(f"GoL board updated (game_id:{game._id}, game_name:{game.name})")
+        finally:
+            self.is_updating_boards = False
+            self.update_board_channel.restart()
 
 
 def setup(bot):

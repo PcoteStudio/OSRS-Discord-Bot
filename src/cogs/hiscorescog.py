@@ -30,10 +30,7 @@ class HiscoresCog(commands.Cog):
         logging.info(f"Updating HS for {hs.server_name}...")
         try:
             channel = self.bot.get_channel(hs.channel_id)
-            botMsgs = []
-            async for msg in channel.history():
-                if (msg.author.id == self.bot.user.id):
-                    botMsgs.insert(0, msg)
+            botMsgs = [msg async for msg in channel.history()]
             content = await hs.getUpdatedHiscoresToPost(1600)
 
             i = 0

@@ -36,6 +36,7 @@ class ChannelCog(commands.Cog):
         game.channel_board = channel.id
         await gameoflifedb.update(game)
         await interaction.send(constants.TEXT_BOARD_CHANNEL_HAS_BEEN_SUCCESSFULLY_SET)
+        game.is_board_updated = False
         logging.info(
             f"GoL live board channel has been set (channel_name:{channel.name}, channel_id:{channel.id})")
 

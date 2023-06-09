@@ -17,9 +17,8 @@ class TileNode:
     buff = 0
     start = False
     examples = None
-    pawn_location = [0, 0]
-    pawn_direction = 0
-    pawn_offset = 0
+    pawn_locations = []
+    pawn_offsets = [0, 0]
 
     def __init__(self, game_id: ObjectId, index: int, doc={}):
         self._id = doc.get("_id", ObjectId())
@@ -36,9 +35,8 @@ class TileNode:
         self.buff = json.get("buff", self.buff)
         self.start = json.get("start", self.start)
         self.examples = json.get("examples", self.examples)
-        self.pawn_location = json.get("pawn_location", self.pawn_location)
-        self.pawn_direction = json.get("pawn_direction", self.pawn_direction)
-        self.pawn_offset = json.get("pawn_offset", self.pawn_offset)
+        self.pawn_locations = json.get("pawn_locations", self.pawn_locations)
+        self.pawn_offsets = json.get("pawn_offsets", self.pawn_offsets)
 
     def add_exit(self, tile: "TileNode"):
         if tile not in self.exits:

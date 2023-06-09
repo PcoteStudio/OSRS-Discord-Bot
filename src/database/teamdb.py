@@ -30,15 +30,17 @@ async def insert_many(teams: Iterable[Team]):
     for team in teams:
         doc = team_to_doc(team)
         docs.append(doc)
-        
+
     result = await instance.team.insert_many(docs)
     logging.info(f"Multiple teams inserted (len:{len(teams)})")
     return result
+
 
 async def update(team: Team):
     result = await instance.team.update_one({'_id': team._id}, {'$set': team_to_doc(team)})
     logging.info(f"Team updated (_id:{team._id}, name:{team.name})")
     return result
+
 
 async def update_many(teams: Iterable[Team]):
     requests = []
@@ -65,6 +67,7 @@ def team_to_doc(team: Team):
         'emoji': team.emoji,
         'seed': team.seed,
         'buffs': team.buffs,
+        'color': team.color,
         'history_index': team.history_index,
         'history': team.history,
         'members': team.members,
