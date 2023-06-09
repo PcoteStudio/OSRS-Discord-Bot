@@ -33,7 +33,12 @@ class GameOfLife:
 
         self.is_board_updated = False
 
+    def is_ready(self):
+        return self.start_index is not None
+
     def has_finished(self, team: Team):
+        if len(self.tiles) is 0:
+            return True
         return team.has_finished(self.tiles)
 
     def set_start_index(self, tile_index):

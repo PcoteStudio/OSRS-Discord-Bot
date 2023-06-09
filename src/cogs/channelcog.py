@@ -1,20 +1,19 @@
 import nextcord
 import logging
-from nextcord.ext import commands
+from nextcord.ext import commands, application_checks
 from internal import utils, constants
-from internal.gol import gameoflife
+from internal.gol import gameoflife, golutils
 from database import gameoflifedb
 
 
 class ChannelCog(commands.Cog):
 
-    @utils.is_in_guild()
-    @nextcord.slash_command(guild_ids=[1114607456304246784])
+    @nextcord.slash_command(guild_ids=constants.COMMANDS_GUILD_ID)
     async def channel(self, interaction):
         pass
 
-    @utils.is_gol_admin()
     @channel.subcommand(description="Set the channel in which the bot will post team update logs.")
+    @application_checks.has_role(constants.ROLE_BOT_ADMIN)
     async def logs(self, interaction: nextcord.Interaction, channel: nextcord.TextChannel):
         game = gameoflife.get_game(interaction.guild.id)
         if game is None:
@@ -24,10 +23,10 @@ class ChannelCog(commands.Cog):
         await gameoflifedb.update(game)
         await interaction.send(constants.TEXT_LOGS_CHANNEL_HAS_BEEN_SUCCESSFULLY_SET)
         logging.info(
-            f"GoL logs channel has been set (channel_name:{channel.name}, channel_id:{channel.id})")
+            f"{utils.format_guild_log(interaction.guild)} GoL logs channel has been set to {channel.name} by {interaction.user.name})")
 
-    @utils.is_gol_admin()
     @channel.subcommand(description="Set the channel in which the bot post the live board.")
+    @application_checks.has_role(constants.ROLE_BOT_ADMIN)
     async def board(self, interaction: nextcord.Interaction, channel: nextcord.TextChannel):
         game = gameoflife.get_game(interaction.guild.id)
         if game is None:
@@ -35,13 +34,13 @@ class ChannelCog(commands.Cog):
             return
         game.channel_board = channel.id
         await gameoflifedb.update(game)
-        await interaction.send(constants.TEXT_BOARD_CHANNEL_HAS_BEEN_SUCCESSFULLY_SET)
         game.is_board_updated = False
         logging.info(
-            f"GoL live board channel has been set (channel_name:{channel.name}, channel_id:{channel.id})")
+            f"{utils.format_guild_log(interaction.guild)} GoL live board channel has been set to {channel.name} by {interaction.user.name})")
+        await interaction.send(constants.TEXT_BOARD_CHANNEL_HAS_BEEN_SUCCESSFULLY_SET)
 
-    @utils.is_gol_admin()
     @channel.subcommand(description="Unset the current GoL channels.")
+    @application_checks.has_role(constants.ROLE_BOT_ADMIN)
     async def unset(self, interaction: nextcord.Interaction):
         game = gameoflife.get_game(interaction.guild.id)
         if game is None:
@@ -52,7 +51,12 @@ class ChannelCog(commands.Cog):
         await gameoflifedb.update(game)
         await interaction.send(constants.TEXT_SET_CHANNELS_HAVE_BEEN_SUCCESSFULLY_CLEARED)
         logging.info(
-            f"GoL channels have been unset (game_name:{game.name}, game_id:{game._id})")
+            f"{utils.format_guild_log(interaction.guild)} GoL channels have been unset by {interaction.user.name})")
+
+    @channel.error
+    async def check_failure_error(self, interaction: nextcord.Interaction, error: Exception):
+        if not isinstance(error, nextcord.ApplicationCheckFailure):
+            raise error
 
 
 def setup(bot):

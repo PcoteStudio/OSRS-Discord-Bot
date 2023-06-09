@@ -1,17 +1,8 @@
 import nextcord
-from nextcord.ext import application_checks
 
 
-def is_gol_admin():
-    def predicate(interaction: nextcord.Interaction):
-        return True  # Until implemented
-    return application_checks.check(predicate)
-
-
-def is_in_guild():
-    def predicate(interaction: nextcord.Interaction):
-        return isinstance(interaction.guild, nextcord.Guild)
-    return application_checks.check(predicate)
+def format_guild_log(guild):
+    return f"[G#{guild.id if isinstance(guild, nextcord.Guild) else guild}]"
 
 
 def mention_to_id(mention: str):

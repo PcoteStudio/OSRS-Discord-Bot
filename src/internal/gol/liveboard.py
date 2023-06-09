@@ -8,6 +8,7 @@ def draw_game(game: GameOfLife):
     path_board = os.path.join(os.getcwd() + "/src/boards/pound.webp")
     path_font = os.path.join(os.getcwd() + "/src/fonts/SEGUIEMJ.ttf")
     path_out = os.path.join(os.getcwd() + "/out/boards/pound_generated.webp")
+    os.makedirs(os.path.dirname(path_out), exist_ok=True)
 
     img = Image.open(path_board)
     drawn = ImageDraw.Draw(img)

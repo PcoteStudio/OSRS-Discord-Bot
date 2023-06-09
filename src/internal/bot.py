@@ -9,11 +9,12 @@ class Bot(commands.Bot):
     def __init__(self, **kwargs):
         super().__init__(
             command_prefix=self.get_prefix_,
-            description=kwargs.pop('description'),
-            intents=kwargs.pop('intents')
+            description=kwargs.pop("description"),
+            intents=kwargs.pop("intents")
         )
         self.start_time = None
         self.app_info = None
+        self.config = kwargs.pop("config")
 
         self.loop.create_task(self.track_start())
         self.load_all_extensions()
@@ -31,6 +32,8 @@ class Bot(commands.Bot):
         cogs = [x.stem for x in Path(join(dirname(__file__), '../cogs')).glob('*.py')]
         for extension in cogs:
             try:
+                if extension in self.config.get("EXCLUDED_COGS", []):
+                    continue
                 self.load_extension(f'cogs.{extension}')
                 logging.info(f'Loaded {extension}')
             except Exception as e:

@@ -1,11 +1,13 @@
-import random
+import traceback
+import sys
 import logging
 import os
 import json
 import nextcord
-from nextcord.ext import tasks, commands
-from internal import choiceform, utils, constants
-from internal.gol import gameoflife, golutils, liveboard
+from datetime import datetime
+from nextcord.ext import tasks, commands, application_checks
+from internal import choiceform, constants, utils
+from internal.gol import gameoflife, golchecks, golutils, liveboard
 from internal.gol.gameoflife import GameOfLife
 from database import teamdb, tilenodedb, gameoflifedb
 
@@ -15,19 +17,19 @@ class GameOfLifeCog(commands.Cog):
         self.bot = bot
         self.is_updating_boards = False
 
-    @utils.is_in_guild()
-    @nextcord.slash_command(guild_ids=[1114607456304246784])
-    async def gol(self, interaction):
+    @nextcord.slash_command(guild_ids=constants.COMMANDS_GUILD_ID)
+    async def gol(self, interaction, test):
         pass
 
-    @gol.subcommand()
-    @utils.is_gol_admin()
+    @gol.subcommand(description="Create a new GoL session on the server.")
+    @application_checks.guild_only()
+    @application_checks.has_role(constants.ROLE_BOT_ADMIN)
     async def create(self, interaction: nextcord.Interaction, name: str):
         game_was_archived = False
         game = gameoflife.get_game(interaction.guild.id)
         if game is not None:
             await interaction.send(f'A GoL session already exists for this server. Do you wish to overwrite **{game.name}**?')
-            choice = await choiceform.slash_choose(self.bot, interaction, [constants.EMOJI_CONFIRM, constants.EMOJI_CANCEL])
+            choice, user = await choiceform.slash_choose(self.bot, interaction, [constants.EMOJI_CONFIRM, constants.EMOJI_CANCEL])
             if choice == None:
                 await interaction.edit_original_message(content=constants.TEXT_THE_COMMAND_HAS_BEEN_CANCELED_AFTER_NO_INTERACTION_FROM_USER)
                 return
@@ -38,7 +40,9 @@ class GameOfLifeCog(commands.Cog):
                 game.is_archived = True
                 await gameoflifedb.update(game)
                 gameoflife.games[game.guild_id] = None
-                await interaction.edit_original_message(content=f'The existing GoL session **{game.name}** has been archived.')
+                logging.info(
+                    f"{utils.format_guild_log(interaction.guild)} The existing GoL session {game.name} has been archived by {user.name}.")
+                await interaction.edit_original_message(content=f"The existing GoL session **{game.name}** has been archived.")
                 game_was_archived = True
 
         game = GameOfLife(interaction.guild.id, name)
@@ -46,22 +50,23 @@ class GameOfLifeCog(commands.Cog):
         await gameoflifedb.insert(game)
         await tilenodedb.insert_many(game.tiles)
         gameoflife.games[game.guild_id] = game
-        content = f"A GoL session **{name}** was successfully created for this server."
+        logging.info(
+            f"{utils.format_guild_log(interaction.guild)} The GoL session {name} was successfully created for this server by {interaction.user.name}.")
+        content = f"The GoL session **{name}** was successfully created for this server."
         if game_was_archived:
             await interaction.edit_original_message(content=content)
         else:
             await interaction.send(content)
         game.is_board_updated = False
 
-    @gol.subcommand()
-    @utils.is_gol_admin()
+    @gol.subcommand(description="Archive the active GoL session of the server.")
+    @application_checks.guild_only()
+    @application_checks.has_role(constants.ROLE_BOT_ADMIN)
+    @golchecks.game_exists()
     async def archive(self, interaction: nextcord.Interaction):
         game = gameoflife.get_game(interaction.guild.id)
-        if game is None:
-            await interaction.send(f'{constants.EMOJI_INCORRECT} {constants.TEXT_NO_ACTIVE_GOL_SESSION_ON_SERVER}')
-            return
         await interaction.send(f'Do you really wish to archive the GoL session **{game.name}** from this server?')
-        choice = await choiceform.slash_choose(self.bot, interaction, [constants.EMOJI_CONFIRM, constants.EMOJI_CANCEL])
+        choice, user = await choiceform.slash_choose(self.bot, interaction, [constants.EMOJI_CONFIRM, constants.EMOJI_CANCEL])
         if choice == None:
             await interaction.edit_original_message(content=constants.TEXT_THE_COMMAND_HAS_BEEN_CANCELED_AFTER_NO_INTERACTION_FROM_USER)
             return
@@ -72,41 +77,63 @@ class GameOfLifeCog(commands.Cog):
             game.is_archived = True
             await gameoflifedb.update(game)
             gameoflife.games[game.guild_id] = None
-            await interaction.edit_original_message(content=f'The existing GoL session **{game.name}** has been archived.')
+            logging.info(
+                f"{utils.format_guild_log(interaction.guild)} The existing GoL session {game.name} has been archived by {user.name}.")
+            await interaction.edit_original_message(content=f"The existing GoL session **{game.name}** has been archived.")
 
-    @gol.subcommand()
-    @utils.is_gol_admin()
+    @gol.subcommand(description="Load a board configuration into the active GoL session.")
+    @application_checks.guild_only()
+    @application_checks.has_role(constants.ROLE_BOT_ADMIN)
+    @golchecks.game_exists()
     async def load(self, interaction: nextcord.Interaction, filename: str):
         game = gameoflife.get_game(interaction.guild.id)
-        if game is None:
-            await interaction.send(f'{constants.EMOJI_INCORRECT} {constants.TEXT_NO_ACTIVE_GOL_SESSION_ON_SERVER}')
-            return
-
-        path = os.path.join(os.getcwd() + "/src/tiles/", filename)
+        path = os.path.join(os.getcwd() + f"/src/tiles/{filename}.json")
         if os.path.isfile(path) == False:
-            await interaction.send(f":x: The file {filename} doesn't exist.")
+            await interaction.send(f"{constants.EMOJI_INCORRECT} The file {filename} doesn't exist.")
             return
         with open(path, 'r', encoding='utf-8') as doc:
             content = json.load(doc)
             game.load_tiles(content)
-            await tilenodedb.update_many(game.tiles)
-            await teamdb.update_many(game.teams)
-            await gameoflifedb.update(game)
-            await interaction.send(f"Tiles loaded successfully.")
-            game.is_board_updated = False
+        await tilenodedb.update_many(game.tiles)
+        await teamdb.update_many(game.teams)
+        await gameoflifedb.update(game)
+        game.is_board_updated = False
+        logging.info(
+            f"{utils.format_guild_log(interaction.guild)} Tiles loaded successfully for the GoL session {game.name} by {interaction.user.name}.")
+        await interaction.send(f"Tiles loaded successfully for the GoL session **{game.name}**.")
 
-    @utils.is_in_guild()
-    @nextcord.slash_command(guild_ids=[1114607456304246784])
+    @gol.subcommand(description="Set the start time of the active GoL session.")
+    @application_checks.guild_only()
+    @application_checks.has_role(constants.ROLE_BOT_ADMIN)
+    @golchecks.game_exists()
+    async def starttime(self, interaction: nextcord.Interaction, year: int, month: int, day: int, hour: int, minute: int):
+        game = gameoflife.get_game(interaction.guild.id)
+        game.start_time = datetime(year, month, day, hour, minute=minute)
+        await gameoflifedb.update(game)
+        logging.info(
+            f"{utils.format_guild_log(interaction.guild)} Start time set to {game.start_time.strftime(constants.DATE_FORMAT)} for the GoL session {game.name} by {interaction.user.name}.")
+        await interaction.send(f"Start time set to {game.start_time.strftime(constants.DATE_FORMAT)} for the GoL session **{game.name}**.")
+
+    @gol.subcommand(description="Set the end time of the active GoL session.")
+    @application_checks.guild_only()
+    @application_checks.has_role(constants.ROLE_BOT_ADMIN)
+    @golchecks.game_exists()
+    async def starttime(self, interaction: nextcord.Interaction, year: int, month: int, day: int, hour: int, minute: int):
+        game = gameoflife.get_game(interaction.guild.id)
+        game.end_time = datetime(year, month, day, hour, minute=minute)
+        await gameoflifedb.update(game)
+        logging.info(
+            f"{utils.format_guild_log(interaction.guild)} End time set to {game.end_time.strftime(constants.DATE_FORMAT)} for the GoL session {game.name} by {interaction.user.name}.")
+        await interaction.send(f"End time set to {game.end_time.strftime(constants.DATE_FORMAT)} for the GoL session **{game.name}**.")
+
+    @nextcord.slash_command(guild_ids=constants.COMMANDS_GUILD_ID, description="Roll for your next task.")
+    @application_checks.guild_only()
+    @golchecks.game_is_ready()
+    @golchecks.game_is_in_progress()
+    @golchecks.player_is_in_team()
     async def roll(self, interaction: nextcord.Interaction):
         game = gameoflife.get_game(interaction.guild.id)
-        if game is None:
-            await interaction.send(f'{constants.EMOJI_INCORRECT} {constants.TEXT_NO_ACTIVE_GOL_SESSION_ON_SERVER}')
-            return
-
         team = game.get_team_by_player_id(interaction.user.id)
-        if team is None:
-            await interaction.send(f'{constants.EMOJI_INCORRECT} {constants.TEXT_YOU_ARE_NOT_MEMBER_OF_ANY_TEAM}')
-            return
 
         if game.has_finished(team) == True:
             await interaction.send(f'{constants.EMOJI_INCORRECT} {constants.TEXT_YOUR_TEAM_HAS_ALREADY_COMPLETED_BOARD}')
@@ -122,7 +149,7 @@ class GameOfLifeCog(commands.Cog):
             content = f"{constants.TEXT_HAVE_YOU_COMPLETED_YOUR_PREVIOUS_TASK}\n"
             content += golutils.format_task_multiline(cur_tile)
             await interaction.send(content)
-            choice = await choiceform.slash_choose(self.bot, interaction, [constants.EMOJI_CONFIRM, constants.EMOJI_CANCEL], team.get_members_id())
+            choice, user = await choiceform.slash_choose(self.bot, interaction, [constants.EMOJI_CONFIRM, constants.EMOJI_CANCEL], team.get_members_id())
             if choice == None:
                 await interaction.edit_original_message(content=constants.TEXT_THE_COMMAND_HAS_BEEN_CANCELED_AFTER_NO_INTERACTION_FROM_USER)
                 return
@@ -130,6 +157,8 @@ class GameOfLifeCog(commands.Cog):
                 await interaction.edit_original_message(content=constants.TEXT_THE_COMMAND_HAS_BEEN_CANCELED_BY_TEAM_MEMBER)
                 return
 
+            logging.info(
+                f"{utils.format_guild_log(interaction.guild)} {interaction.user.name} confirmed the roll completion for {cur_tile.task}.")
             destinations = game.get_possible_destinations(team)
             destinations = destinations[::-1]  # Set left and right properly
             traveled = []
@@ -146,13 +175,13 @@ class GameOfLifeCog(commands.Cog):
             if len(destinations) >= 2:
                 content += golutils.format_branch(destinations)
                 await interaction.edit_original_message(content=content)
-                choice = await choiceform.slash_choose(self.bot, interaction, golutils.get_branch_reactions(destinations), team.get_members_id())
+                choice, user = await choiceform.slash_choose(self.bot, interaction, golutils.get_branch_reactions(destinations), team.get_members_id())
                 if choice == None:
                     await interaction.edit_original_message(content=constants.TEXT_THE_COMMAND_HAS_BEEN_CANCELED_AFTER_NO_INTERACTION_FROM_USER)
                     return
                 await interaction.edit_original_message(content=content[:-len(constants.TEXT_REACT_TO_THIS_MESSAGE_WITH_CHOICE_DROP_WONT_COUNT)])
                 traveled = game.choose_destination(team, destinations[choice])
-                content = f"{interaction.user.display_name} has chosen the {'left' if choice == 0 else 'right'} path!\n"
+                content = f"{interaction.user.display_name.title()} has chosen the {'left' if choice == 0 else 'right'} path!\n"
                 content += golutils.format_travel(team, destinations[choice], traveled)
                 await teamdb.update(team)
                 await interaction.followup.send(content)
@@ -161,8 +190,10 @@ class GameOfLifeCog(commands.Cog):
         finally:
             team.is_rolling = False
 
-    @utils.is_in_guild()
-    @nextcord.slash_command(guild_ids=[1114607456304246784])
+    @nextcord.slash_command(guild_ids=constants.COMMANDS_GUILD_ID, description="Rolls back a specific team's last roll.")
+    @application_checks.guild_only()
+    @application_checks.has_role(constants.ROLE_BOT_ADMIN)
+    @golchecks.game_is_ready()
     async def rollback(self, interaction: nextcord.Interaction, user: nextcord.User):
         game = gameoflife.get_game(interaction.guild.id)
         if game is None:
@@ -187,24 +218,21 @@ class GameOfLifeCog(commands.Cog):
             content = f"Team {golutils.format_team(team)} has been rolled back to this task:\n"
             content += f"{golutils.format_task_multiline(destination)}"
             await teamdb.update(team)
+            logging.info(
+                f"{utils.format_guild_log(interaction.guild)} {interaction.user.name} has rolled back {team.name} to {destination.task}.")
             await interaction.send(content)
             await self.post_in_logs_channel(game, content + "\n" + constants.TEXT_MESSAGE_SEPARATOR)
             game.is_board_updated = False
         finally:
             team.is_rolling = False
 
-    @utils.is_in_guild()
-    @nextcord.slash_command(guild_ids=[1114607456304246784])
+    @nextcord.slash_command(guild_ids=constants.COMMANDS_GUILD_ID, description="Displays your current task.")
+    @application_checks.guild_only()
+    @golchecks.game_is_ready()
+    @golchecks.player_is_in_team()
     async def current(self, interaction: nextcord.Interaction):
         game = gameoflife.get_game(interaction.guild.id)
-        if game is None:
-            await interaction.send(f'{constants.EMOJI_INCORRECT} {constants.TEXT_NO_ACTIVE_GOL_SESSION_ON_SERVER}')
-            return
-
         team = game.get_team_by_player_id(interaction.user.id)
-        if team is None:
-            await interaction.send(f'{constants.EMOJI_INCORRECT} {constants.TEXT_YOU_ARE_NOT_MEMBER_OF_ANY_TEAM}')
-            return
 
         if game.has_finished(team) == True:
             await interaction.send(f'{constants.EMOJI_INCORRECT} {constants.TEXT_YOUR_TEAM_HAS_ALREADY_COMPLETED_BOARD}')
@@ -233,7 +261,7 @@ class GameOfLifeCog(commands.Cog):
         self.is_updating_boards = True
         try:
             for guild_id, game in gameoflife.games.items():
-                if game is None or game.channel_board is None or game.is_board_updated:
+                if game is None or not game.is_ready() or game.channel_board is None or game.is_board_updated:
                     continue
                 game.is_board_updated = None
                 original_board_path = os.path.join(os.getcwd() + "/src/boards/pound.webp")
@@ -256,10 +284,20 @@ class GameOfLifeCog(commands.Cog):
                     await channel.send(content[j], file=files[j])
                 if (game.is_board_updated == None):
                     game.is_board_updated = True
-                logging.info(f"GoL board updated (game_id:{game._id}, game_name:{game.name})")
+                logging.info(
+                    f"{utils.format_guild_log(guild_id)} GoL board updated ({golutils.format_game_log(game)})")
+        except Exception as error:
+            logging.error(error)
+            traceback.print_exception(*sys.exc_info())
         finally:
             self.is_updating_boards = False
-            self.update_board_channel.restart()
+
+    @gol.error
+    @roll.error
+    @rollback.error
+    async def check_failure_error(self, interaction: nextcord.Interaction, error: Exception):
+        if not isinstance(error, nextcord.ApplicationCheckFailure):
+            raise error
 
 
 def setup(bot):

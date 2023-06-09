@@ -29,8 +29,6 @@ async def run():
         intents=intents
     )
 
-    bot.config = config
-
     try:
         token = config.get('BOT_TOKEN')
         await bot.start(token)

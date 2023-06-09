@@ -2,7 +2,9 @@ import traceback
 from datetime import datetime
 import nextcord
 import logging
+import sys
 from nextcord.ext import commands
+from internal import constants
 
 
 class ErrorHandler(commands.Cog):
@@ -62,13 +64,9 @@ class ErrorHandler(commands.Cog):
 
     @commands.Cog.listener()
     async def on_application_command_error(self, interaction: nextcord.Interaction, error):
-        classname = error.__class__
-        if classname in self._error_messages.keys():
-            msg = self._error_messages.get(classname, None)
-            if isinstance(msg, str):
-                await interaction.send(":x: " + msg.format(err=error))
-        else:
-            logging.error("TODO Handle application command errors")
+        if not isinstance(error, nextcord.ApplicationCheckFailure):
+            logging.error(error)
+        await interaction.send(f"{constants.EMOJI_INCORRECT} {error}")
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx: commands.Context, error):
@@ -82,7 +80,7 @@ class ErrorHandler(commands.Cog):
         else:
 
             if isinstance(error, (commands.CommandError, commands.CheckFailure, nextcord.ApplicationCheckFailure)) and not isinstance(error, commands.CommandInvokeError):
-                return await ctx.send(f':x: {error}')
+                return await ctx.send(f'{constants.EMOJI_INCORRECT} {error}')
 
             await ctx.send(':rotating_light: An error occured while trying to execute that command')
 

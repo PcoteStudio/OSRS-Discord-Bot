@@ -1,7 +1,11 @@
 from internal import constants
-from internal.gol import gameoflife
+from internal.gol.gameoflife import GameOfLife
 from internal.gol.tilenode import TileNode
 from internal.gol.team import Team
+
+
+def format_game_log(game: GameOfLife):
+    return f"game_name:{game.name}, game_id:{game._id}"
 
 
 def format_roll(base_roll: int, roll: int):

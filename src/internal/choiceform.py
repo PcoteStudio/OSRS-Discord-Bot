@@ -21,10 +21,10 @@ async def slash_choose(bot: Bot, interaction: nextcord.Interaction, emojis: list
                 continue
             i = emojis.index(emoji)
             await message.clear_reactions()
-            return i
+            return i, user
         except asyncio.TimeoutError:
             await message.clear_reactions()
-            return None
+            return None, None
 
 
 async def choose(ctx: commands.Context, message: nextcord.Message, emojis: list):
