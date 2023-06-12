@@ -118,7 +118,7 @@ class GameOfLifeCog(commands.Cog):
     @application_checks.guild_only()
     @application_checks.has_role(constants.ROLE_BOT_ADMIN)
     @golchecks.game_exists()
-    async def starttime(self, interaction: nextcord.Interaction, year: int, month: int, day: int, hour: int, minute: int):
+    async def endtime(self, interaction: nextcord.Interaction, year: int, month: int, day: int, hour: int, minute: int):
         game = gameoflife.get_game(interaction.guild.id)
         game.end_time = datetime(year, month, day, hour, minute=minute)
         await gameoflifedb.update(game)
@@ -296,7 +296,7 @@ class GameOfLifeCog(commands.Cog):
     @roll.error
     @rollback.error
     async def check_failure_error(self, interaction: nextcord.Interaction, error: Exception):
-        if not isinstance(error, nextcord.ApplicationCheckFailure):
+        if not isinstance(error, (nextcord.ApplicationCheckFailure, nextcord.ClientException)):
             raise error
 
 

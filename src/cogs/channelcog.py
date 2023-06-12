@@ -55,7 +55,7 @@ class ChannelCog(commands.Cog):
 
     @channel.error
     async def check_failure_error(self, interaction: nextcord.Interaction, error: Exception):
-        if not isinstance(error, nextcord.ApplicationCheckFailure):
+        if not isinstance(error, (nextcord.ApplicationCheckFailure, nextcord.ClientException)):
             raise error
 
 

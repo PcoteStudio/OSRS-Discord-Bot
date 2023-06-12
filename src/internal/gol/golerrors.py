@@ -26,3 +26,8 @@ class ApplicationGolAlreadyEnded(ApplicationCheckFailure):
 class ApplicationPlayerNotInTeam(ApplicationCheckFailure):
     def __init__(self, message: Optional[str] = None) -> None:
         super().__init__(message or "You are not in any team.")
+
+
+class ApplicationGolAlreadyStarted(ApplicationCheckFailure):
+    def __init__(self, message: Optional[str] = None) -> None:
+        super().__init__(message or "The GoL event has already started.")

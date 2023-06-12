@@ -33,6 +33,9 @@ class TeamCog(commands.Cog):
     @application_checks.has_role(constants.ROLE_BOT_ADMIN)
     @golchecks.game_exists()
     async def create(self, interaction: nextcord.Interaction, name: str, emoji: str, users: str):
+        golutils.validate_team_name(name)
+        golutils.validate_emoji(emoji)
+
         game = gameoflife.get_game(interaction.guild.id)
         members = await utils.convert_mentions_string_into_members(interaction.guild, users)
 
@@ -84,9 +87,64 @@ class TeamCog(commands.Cog):
             f"{utils.format_guild_log(interaction.guild)} Team {deleted_teams[0].name} deleted successfully by {interaction.user.name}.")
         await interaction.send(f"The team {golutils.format_team(deleted_teams[0])} was deleted successfully.")
 
+    @team.subcommand(description="Choose your team's emoji/pawn")
+    @application_checks.guild_only()
+    @golchecks.game_exists()
+    @golchecks.game_has_not_started()
+    @golchecks.player_is_in_team()
+    async def emoji(self, interaction: nextcord.Interaction, emoji: str):
+        golutils.validate_emoji(emoji)
+        game = gameoflife.get_game(interaction.guild.id)
+        team = game.get_team_by_player_id(interaction.user.id)
+        team.emoji = emoji
+        await teamdb.update(team)
+
+        game.is_board_updated = False
+        logging.info(
+            f"{utils.format_guild_log(interaction.guild)} Team {team.name} emoji successfully changed by {interaction.user.name}.")
+        await interaction.send(f"The team {golutils.format_team(team, False)}'s emoji was successfully changed to {team.emoji}.")
+
+    @team.subcommand(description="Choose your team's name")
+    @application_checks.guild_only()
+    @golchecks.game_exists()
+    @golchecks.game_has_not_started()
+    @golchecks.player_is_in_team()
+    async def name(self, interaction: nextcord.Interaction, name: str):
+        golutils.validate_team_name(name)
+        game = gameoflife.get_game(interaction.guild.id)
+        team = game.get_team_by_player_id(interaction.user.id)
+        previous_name = golutils.format_team(team, False)
+        team.name = name
+        await teamdb.update(team)
+
+        logging.info(
+            f"{utils.format_guild_log(interaction.guild)} Team {team.name} name successfully changed by {interaction.user.name}.")
+        await interaction.send(f"The team {previous_name}'s name was successfully changed to {team.name}.")
+
+    @team.subcommand(description="Choose your team's color")
+    @application_checks.guild_only()
+    @golchecks.game_exists()
+    @golchecks.game_has_not_started()
+    @golchecks.player_is_in_team()
+    async def color(self, interaction: nextcord.Interaction,
+                    color: str = nextcord.SlashOption(name="color", choices={"Black": "black", "Blue": "blue", "Brown": "brown",
+                                                                             "Crimson": "crimson", "Emerald": "emerald",
+                                                                             "Fuchsia": "fuchsia", "Gray": "gray", "Indigo": "indigo",
+                                                                             "Lime": "lime", "Navy blue": "navy blue", "Red": "red",
+                                                                             "Turquoise": "turquoise", "White": "white"})):
+        game = gameoflife.get_game(interaction.guild.id)
+        team = game.get_team_by_player_id(interaction.user.id)
+        team.color = constants.COLORS[color]
+        await teamdb.update(team)
+
+        game.is_board_updated = False
+        logging.info(
+            f"{utils.format_guild_log(interaction.guild)} Team {team.name} color successfully changed by {interaction.user.name}.")
+        await interaction.send(f"The team {golutils.format_team(team, False)}'s color was successfully changed to {color}")
+
     @team.error
     async def check_failure_error(self, interaction: nextcord.Interaction, error: Exception):
-        if not isinstance(error, nextcord.ApplicationCheckFailure):
+        if not isinstance(error, (nextcord.ApplicationCheckFailure, nextcord.ClientException)):
             raise error
 
 

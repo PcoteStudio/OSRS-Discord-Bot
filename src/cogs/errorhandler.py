@@ -64,7 +64,7 @@ class ErrorHandler(commands.Cog):
 
     @commands.Cog.listener()
     async def on_application_command_error(self, interaction: nextcord.Interaction, error):
-        if not isinstance(error, nextcord.ApplicationCheckFailure):
+        if not isinstance(error, (nextcord.ApplicationCheckFailure, nextcord.ClientException)):
             logging.error(error)
         await interaction.send(f"{constants.EMOJI_INCORRECT} {error}")
 
@@ -79,7 +79,7 @@ class ErrorHandler(commands.Cog):
                 await ctx.send(msg.format(ctx=ctx, err=error))
         else:
 
-            if isinstance(error, (commands.CommandError, commands.CheckFailure, nextcord.ApplicationCheckFailure)) and not isinstance(error, commands.CommandInvokeError):
+            if isinstance(error, (commands.CommandError, commands.CheckFailure, nextcord.ApplicationCheckFailure, nextcord.ClientException)) and not isinstance(error, commands.CommandInvokeError):
                 return await ctx.send(f'{constants.EMOJI_INCORRECT} {error}')
 
             await ctx.send(':rotating_light: An error occured while trying to execute that command')

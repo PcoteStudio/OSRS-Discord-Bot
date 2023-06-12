@@ -1,7 +1,18 @@
+from nextcord import errors
 from internal import constants
 from internal.gol.gameoflife import GameOfLife
 from internal.gol.tilenode import TileNode
 from internal.gol.team import Team
+
+
+def validate_emoji(emoji: str):
+    if (len(emoji) != 1):
+        raise errors.InvalidArgument("Emoji length should be exactly 1 character.")
+
+
+def validate_team_name(name: str):
+    if (len(name) < 1 or len(name) > 50):
+        raise errors.InvalidArgument("Name length should be between 1 and 50 characters.")
 
 
 def format_game_log(game: GameOfLife):
@@ -18,8 +29,11 @@ def format_roll_sentence(team: Team, base_roll: int, roll: int):
     return f"Team {format_team(team)} rolled a {format_roll(base_roll, roll)}!\n"
 
 
-def format_team(team: Team):
-    return f"**{team.name}** {team.emoji}"
+def format_team(team: Team, include_emoji=True):
+    result = f"**{team.name}**"
+    if include_emoji:
+        result += f" {team.emoji}"
+    return result
 
 
 def format_task(tile: TileNode):

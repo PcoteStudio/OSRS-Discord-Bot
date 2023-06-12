@@ -53,3 +53,13 @@ def game_is_in_progress():
             raise golerrors.ApplicationGolAlreadyEnded
         return True
     return application_checks.check(predicate)
+
+
+def game_has_not_started():
+    def predicate(interaction: nextcord.Interaction):
+        game = get_game(interaction)
+        now = datetime.now()
+        if now > game.start_time:
+            raise golerrors.ApplicationGolAlreadyStarted
+        return True
+    return application_checks.check(predicate)
