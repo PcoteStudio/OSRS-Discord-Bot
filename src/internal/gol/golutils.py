@@ -5,6 +5,11 @@ from internal.gol.tilenode import TileNode
 from internal.gol.team import Team
 
 
+def validate_team_users(members):
+    if (len(members) == 0):
+        raise errors.InvalidArgument("Enter at least 1 valid user.")
+
+
 def validate_emoji(emoji: str):
     if (len(emoji) != 1):
         raise errors.InvalidArgument("Emoji length should be exactly 1 character.")

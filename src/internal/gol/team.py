@@ -112,11 +112,11 @@ class Team:
             self.add_member(m)
 
     def add_member(self, member):
-        if member not in self.members:
+        if not self.is_in_team(member.id):
             self.members.append({'id': member.id, 'name': member.display_name})
 
-    def remove_member(self, member):
-        self.members = filter(lambda m: m.id != member['id'], self.members)
+    def remove_member(self, player_id):
+        self.members = list(filter(lambda m: m['id'] != player_id, self.members))
 
     def get_members_id(self):
         return map(lambda m: m["id"], self.members)

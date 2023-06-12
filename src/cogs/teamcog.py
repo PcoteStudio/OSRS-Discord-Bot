@@ -35,13 +35,9 @@ class TeamCog(commands.Cog):
     async def create(self, interaction: nextcord.Interaction, name: str, emoji: str, users: str):
         golutils.validate_team_name(name)
         golutils.validate_emoji(emoji)
-
         game = gameoflife.get_game(interaction.guild.id)
         members = await utils.convert_mentions_string_into_members(interaction.guild, users)
-
-        if len(members) == 0:
-            await interaction.send(f"{constants.EMOJI_INCORRECT} A team needs at least 1 member.")
-            return
+        golutils.validate_team_users(members)
 
         for t in game.teams:
             for m in members:
@@ -58,6 +54,61 @@ class TeamCog(commands.Cog):
         logging.info(
             f"{utils.format_guild_log(interaction.guild)} Team {team.name} created successfully by {interaction.user.name}.")
         await interaction.send(f"Team {golutils.format_team(team)} created successfully. Members : {team.get_members_as_string(True, ' ')}.")
+
+    @team.subcommand(description="Add the mentioned users to the team of the mentioned member.")
+    @application_checks.guild_only()
+    @application_checks.has_role(constants.ROLE_BOT_ADMIN)
+    @golchecks.game_exists()
+    async def addmembers(self, interaction: nextcord.Interaction, current_user: nextcord.User, users: str):
+        game = gameoflife.get_game(interaction.guild.id)
+        team = game.get_team_by_player_id(current_user.id)
+        if (not team):
+            raise nextcord.InvalidArgument(f"{current_user.display_name} is not a member of any team.")
+
+        members = await utils.convert_mentions_string_into_members(interaction.guild, users)
+        golutils.validate_team_users(members)
+
+        for t in game.teams:
+            if t == team:
+                continue
+            for m in members:
+                if t.is_in_team(m.id):
+                    await interaction.send(f"{constants.EMOJI_INCORRECT} <@{m.id}> is already in team {golutils.format_team(t)}.")
+                    return
+
+        team.add_members(members)
+        await teamdb.update(team)
+
+        logging.info(
+            f"{utils.format_guild_log(interaction.guild)} New members successfully added to team {team.name} by {interaction.user.name}.")
+        await interaction.send(f"New members successfully added to team {golutils.format_team(team)}. Members : {team.get_members_as_string(True, ' ')}.")
+
+    @team.subcommand(description="Removed the mentioned users from their respective teams")
+    @application_checks.guild_only()
+    @application_checks.has_role(constants.ROLE_BOT_ADMIN)
+    @golchecks.game_exists()
+    async def removemembers(self, interaction: nextcord.Interaction, users: str):
+        game = gameoflife.get_game(interaction.guild.id)
+        members = await utils.convert_mentions_string_into_members(interaction.guild, users)
+        golutils.validate_team_users(members)
+        teams = []
+        for m in members:
+            team = game.get_team_by_player_id(m.id)
+            if (not team):
+                raise nextcord.InvalidArgument(f"{m.display_name} is not a member of any team.")
+            teams.append(team)
+
+        for i, m in enumerate(members):
+            teams[i].remove_member(m.id)
+            if len(teams[i].members) == 0:
+                game.remove_team(teams[i])
+                await teamdb.delete(teams[i])
+
+        await teamdb.update_many(list(set(filter(lambda t: len(t.members) > 0, teams))))
+
+        logging.info(
+            f"{utils.format_guild_log(interaction.guild)} Successfully removed members from teams by {interaction.user.name}.")
+        await interaction.send(f"Members successfully removed from teams.")
 
     @team.subcommand(description="Delete the team the user is part of.")
     @application_checks.guild_only()
