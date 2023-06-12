@@ -36,6 +36,6 @@ def draw_game(game: GameOfLife):
             loc = pop_tile.pawn_locations[loc_index]
             offsets = pop_tile.pawn_offsets
             drawn.text((loc[0] + loc_depth * offsets[0], loc[1] + loc_depth *
-                        offsets[1]), team.emoji, fill=tuple(team.color), font=mf)
+                        offsets[1]), team.emoji[0], fill=tuple(team.color), font=mf)
     img.save(path_out)
     return path_out

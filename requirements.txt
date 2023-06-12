@@ -16,3 +16,4 @@ astunparse==1.6.3
 wheel==0.40.0
 six==1.16.0
 pillow==9.5.0
+emoji==2.5.0

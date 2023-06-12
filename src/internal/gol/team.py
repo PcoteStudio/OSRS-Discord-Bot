@@ -1,8 +1,9 @@
 import random
+from datetime import datetime
 from collections.abc import Iterable
 from bson.objectid import ObjectId
 from internal import constants
-from internal.gol.tilenode import TileNode, TileType
+from internal.gol.tilenode import TileNode, TileType, Destination
 
 
 class Team:
@@ -27,13 +28,15 @@ class Team:
     def has_start_tile(self):
         return len(self.history) > 0
 
-    def set_start_tile(self, tile):
+    def set_start_tile(self, tile, min_time):
         if self.has_start_tile():
             return
-        tile.base_roll = 0
-        tile.roll = 0
-        tile.early = 0
-        self.choose_destination(tile)
+        dest = Destination(tile)
+        dest.roll = 0
+        dest.base_roll = 0
+        dest.early = 0
+        dest.date_time = datetime.utcnow()
+        self.choose_destination(dest, min_time)
 
     def get_current_tile(self, tiles):
         cur_history = self.get_current_history()
@@ -41,13 +44,14 @@ class Team:
         return cur_tile
 
     def get_possible_destinations(self, tiles):
-        if self.can_choose_next_destination() == False:
+        if not self.can_choose_next_destination():
             tile_history = self.history[self.history_index + 1]
             tile = tiles[tile_history['tile_index']]
-            tile.roll = tile_history['roll']
-            tile.base_roll = tile_history['base_roll']
-            tile.early = tile_history['early']
-            return [tile]
+            dest = Destination(tile)
+            dest.roll = tile_history['roll']
+            dest.base_roll = tile_history['base_roll']
+            dest.early = tile_history['early']
+            return [dest]
 
         cur_history = self.get_current_history()
         cur_tile = tiles[cur_history['tile_index']]
@@ -55,21 +59,28 @@ class Team:
         base_roll = random.randint(constants.MIN_ROLL, constants.MAX_ROLL)
         roll = min(constants.MAX_ROLL, max(base_roll, constants.MIN_ROLL + self.buffs))
         destinations = TileNode.get_options(cur_tile, roll)
-        for d in destinations:
-            d.roll = roll
-            d.base_roll = base_roll
+        for i, d in enumerate(destinations):
+            dest = Destination(d)
+            dest.roll = roll
+            dest.base_roll = base_roll
+            destinations[i] = dest
         return destinations
 
-    def choose_destination(self, destination):
+    def choose_destination(self, destination, min_time):
         h = {"base_roll": destination.base_roll, "roll": destination.roll,
-             "tile_index": destination.index, "early": destination.early}
+             "tile_index": destination.index, "early": destination.early,
+             "time": datetime.utcnow()}
         # New roll
         if self.history_index == len(self.history) - 1:
             self.history.append(h)
-        # Can't change existing roll
+        # Can't change existing roll after roll back
         elif destination.index != self.history[self.history_index + 1]["tile_index"]:
             return None
-        # New roll
+        # Roll forward after roll back
+        else:
+            self.history[self.history_index]["time"] = datetime.utcnow()
+
+        self.update_first_rolls_history(min_time)
         self.history_index += 1
         self.seed += 1
         self.buffs += destination.buff
@@ -81,6 +92,10 @@ class Team:
             new_destinations = self.choose_destination(move_destinations[0])
             return [destination] + new_destinations
         return [destination]
+
+    def update_first_rolls_history(self, min_time):
+        for h in self.history:
+            h["time"] = max(min_time, h["time"])
 
     def roll_back(self, tiles):
         if self.history_index <= 0:

@@ -1,3 +1,4 @@
+from emoji import is_emoji
 from nextcord import errors
 from internal import constants
 from internal.gol.gameoflife import GameOfLife
@@ -11,7 +12,7 @@ def validate_team_users(members):
 
 
 def validate_emoji(emoji: str):
-    if (len(emoji) != 1):
+    if (len(emoji) != 1 and not is_emoji(emoji)):
         raise errors.InvalidArgument("Emoji length should be exactly 1 character.")
 
 

@@ -4,10 +4,10 @@ import logging
 import os
 import json
 import nextcord
-from datetime import datetime
+from datetime import datetime, timezone
 from nextcord.ext import tasks, commands, application_checks
 from internal import choiceform, constants, utils
-from internal.gol import gameoflife, golchecks, golutils, liveboard
+from internal.gol import gameoflife, golchecks, golutils, liveboard, golstats
 from internal.gol.gameoflife import GameOfLife
 from database import teamdb, tilenodedb, gameoflifedb
 
@@ -102,29 +102,29 @@ class GameOfLifeCog(commands.Cog):
             f"{utils.format_guild_log(interaction.guild)} Tiles loaded successfully for the GoL session {game.name} by {interaction.user.name}.")
         await interaction.send(f"Tiles loaded successfully for the GoL session **{game.name}**.")
 
-    @gol.subcommand(description="Set the start time of the active GoL session.")
+    @gol.subcommand(description="Set the start time (UTC) of the active GoL session.")
     @application_checks.guild_only()
     @application_checks.has_role(constants.ROLE_BOT_ADMIN)
     @golchecks.game_exists()
     async def starttime(self, interaction: nextcord.Interaction, year: int, month: int, day: int, hour: int, minute: int):
         game = gameoflife.get_game(interaction.guild.id)
-        game.start_time = datetime(year, month, day, hour, minute=minute)
+        game.start_time = datetime(year, month, day, hour, minute=minute, tzinfo=timezone.utc)
         await gameoflifedb.update(game)
         logging.info(
             f"{utils.format_guild_log(interaction.guild)} Start time set to {game.start_time.strftime(constants.DATE_FORMAT)} for the GoL session {game.name} by {interaction.user.name}.")
-        await interaction.send(f"Start time set to {game.start_time.strftime(constants.DATE_FORMAT)} for the GoL session **{game.name}**.")
+        await interaction.send(f"Start time set to UTC {game.start_time.strftime(constants.DATE_FORMAT)} for the GoL session **{game.name}**.")
 
-    @gol.subcommand(description="Set the end time of the active GoL session.")
+    @gol.subcommand(description="Set the end time (UTC) of the active GoL session.")
     @application_checks.guild_only()
     @application_checks.has_role(constants.ROLE_BOT_ADMIN)
     @golchecks.game_exists()
     async def endtime(self, interaction: nextcord.Interaction, year: int, month: int, day: int, hour: int, minute: int):
         game = gameoflife.get_game(interaction.guild.id)
-        game.end_time = datetime(year, month, day, hour, minute=minute)
+        game.end_time = datetime(year, month, day, hour, minute=minute, tzinfo=timezone.utc)
         await gameoflifedb.update(game)
         logging.info(
             f"{utils.format_guild_log(interaction.guild)} End time set to {game.end_time.strftime(constants.DATE_FORMAT)} for the GoL session {game.name} by {interaction.user.name}.")
-        await interaction.send(f"End time set to {game.end_time.strftime(constants.DATE_FORMAT)} for the GoL session **{game.name}**.")
+        await interaction.send(f"End time set to UTC {game.end_time.strftime(constants.DATE_FORMAT)} for the GoL session **{game.name}**.")
 
     @nextcord.slash_command(guild_ids=constants.COMMANDS_GUILD_ID, description="Roll for your next task.")
     @application_checks.guild_only()

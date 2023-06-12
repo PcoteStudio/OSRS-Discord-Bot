@@ -75,3 +75,13 @@ class TileNode:
 
         # Remove duplicates
         return list(dict.fromkeys(options))
+
+
+class Destination(TileNode):
+
+    roll = 0
+    base_roll = 0
+    early = 0
+
+    def __init__(self, tile: TileNode):
+        super().__init__(tile.game_id, tile.index, tile.__dict__)

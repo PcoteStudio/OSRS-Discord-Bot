@@ -46,7 +46,7 @@ def player_is_in_team():
 def game_is_in_progress():
     def predicate(interaction: nextcord.Interaction):
         game = get_game(interaction)
-        now = datetime.now()
+        now = datetime.utcnow()
         if now < game.start_time:
             raise golerrors.ApplicationGolNotStarted
         if now > game.end_time:
@@ -58,7 +58,7 @@ def game_is_in_progress():
 def game_has_not_started():
     def predicate(interaction: nextcord.Interaction):
         game = get_game(interaction)
-        now = datetime.now()
+        now = datetime.utcnow()
         if now > game.start_time:
             raise golerrors.ApplicationGolAlreadyStarted
         return True

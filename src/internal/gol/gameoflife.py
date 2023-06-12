@@ -23,7 +23,7 @@ class GameOfLife:
         self.name = name
         self._id = doc.get('_id', ObjectId())
         self.is_archived = doc.get('is_archived', False)
-        self.start_time = doc.get('start_time', datetime.min)
+        self.start_time = doc.get('start_time', datetime.utcnow())
         self.end_time = doc.get('end_time', datetime.max)
         self.start_index = doc.get('start_index', None)
         self.channel_logs = doc.get('channel_logs', None)
@@ -46,7 +46,7 @@ class GameOfLife:
             return
         self.start_index = tile_index
         for team in self.teams:
-            team.set_start_tile(self.tiles[tile_index])
+            team.set_start_tile(self.tiles[tile_index], self.start_time)
 
     def set_event_time(self, start: datetime, end: datetime):
         self.start_time = start
@@ -59,7 +59,7 @@ class GameOfLife:
         return team.get_possible_destinations(self.tiles)
 
     def choose_destination(self, team, destination):
-        return team.choose_destination(destination)
+        return team.choose_destination(destination, self.start_time)
 
     def generate_board(self):
         self.tiles = boardgenerator.generate_board(self._id)
@@ -72,7 +72,7 @@ class GameOfLife:
             return
         self.teams.append(team)
         if self.start_index is not None:
-            team.set_start_tile(self.tiles[self.start_index])
+            team.set_start_tile(self.tiles[self.start_index], self.start_time)
 
     def remove_team(self, team: Team):
         if team in self.teams:
