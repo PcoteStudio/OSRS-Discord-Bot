@@ -35,7 +35,7 @@ class Team:
         dest.roll = 0
         dest.base_roll = 0
         dest.early = 0
-        dest.date_time = datetime.utcnow()
+        dest.date_time = datetime.utcnow().replace(tzinfo=None)
         self.choose_destination(dest, min_time)
 
     def get_current_tile(self, tiles):
@@ -69,7 +69,7 @@ class Team:
     def choose_destination(self, destination, min_time):
         h = {"base_roll": destination.base_roll, "roll": destination.roll,
              "tile_index": destination.index, "early": destination.early,
-             "time": datetime.utcnow()}
+             "time": datetime.utcnow().replace(tzinfo=None)}
         # New roll
         if self.history_index == len(self.history) - 1:
             self.history.append(h)
@@ -78,7 +78,7 @@ class Team:
             return None
         # Roll forward after roll back
         else:
-            self.history[self.history_index]["time"] = datetime.utcnow()
+            self.history[self.history_index]["time"] = datetime.utcnow().replace(tzinfo=None)
 
         self.update_first_rolls_history(min_time)
         self.history_index += 1

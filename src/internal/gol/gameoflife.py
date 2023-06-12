@@ -1,5 +1,5 @@
 from bson.objectid import ObjectId
-from datetime import datetime
+from datetime import datetime, timezone
 from internal.gol import boardgenerator
 from internal.gol.team import Team
 
@@ -23,7 +23,7 @@ class GameOfLife:
         self.name = name
         self._id = doc.get('_id', ObjectId())
         self.is_archived = doc.get('is_archived', False)
-        self.start_time = doc.get('start_time', datetime.utcnow())
+        self.start_time = doc.get('start_time', datetime.utcnow().replace(tzinfo=None))
         self.end_time = doc.get('end_time', datetime.max)
         self.start_index = doc.get('start_index', None)
         self.channel_logs = doc.get('channel_logs', None)

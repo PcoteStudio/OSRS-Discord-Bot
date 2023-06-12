@@ -108,7 +108,7 @@ class GameOfLifeCog(commands.Cog):
     @golchecks.game_exists()
     async def starttime(self, interaction: nextcord.Interaction, year: int, month: int, day: int, hour: int, minute: int):
         game = gameoflife.get_game(interaction.guild.id)
-        game.start_time = datetime(year, month, day, hour, minute=minute, tzinfo=timezone.utc)
+        game.start_time = datetime(year, month, day, hour, minute=minute, tzinfo=timezone.utc).replace(tzinfo=None)
         await gameoflifedb.update(game)
         logging.info(
             f"{utils.format_guild_log(interaction.guild)} Start time set to {game.start_time.strftime(constants.DATE_FORMAT)} for the GoL session {game.name} by {interaction.user.name}.")
@@ -120,7 +120,7 @@ class GameOfLifeCog(commands.Cog):
     @golchecks.game_exists()
     async def endtime(self, interaction: nextcord.Interaction, year: int, month: int, day: int, hour: int, minute: int):
         game = gameoflife.get_game(interaction.guild.id)
-        game.end_time = datetime(year, month, day, hour, minute=minute, tzinfo=timezone.utc)
+        game.end_time = datetime(year, month, day, hour, minute=minute, tzinfo=timezone.utc).replace(tzinfo=None)
         await gameoflifedb.update(game)
         logging.info(
             f"{utils.format_guild_log(interaction.guild)} End time set to {game.end_time.strftime(constants.DATE_FORMAT)} for the GoL session {game.name} by {interaction.user.name}.")

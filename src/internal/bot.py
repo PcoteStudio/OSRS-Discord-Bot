@@ -21,7 +21,7 @@ class Bot(commands.Bot):
 
     async def track_start(self):
         await self.wait_until_ready()
-        self.start_time = datetime.datetime.utcnow()
+        self.start_time = datetime.datetime.utcnow().replace(tzinfo=None)
 
     async def get_prefix_(self, bot, message):
         prefix = [bot.config['BOT_PREFIX']]
