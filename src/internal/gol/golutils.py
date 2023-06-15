@@ -1,5 +1,5 @@
 from emoji import is_emoji
-from nextcord import errors
+from nextcord import InvalidArgument
 from internal import constants
 from internal.gol.gameoflife import GameOfLife
 from internal.gol.tilenode import TileNode
@@ -8,17 +8,17 @@ from internal.gol.team import Team
 
 def validate_team_users(members):
     if (len(members) == 0):
-        raise errors.InvalidArgument("Enter at least 1 valid user.")
+        raise InvalidArgument("Enter at least 1 valid user.")
 
 
 def validate_emoji(emoji: str):
     if (len(emoji) != 1 and not is_emoji(emoji)):
-        raise errors.InvalidArgument("Emoji length should be exactly 1 character.")
+        raise InvalidArgument("Emoji length should be exactly 1 character.")
 
 
 def validate_team_name(name: str):
     if (len(name) < 1 or len(name) > 50):
-        raise errors.InvalidArgument("Name length should be between 1 and 50 characters.")
+        raise InvalidArgument("Name length should be between 1 and 50 characters.")
 
 
 def format_game_log(game: GameOfLife):

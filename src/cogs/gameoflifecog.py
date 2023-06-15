@@ -5,6 +5,7 @@ import os
 import json
 import nextcord
 from datetime import datetime, timezone
+from nextcord import InvalidArgument
 from nextcord.ext import tasks, commands, application_checks
 from internal import choiceform, constants, utils
 from internal.gol import gameoflife, golchecks, golutils, liveboard, golstats
@@ -108,7 +109,7 @@ class GameOfLifeCog(commands.Cog):
     @golchecks.game_exists()
     async def starttime(self, interaction: nextcord.Interaction, year: int, month: int, day: int, hour: int, minute: int):
         game = gameoflife.get_game(interaction.guild.id)
-        game.start_time = datetime(year, month, day, hour, minute=minute, tzinfo=timezone.utc).replace(tzinfo=None)
+        game.set_start_time(datetime(year, month, day, hour, minute=minute, tzinfo=timezone.utc).replace(tzinfo=None))
         await gameoflifedb.update(game)
         logging.info(
             f"{utils.format_guild_log(interaction.guild)} Start time set to {game.start_time.strftime(constants.DATE_FORMAT)} for the GoL session {game.name} by {interaction.user.name}.")
@@ -239,6 +240,21 @@ class GameOfLifeCog(commands.Cog):
             return
 
         await interaction.send(f"Your team's current task is:\n{golutils.format_task_multiline(game.get_current_tile(team))}")
+
+    @nextcord.slash_command(guild_ids=constants.COMMANDS_GUILD_ID, description="Displays statistics about all teams or a specific one.")
+    @application_checks.guild_only()
+    @golchecks.game_is_ready()
+    async def stats(self, interaction: nextcord.Interaction, user: nextcord.User = None):
+        game = gameoflife.get_game(interaction.guild.id)
+        content = ""
+        if user:
+            team = game.get_team_by_player_id(user.id)
+            if (not team):
+                raise InvalidArgument(f"{user.display_name} is not a member of any team.")
+            content = golstats.get_formatted_team_stats(game, team)
+        else:
+            content = golstats.get_formatted_game_stats(game)
+        await interaction.send(content)
 
     @commands.Cog.listener()
     async def on_ready(self):

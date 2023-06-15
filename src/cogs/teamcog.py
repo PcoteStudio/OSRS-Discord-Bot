@@ -1,5 +1,6 @@
 import logging
 import nextcord
+from nextcord import InvalidArgument
 from nextcord.ext import commands, application_checks
 from internal import utils, constants
 from internal.gol.team import Team
@@ -63,7 +64,7 @@ class TeamCog(commands.Cog):
         game = gameoflife.get_game(interaction.guild.id)
         team = game.get_team_by_player_id(current_user.id)
         if (not team):
-            raise nextcord.InvalidArgument(f"{current_user.display_name} is not a member of any team.")
+            raise InvalidArgument(f"{current_user.display_name} is not a member of any team.")
 
         members = await utils.convert_mentions_string_into_members(interaction.guild, users)
         golutils.validate_team_users(members)
@@ -95,7 +96,7 @@ class TeamCog(commands.Cog):
         for m in members:
             team = game.get_team_by_player_id(m.id)
             if (not team):
-                raise nextcord.InvalidArgument(f"{m.display_name} is not a member of any team.")
+                raise InvalidArgument(f"{m.display_name} is not a member of any team.")
             teams.append(team)
 
         for i, m in enumerate(members):

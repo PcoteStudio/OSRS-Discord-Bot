@@ -48,9 +48,10 @@ class GameOfLife:
         for team in self.teams:
             team.set_start_tile(self.tiles[tile_index], self.start_time)
 
-    def set_event_time(self, start: datetime, end: datetime):
+    def set_start_time(self, start: datetime):
         self.start_time = start
-        self.end_time = end
+        for team in self.teams:
+            team.set_start_time(start)
 
     def get_current_tile(self, team: Team):
         return team.get_current_tile(self.tiles)

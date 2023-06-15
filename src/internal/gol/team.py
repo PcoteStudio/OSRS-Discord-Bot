@@ -28,6 +28,10 @@ class Team:
     def has_start_tile(self):
         return len(self.history) > 0
 
+    def set_start_time(self, start: datetime):
+        if self.history_index == 0:
+            self.history[0]["time"] = start
+
     def set_start_tile(self, tile, min_time):
         if self.has_start_tile():
             return
