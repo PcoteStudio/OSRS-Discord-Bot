@@ -1,13 +1,60 @@
+import calendar
+import logging
 import os
+import math
 import copy
+from datetime import datetime
+import sys
+import traceback
 from internal.gol.gameoflife import GameOfLife
 from PIL import Image, ImageFont, ImageDraw
+
+from os import listdir
+from os.path import isfile, join
+
+
+async def __open_resize_image(path, width, height):
+    frame = Image.open(path)
+    frame = frame.resize((width, height))
+    return frame
+
+
+async def generate_animation(game: GameOfLife):
+    unixtime = calendar.timegm(datetime.utcnow().utctimetuple())
+    path_source = f"{os.getcwd()}/out/{game.guild_id}/{game._id}/"
+    path_out = f"{os.getcwd()}/out/{game.guild_id}/{game._id}/gif/gif_{unixtime}.gif"
+    os.makedirs(os.path.dirname(path_source), exist_ok=True)
+    os.makedirs(os.path.dirname(path_out), exist_ok=True)
+
+    images = []
+    files = [f for f in listdir(path_source) if isfile(join(path_source, f))]
+    max_files = 50
+    ratio = 1
+    if len(files) > max_files:
+        ratio = math.ceil(len(files)/max_files)
+    for i, file in enumerate(files):
+        try:
+            if i % ratio == 0 or i == 0 or i == len(files) - 1:
+                images.append(await __open_resize_image(path_source + file, 703, 853))
+        except Exception as e:
+            logging.error(e)
+            traceback.print_exception(*sys.exc_info())
+
+    images[0].save(path_out,
+                   save_all=True,
+                   optimize=True,
+                   append_images=images[1:],
+                   duration=300,
+                   loop=0)
+
+    return path_out
 
 
 def draw_game(game: GameOfLife):
     path_board = os.path.join(os.getcwd() + "/src/boards/pound.webp")
     path_font = os.path.join(os.getcwd() + "/src/fonts/SEGUIEMJ.ttf")
-    path_out = os.path.join(os.getcwd() + "/out/boards/pound_generated.webp")
+    unixtime = calendar.timegm(datetime.utcnow().utctimetuple())
+    path_out = f"{os.getcwd()}/out/boards/{game.guild_id}/{game._id}/board_{unixtime}.webp"
     os.makedirs(os.path.dirname(path_out), exist_ok=True)
 
     img = Image.open(path_board)

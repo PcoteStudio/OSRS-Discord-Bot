@@ -93,7 +93,7 @@ class Team:
             move_destinations[0].base_roll = 0
             move_destinations[0].roll = 0
             move_destinations[0].early = 0
-            new_destinations = self.choose_destination(move_destinations[0])
+            new_destinations = self.choose_destination(move_destinations[0], min_time)
             return [destination] + new_destinations
         return [destination]
 

@@ -1,3 +1,4 @@
+import asyncio
 import traceback
 import sys
 import logging
@@ -264,11 +265,50 @@ class GameOfLifeCog(commands.Cog):
             gameoflife.games[g.id] = await gameoflifedb.get_by_guild_id(g.id)
         logging.info("GoL sessions loaded")
         self.update_board_channel.start()
+        self.update_progress_board.start()
 
     async def post_in_logs_channel(self, game, content):
         if game and game.channel_logs:
             channel = self.bot.get_channel(game.channel_logs)
             await channel.send(content)
+
+    @tasks.loop(hours=23)
+    async def update_progress_board(self):
+        await asyncio.sleep(utils.seconds_until(6, 0))
+        while self.is_updating_boards:
+            await asyncio.sleep(1)
+        self.is_updating_boards = True
+        logging.info(f"Starting GoL progress board updates")
+        try:
+            now = datetime.utcnow().replace(tzinfo=None)
+            for guild_id, game in gameoflife.games.items():
+                if game is None or not game.is_ready() or game.channel_board is None:
+                    continue
+                if now < game.start_time or now > game.end_time:
+                    continue
+
+                channel = self.bot.get_channel(game.channel_board)
+                botMsgs = [msg async for msg in channel.history()]
+                if len(botMsgs) < 2:
+                    continue
+
+                path_out = await liveboard.generate_animation(game)
+                content = "Progress board (updated daily)"
+                file = nextcord.File(path_out)
+
+                for i, msg in enumerate(reversed(botMsgs)):
+                    if (i == 2):
+                        await msg.edit(content=content, file=file)
+                if len(botMsgs) < 3:
+                    await channel.send(content, file=file)
+                logging.info(
+                    f"{utils.format_guild_log(guild_id)} GoL progress board updated ({golutils.format_game_log(game)})")
+        except Exception as error:
+            logging.error(error)
+            traceback.print_exception(*sys.exc_info())
+        finally:
+            self.is_updating_boards = False
+            logging.info(f"Finished GoL progress board updates")
 
     @tasks.loop(seconds=2)
     async def update_board_channel(self):
@@ -280,19 +320,16 @@ class GameOfLifeCog(commands.Cog):
                 if game is None or not game.is_ready() or game.channel_board is None or game.is_board_updated:
                     continue
                 game.is_board_updated = None
+
                 original_board_path = os.path.join(os.getcwd() + "/src/boards/pound.webp")
                 updated_board_path = liveboard.draw_game(game)
                 channel = self.bot.get_channel(game.channel_board)
-
-                botMsgs = [msg async for msg in channel.history()]
-
                 content = ["Reference board", "Updated board"]
                 files = [nextcord.File(original_board_path), nextcord.File(updated_board_path)]
+                botMsgs = [msg async for msg in channel.history()]
 
                 for i, msg in enumerate(reversed(botMsgs)):
-                    if (i >= len(content)):
-                        await msg.delete()
-                    else:
+                    if (i < len(content)):
                         await msg.edit(content=content[i], file=files[i])
 
                 i = len(botMsgs)
@@ -311,6 +348,7 @@ class GameOfLifeCog(commands.Cog):
     @gol.error
     @roll.error
     @rollback.error
+    @stats.error
     async def check_failure_error(self, interaction: nextcord.Interaction, error: Exception):
         if not isinstance(error, (nextcord.ApplicationCheckFailure, nextcord.ClientException)):
             raise error

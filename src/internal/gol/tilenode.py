@@ -85,3 +85,7 @@ class Destination(TileNode):
 
     def __init__(self, tile: TileNode):
         super().__init__(tile.game_id, tile.index, tile.__dict__)
+        for exit in tile.__dict__["exits"]:
+            super().add_exit(exit)
+        for entrance in tile.__dict__["entrances"]:
+            super().add_entrance(entrance)

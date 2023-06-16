@@ -1,4 +1,3 @@
-import os
 import nextcord
 import logging
 import asyncio

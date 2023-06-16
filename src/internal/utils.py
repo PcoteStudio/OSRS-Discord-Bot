@@ -1,3 +1,4 @@
+import datetime
 import nextcord
 
 
@@ -26,3 +27,12 @@ async def convert_mentions_string_into_members(guild: nextcord.Guild, mentions: 
             continue
         members.append(m)
     return members
+
+
+def seconds_until(hours, minutes):
+    given_time = datetime.time(hours, minutes, tzinfo=datetime.timezone.utc).replace(tzinfo=None)
+    now = datetime.datetime.utcnow().replace(tzinfo=None)
+    future_exec = datetime.datetime.combine(now, given_time)
+    if (future_exec - now).days < 0:
+        future_exec = datetime.datetime.combine(now + datetime.timedelta(days=1), given_time)
+    return (future_exec - now).total_seconds()

@@ -1,3 +1,5 @@
+import sys
+import traceback
 from internal.hiscores import Hiscores
 from nextcord.ext import commands, tasks
 from internal import constants
@@ -47,6 +49,7 @@ class HiscoresCog(commands.Cog):
             logging.info(f"Updated HS for {hs.server_name}.")
         except Exception as e:
             logging.error(f"An error occurred while updating HS for {hs.server_name}: {str(e)}")
+            traceback.print_exception(*sys.exc_info())
 
     @commands.Cog.listener()
     async def on_ready(self):
