@@ -41,5 +41,6 @@ def game_to_doc(game: GameOfLife):
         'start_index': game.start_index,
         'channel_logs': game.channel_logs,
         'channel_board': game.channel_board,
+        'file_name': game.file_name,
     }
     return doc

@@ -29,7 +29,8 @@ async def run():
     )
 
     try:
-        token = config.get('BOT_TOKEN')
+        is_prod = config.get('IS_PROD', False)
+        token = config.get('PROD_BOT_TOKEN' if is_prod else 'BOT_TOKEN')
         await bot.start(token)
     except KeyboardInterrupt:
         await bot.logout()

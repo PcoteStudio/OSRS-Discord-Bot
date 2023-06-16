@@ -95,6 +95,7 @@ class GameOfLifeCog(commands.Cog):
             return
         with open(path, 'r', encoding='utf-8') as doc:
             content = json.load(doc)
+            game.set_file_name(filename)
             game.load_tiles(content)
         await tilenodedb.update_many(game.tiles)
         await teamdb.update_many(game.teams)
@@ -284,7 +285,7 @@ class GameOfLifeCog(commands.Cog):
             for guild_id, game in gameoflife.games.items():
                 if game is None or not game.is_ready() or game.channel_board is None:
                     continue
-                if now < game.start_time or now > game.end_time:
+                if not game.is_in_progress():
                     continue
 
                 channel = self.bot.get_channel(game.channel_board)
@@ -321,7 +322,7 @@ class GameOfLifeCog(commands.Cog):
                     continue
                 game.is_board_updated = None
 
-                original_board_path = os.path.join(os.getcwd() + "/src/boards/pound.webp")
+                original_board_path = os.path.join(os.getcwd() + f"/src/boards/{game.file_name}.webp")
                 updated_board_path = liveboard.draw_game(game)
                 channel = self.bot.get_channel(game.channel_board)
                 content = ["Reference board", "Updated board"]

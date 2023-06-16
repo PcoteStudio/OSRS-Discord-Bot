@@ -28,13 +28,18 @@ class GameOfLife:
         self.start_index = doc.get('start_index', None)
         self.channel_logs = doc.get('channel_logs', None)
         self.channel_board = doc.get('channel_board', None)
+        self.file_name = doc.get('file_name', None)
         self.teams = []
         self.tiles = []
 
         self.is_board_updated = False
 
     def is_ready(self):
-        return self.start_index is not None
+        return self.start_index is not None and self.file_name is not None
+
+    def is_in_progress(self):
+        now = datetime.utcnow().replace(tzinfo=None)
+        return now >= self.start_time and now <= self.end_time
 
     def has_finished(self, team: Team):
         if len(self.tiles) is 0:
@@ -64,6 +69,9 @@ class GameOfLife:
 
     def generate_board(self):
         self.tiles = boardgenerator.generate_board(self._id)
+
+    def set_file_name(self, file_name):
+        self.file_name = file_name
 
     def load_tiles(self, tiles_content):
         self.set_start_index(boardgenerator.load_tiles(self.tiles, tiles_content))
