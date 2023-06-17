@@ -1,3 +1,4 @@
+import os
 import nextcord
 import logging
 import asyncio
@@ -5,10 +6,9 @@ from internal.bot import Bot
 
 
 def load_config():
-    from os.path import join, dirname
     from internal import configmanager
 
-    configmanager.init(join(dirname(__file__), 'config/serverSettings.json'), 'utf-8')
+    configmanager.init(os.path.join(os.getcwd(), 'config/serverSettings.json'), 'utf-8')
     return configmanager.instance
 
 

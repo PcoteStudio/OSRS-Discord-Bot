@@ -42,7 +42,7 @@ class GameOfLife:
         return now >= self.start_time and now <= self.end_time
 
     def has_finished(self, team: Team):
-        if len(self.tiles) is 0:
+        if len(self.tiles) == 0:
             return True
         return team.has_finished(self.tiles)
 
