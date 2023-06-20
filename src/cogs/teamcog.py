@@ -82,7 +82,7 @@ class TeamCog(commands.Cog):
 
         logging.info(
             f"{utils.format_guild_log(interaction.guild)} New members successfully added to team {team.name} by {interaction.user.name}.")
-        await interaction.send(f"New members successfully added to team {golutils.format_team(team)}. Members : {team.get_members_as_string(True, ' ')}.")
+        await interaction.send(f"New members successfully added to team {golutils.format_team(team)}. Members : {team.get_members_as_string(True, ', ')}.")
 
     @team.subcommand(description="Removed the mentioned users from their respective teams")
     @application_checks.guild_only()

@@ -139,7 +139,7 @@ class Team:
         self.members = list(filter(lambda m: m['id'] != player_id, self.members))
 
     def get_members_id(self):
-        return map(lambda m: m["id"], self.members)
+        return [m["id"] for m in self.members]
 
     def get_members_as_string(self, ping: bool, separator: str):
         result = ""
