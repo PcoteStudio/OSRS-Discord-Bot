@@ -134,6 +134,7 @@ class GameOfLifeCog(commands.Cog):
     @golchecks.game_is_ready()
     @golchecks.game_is_in_progress()
     @golchecks.player_is_in_team()
+    @golchecks.command_is_in_team_channel()
     async def roll(self, interaction: nextcord.Interaction):
         game = gameoflife.get_game(interaction.guild.id)
         team = game.get_team_by_player_id(interaction.user.id)
@@ -199,9 +200,6 @@ class GameOfLifeCog(commands.Cog):
     @golchecks.game_is_ready()
     async def rollback(self, interaction: nextcord.Interaction, user: nextcord.User):
         game = gameoflife.get_game(interaction.guild.id)
-        if game is None:
-            await interaction.send(f'{constants.EMOJI_INCORRECT} {constants.TEXT_NO_ACTIVE_GOL_SESSION_ON_SERVER}')
-            return
 
         team = game.get_team_by_player_id(user.id)
         if team is None:
@@ -233,6 +231,8 @@ class GameOfLifeCog(commands.Cog):
     @application_checks.guild_only()
     @golchecks.game_is_ready()
     @golchecks.player_is_in_team()
+    @golchecks.command_is_in_team_channel()
+    @golchecks.game_is_in_progress()
     async def current(self, interaction: nextcord.Interaction):
         game = gameoflife.get_game(interaction.guild.id)
         team = game.get_team_by_player_id(interaction.user.id)

@@ -13,6 +13,7 @@ class Team:
         self.name = name
         self.emoji = emoji
         self.seed = doc.get("seed", random.randint(1000, 100000000000))
+        self.channel = doc.get("channel", None)
         self.history_index = doc.get("history_index", -1)
         self.buffs = doc.get("buffs", 0)
         self.color = doc.get("color", [0, 0, 0])

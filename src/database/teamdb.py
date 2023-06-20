@@ -67,6 +67,7 @@ def team_to_doc(team: Team):
         'emoji': team.emoji,
         'seed': team.seed,
         'buffs': team.buffs,
+        'channel': team.channel,
         'color': team.color,
         'history_index': team.history_index,
         'history': team.history,

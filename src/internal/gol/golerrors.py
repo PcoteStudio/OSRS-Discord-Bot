@@ -28,6 +28,11 @@ class ApplicationPlayerNotInTeam(ApplicationCheckFailure):
         super().__init__(message or "You are not in any team.")
 
 
+class ApplicationNotInTeamChannel(ApplicationCheckFailure):
+    def __init__(self, message: Optional[str] = None) -> None:
+        super().__init__(message or "Team commands should be done in your team's channel.")
+
+
 class ApplicationGolAlreadyStarted(ApplicationCheckFailure):
     def __init__(self, message: Optional[str] = None) -> None:
         super().__init__(message or "The GoL event has already started.")

@@ -43,6 +43,15 @@ def player_is_in_team():
     return application_checks.check(predicate)
 
 
+def command_is_in_team_channel():
+    def predicate(interaction: nextcord.Interaction):
+        team = get_team(interaction)
+        if team.channel and interaction.channel.id != team.channel:
+            raise golerrors.ApplicationNotInTeamChannel
+        return True
+    return application_checks.check(predicate)
+
+
 def game_is_in_progress():
     def predicate(interaction: nextcord.Interaction):
         game = get_game(interaction)

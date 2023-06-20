@@ -144,6 +144,7 @@ class TeamCog(commands.Cog):
     @golchecks.game_exists()
     @golchecks.game_has_not_started()
     @golchecks.player_is_in_team()
+    @golchecks.command_is_in_team_channel()
     async def emoji(self, interaction: nextcord.Interaction, emoji: str):
         golutils.validate_emoji(emoji)
         game = gameoflife.get_game(interaction.guild.id)
@@ -161,6 +162,7 @@ class TeamCog(commands.Cog):
     @golchecks.game_exists()
     @golchecks.game_has_not_started()
     @golchecks.player_is_in_team()
+    @golchecks.command_is_in_team_channel()
     async def name(self, interaction: nextcord.Interaction, name: str):
         golutils.validate_team_name(name)
         game = gameoflife.get_game(interaction.guild.id)
@@ -178,6 +180,7 @@ class TeamCog(commands.Cog):
     @golchecks.game_exists()
     @golchecks.game_has_not_started()
     @golchecks.player_is_in_team()
+    @golchecks.command_is_in_team_channel()
     async def color(self, interaction: nextcord.Interaction,
                     color: str = nextcord.SlashOption(name="color", choices={"Black": "black", "Blue": "blue", "Brown": "brown",
                                                                              "Crimson": "crimson", "Emerald": "emerald",
