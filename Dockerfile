@@ -18,8 +18,8 @@ FROM python:3.11-alpine
 WORKDIR /app
 
 COPY --from=build /opt/venv /opt/venv
-COPY --from=build /app/ .
+COPY --from=build /app/ ./src
 
 ENV PATH="/opt/venv/bin:$PATH"
 
-CMD ["python", "main.py"]
+CMD ["python", "src/main.py"]
