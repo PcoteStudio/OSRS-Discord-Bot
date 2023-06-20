@@ -27,7 +27,7 @@ async def generate_animation(game: GameOfLife):
     os.makedirs(os.path.dirname(path_out), exist_ok=True)
 
     images = []
-    files = [f for f in listdir(path_source) if isfile(join(path_source, f))]
+    files = [f for f in sorted(listdir(path_source)) if isfile(join(path_source, f))]
     max_files = 50
     ratio = 1
     if len(files) > max_files:
@@ -52,7 +52,7 @@ async def generate_animation(game: GameOfLife):
 
 def draw_game(game: GameOfLife):
     path_board = os.path.join(os.getcwd() + f"/src/boards/{game.file_name}.webp")
-    path_font = os.path.join(os.getcwd() + "/src/fonts/SEGUIEMJ.ttf")
+    path_font = os.path.join(os.getcwd() + "/src/fonts/SEGUIEMJ.TTF")
     unixtime = calendar.timegm(datetime.utcnow().utctimetuple())
     path_out = f"{os.getcwd()}/out/{game.guild_id}/{game._id}/board_{unixtime if game.is_in_progress() else ''}.webp"
     os.makedirs(os.path.dirname(path_out), exist_ok=True)

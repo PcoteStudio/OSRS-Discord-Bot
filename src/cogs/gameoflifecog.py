@@ -281,7 +281,6 @@ class GameOfLifeCog(commands.Cog):
         self.is_updating_boards = True
         logging.info(f"Starting GoL progress board updates")
         try:
-            now = datetime.utcnow().replace(tzinfo=None)
             for guild_id, game in gameoflife.games.items():
                 if game is None or not game.is_ready() or game.channel_board is None:
                     continue

@@ -14,11 +14,12 @@ def load_config():
 
 async def run():
     config = load_config()
+    is_prod = config.get('IS_PROD', False)
 
     if config.get('DATABASE') is True:
         from internal import databasemanager
         databasemanager.init(config.get('MONGO_CONNECTION_STRING'),
-                             config.get('MONGO_DATABASE_NAME'))
+                             config.get('PROD_MONGO_DATABASE_NAME' if is_prod else 'MONGO_DATABASE_NAME'))
 
     intents = nextcord.Intents.default()
     intents.message_content = True
@@ -29,7 +30,6 @@ async def run():
     )
 
     try:
-        is_prod = config.get('IS_PROD', False)
         token = config.get('PROD_BOT_TOKEN' if is_prod else 'BOT_TOKEN')
         await bot.start(token)
     except KeyboardInterrupt:
