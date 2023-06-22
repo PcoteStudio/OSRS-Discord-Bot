@@ -83,7 +83,7 @@ class Team:
             return None
         # Roll forward after roll back
         else:
-            self.history[self.history_index]["time"] = datetime.utcnow().replace(tzinfo=None)
+            self.history[self.history_index + 1]["time"] = datetime.utcnow().replace(tzinfo=None)
 
         self.update_first_rolls_history(min_time)
         self.history_index += 1
@@ -115,9 +115,6 @@ class Team:
 
     def can_choose_next_destination(self):
         return self.history_index >= len(self.history) - 1
-
-    def roll_forward(self):
-        pass
 
     def get_current_history(self):
         if (self.history_index < 0):

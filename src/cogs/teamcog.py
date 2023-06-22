@@ -26,7 +26,7 @@ class TeamCog(commands.Cog):
             return
         content = f"The following teams are registered to **{game.name}**:"
         for team in game.teams:
-            content += f"\n- Team {golutils.format_team(team)} ({team.get_members_as_string(False, ' ')})"
+            content += f"\n- Team {golutils.format_team(team)} ({team.get_members_as_string(False, ', ')})"
         await interaction.send(content)
 
     @team.subcommand(description="Create a new team with the mentioned users.")
@@ -54,7 +54,7 @@ class TeamCog(commands.Cog):
 
         logging.info(
             f"{utils.format_guild_log(interaction.guild)} Team {team.name} created successfully by {interaction.user.name}.")
-        await interaction.send(f"Team {golutils.format_team(team)} created successfully. Members : {team.get_members_as_string(True, ' ')}.")
+        await interaction.send(f"Team {golutils.format_team(team)} created successfully. Members : {team.get_members_as_string(True, ', ')}.")
 
     @team.subcommand(description="Add the mentioned users to the team of the mentioned member.")
     @application_checks.guild_only()
