@@ -8,7 +8,7 @@ from database import gameoflifedb, teamdb
 
 class ChannelCog(commands.Cog):
 
-    @nextcord.slash_command(guild_ids=constants.COMMANDS_GUILD_ID)
+    @nextcord.slash_command()
     async def channel(self, interaction):
         pass
 

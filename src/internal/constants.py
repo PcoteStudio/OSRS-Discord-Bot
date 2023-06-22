@@ -1,5 +1,4 @@
 ROLE_BOT_ADMIN = 'GoL manager'
-COMMANDS_GUILD_ID = [1114607456304246784]
 DATE_FORMAT = "%Y/%m/%d %Hh%M"
 COLORS={"black": (0,0,0), "blue":(0,0,255), "brown":(139,69,19), "crimson":(90,0,0),
         "emerald":(4,99,7), "fuchsia":(255,0,255), "gray":(75,75,75), "indigo":(94,0,163), "lime":(0,255,0),

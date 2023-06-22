@@ -26,7 +26,8 @@ async def run():
     bot = Bot(
         config=config,
         description=config.get('BOT_DESCRIPTION'),
-        intents=intents
+        intents=intents,
+        default_guild_ids=config.get('PROD_GUILD_ID' if is_prod else 'DEV_GUILD_ID', None)
     )
 
     try:

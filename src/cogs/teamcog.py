@@ -12,7 +12,7 @@ class TeamCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @nextcord.slash_command(guild_ids=constants.COMMANDS_GUILD_ID)
+    @nextcord.slash_command()
     async def team(self, interaction):
         pass
 

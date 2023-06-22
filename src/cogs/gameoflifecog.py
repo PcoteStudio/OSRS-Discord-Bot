@@ -19,7 +19,7 @@ class GameOfLifeCog(commands.Cog):
         self.bot = bot
         self.is_updating_boards = False
 
-    @nextcord.slash_command(guild_ids=constants.COMMANDS_GUILD_ID)
+    @nextcord.slash_command()
     async def gol(self, interaction, test):
         pass
 
@@ -129,7 +129,7 @@ class GameOfLifeCog(commands.Cog):
             f"{utils.format_guild_log(interaction.guild)} End time set to {game.end_time.strftime(constants.DATE_FORMAT)} for the GoL session {game.name} by {interaction.user.name}.")
         await interaction.send(f"End time set to UTC {game.end_time.strftime(constants.DATE_FORMAT)} for the GoL session **{game.name}**.")
 
-    @nextcord.slash_command(guild_ids=constants.COMMANDS_GUILD_ID, description="Roll for your next task.")
+    @nextcord.slash_command(description="Roll for your next task.")
     @application_checks.guild_only()
     @golchecks.game_is_ready()
     @golchecks.game_is_in_progress()
@@ -194,7 +194,7 @@ class GameOfLifeCog(commands.Cog):
         finally:
             team.is_rolling = False
 
-    @nextcord.slash_command(guild_ids=constants.COMMANDS_GUILD_ID, description="Rolls back a specific team's last roll.")
+    @nextcord.slash_command(description="Rolls back a specific team's last roll.")
     @application_checks.guild_only()
     @application_checks.has_role(constants.ROLE_BOT_ADMIN)
     @golchecks.game_is_ready()
@@ -227,7 +227,7 @@ class GameOfLifeCog(commands.Cog):
         finally:
             team.is_rolling = False
 
-    @nextcord.slash_command(guild_ids=constants.COMMANDS_GUILD_ID, description="Displays your current task.")
+    @nextcord.slash_command(description="Displays your current task.")
     @application_checks.guild_only()
     @golchecks.game_is_ready()
     @golchecks.player_is_in_team()
@@ -243,7 +243,7 @@ class GameOfLifeCog(commands.Cog):
 
         await interaction.send(f"Your team's current task is:\n{golutils.format_task_multiline(game.get_current_tile(team))}")
 
-    @nextcord.slash_command(guild_ids=constants.COMMANDS_GUILD_ID, description="Displays statistics about all teams or a specific one.")
+    @nextcord.slash_command(description="Displays statistics about all teams or a specific one.")
     @application_checks.guild_only()
     @golchecks.game_is_ready()
     async def stats(self, interaction: nextcord.Interaction, user: nextcord.User = None):

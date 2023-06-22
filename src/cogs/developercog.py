@@ -10,7 +10,7 @@ class DeveloperCog(commands.Cog):
     async def ping(self, ctx):
         await ctx.send("Pong")
 
-    @nextcord.slash_command(guild_ids=constants.COMMANDS_GUILD_ID)
+    @nextcord.slash_command()
     async def help(self, interaction):
         content = "**Available commands**"
         content += "```"
