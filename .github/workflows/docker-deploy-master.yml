@@ -20,3 +20,7 @@ jobs:
       - run: |
           docker build . -t nsignori/osrs-discord-bot:latest
           docker push nsignori/osrs-discord-bot:latest
+      - name: Portainer Stack Redeploy
+        uses: magdemajt/trigger-webhook@v1
+        with:
+          url: https://docker.woofi7.com/api/stacks/webhooks/9d71546e-74fe-4aea-9fcb-bcc4fc2aead6
