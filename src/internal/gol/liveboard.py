@@ -44,7 +44,7 @@ async def generate_animation(game: GameOfLife):
                    save_all=True,
                    optimize=True,
                    append_images=images[1:],
-                   duration=300,
+                   duration=400,
                    loop=0)
 
     return path_out

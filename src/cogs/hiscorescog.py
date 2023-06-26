@@ -32,11 +32,11 @@ class HiscoresCog(commands.Cog):
         logging.info(f"Updating HS for {hs.server_name}...")
         try:
             channel = self.bot.get_channel(hs.channel_id)
-            botMsgs = [msg async for msg in channel.history()]
+            botMsgs = [msg async for msg in channel.history() if msg.author.id == self.bot.user.id]
             content = await hs.getUpdatedHiscoresToPost(1600)
 
             i = 0
-            for msg in botMsgs:
+            for msg in reversed(botMsgs):
                 if (i >= len(content)):
                     await msg.delete()
                 else:
