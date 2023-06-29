@@ -348,6 +348,7 @@ class GameOfLifeCog(commands.Cog):
     @gol.error
     @roll.error
     @rollback.error
+    @current.error
     @stats.error
     async def check_failure_error(self, interaction: nextcord.Interaction, error: Exception):
         if not isinstance(error, (nextcord.ApplicationCheckFailure, nextcord.ClientException)):
