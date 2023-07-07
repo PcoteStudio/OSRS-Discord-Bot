@@ -254,9 +254,11 @@ class GameOfLifeCog(commands.Cog):
             if (not team):
                 raise InvalidArgument(f"{user.display_name} is not a member of any team.")
             content = golstats.get_formatted_team_stats(game, team)
+            await interaction.send(content)
         else:
             content = golstats.get_formatted_game_stats(game)
-        await interaction.send(content)
+            await interaction.send(content[0])
+            await interaction.followup.send(content[1])
 
     @commands.Cog.listener()
     async def on_ready(self):

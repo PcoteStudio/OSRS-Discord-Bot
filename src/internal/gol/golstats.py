@@ -101,10 +101,8 @@ def get_formatted_team_stats(game: GameOfLife, team: Team):
 
 def get_formatted_game_stats(game: GameOfLife):
     all_avg_total_rolls = get_all_average_total_rolls(game)
-    content = format_all_average_rolls(all_avg_total_rolls)
-    content += format_all_total_rolls(all_avg_total_rolls)
-    content += format_all_tiles_before_end(get_all_tiles_before_end(game))
-    content += format_all_tiles_speed(get_all_tiles_speed(game))
+    content = [format_all_average_rolls(all_avg_total_rolls) + format_all_total_rolls(all_avg_total_rolls),
+               format_all_tiles_before_end(get_all_tiles_before_end(game)) + format_all_tiles_speed(get_all_tiles_speed(game))]
     return content
 
 
