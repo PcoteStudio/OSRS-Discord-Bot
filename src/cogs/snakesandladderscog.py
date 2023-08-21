@@ -333,6 +333,7 @@ class SnakesAndLaddersCog(commands.Cog):
 
     @tasks.loop(hours=23)
     async def update_progress_board(self):
+        return  # disabled for big board
         await asyncio.sleep(utils.seconds_until(6, 0))
         while self.is_updating_boards:
             await asyncio.sleep(1)
