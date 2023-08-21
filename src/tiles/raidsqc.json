@@ -1,0 +1,1578 @@
+[
+    {
+        "index": 100,
+        "task": "Obtain a bass from the Nightmare or Phosani's Nightmare",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                32,
+                1616
+            ]
+        ],
+        "start": true
+    },
+    {
+        "index": 99,
+        "task": "Climb the ladder to tile 7",
+        "move": 5,
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                182,
+                1616
+            ]
+        ]
+    },
+    {
+        "index": 98,
+        "task": "Complete a skull sceptre",
+        "examples": "Left skull half, right skull half, top of sceptre and bottom of sceptre",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                332,
+                1616
+            ]
+        ]
+    },
+    {
+        "index": 97,
+        "task": "Obtain a mithril bar from the Giant Mole",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                482,
+                1616
+            ]
+        ]
+    },
+    {
+        "index": 96,
+        "task": "Obtain a brimstone key",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                632,
+                1616
+            ]
+        ]
+    },
+    {
+        "index": 95,
+        "task": "Complete the Perfect Zalcano combat achievement",
+        "examples": "Make sure you have the 'Repeat completion' setting enabled",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                782,
+                1616
+            ]
+        ]
+    },
+    {
+        "index": 94,
+        "task": "Obtain a Larran's key",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                932,
+                1616
+            ]
+        ]
+    },
+    {
+        "index": 93,
+        "task": "Obtain a blood essence",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                1082,
+                1616
+            ]
+        ]
+    },
+    {
+        "index": 92,
+        "task": "Complete the Facing Jad Head-on combat achievement",
+        "examples": "Make sure you have the 'Repeat completion' setting enabled",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                1082,
+                1486
+            ]
+        ]
+    },
+    {
+        "index": 91,
+        "task": "Obtain an ancient staff",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                932,
+                1486
+            ]
+        ]
+    },
+    {
+        "index": 90,
+        "task": "Obtain a brine sabre",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                782,
+                1486
+            ]
+        ]
+    },
+    {
+        "index": 89,
+        "task": "Obtain a mud battlestaff, a seercull or a rock-shell armor piece from the Dagannoth Kings",
+        "examples": "Mud battlestaff, seercull, rock-shell plate or rock-shell legs",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                632,
+                1486
+            ]
+        ]
+    },
+    {
+        "index": 88,
+        "task": "Slide down the snake to tile 6",
+        "move": -7,
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                482,
+                1486
+            ]
+        ]
+    },
+    {
+        "index": 87,
+        "task": "Complete the Better Get Moving combat achievement",
+        "examples": "Make sure you have the 'Repeat completion' setting enabled",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                332,
+                1486
+            ]
+        ]
+    },
+    {
+        "index": 86,
+        "task": "Obtain an uncut ruby from Sarachnis",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                182,
+                1486
+            ]
+        ]
+    },
+    {
+        "index": 85,
+        "task": "Obtain a long bone",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                32,
+                1486
+            ]
+        ]
+    },
+    {
+        "index": 84,
+        "task": "Climb the ladder to tile 21",
+        "move": 4,
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                32,
+                1356
+            ]
+        ]
+    },
+    {
+        "index": 83,
+        "task": "Obtain a magic seed",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                182,
+                1356
+            ]
+        ]
+    },
+    {
+        "index": 82,
+        "task": "Obtain de dragon battleaxe",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                332,
+                1356
+            ]
+        ]
+    },
+    {
+        "index": 81,
+        "task": "Complete 5 different grandmaster combat achievements",
+        "examples": "Make sure you have the 'Repeat completion' setting enabled",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                482,
+                1356
+            ]
+        ]
+    },
+    {
+        "index": 80,
+        "task": "Obtain the Chompy chick",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                632,
+                1356
+            ]
+        ]
+    },
+    {
+        "index": 79,
+        "task": "Obtain a clue scroll from the thermonuclear smoke devil",
+        "examples": "Hard or elite clue",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                782,
+                1356
+            ]
+        ]
+    },
+    {
+        "index": 78,
+        "task": "Obtain dragon arrows",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                932,
+                1356
+            ]
+        ]
+    },
+    {
+        "index": 77,
+        "task": "Obtain an awakener's orb",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                1082,
+                1356
+            ]
+        ]
+    },
+    {
+        "index": 76,
+        "task": "Obtain a cockatrice head",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                1082,
+                1226
+            ]
+        ]
+    },
+    {
+        "index": 75,
+        "task": "Slide down the snake to tile 18",
+        "move": -8,
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                932,
+                1226
+            ]
+        ]
+    },
+    {
+        "index": 74,
+        "task": "Obtain a key master teleport",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                782,
+                1226
+            ]
+        ]
+    },
+    {
+        "index": 73,
+        "task": "Obtain a fedora",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                632,
+                1226
+            ]
+        ]
+    },
+    {
+        "index": 72,
+        "task": "Climb the ladder to tile 33",
+        "move": 4,
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                482,
+                1226
+            ]
+        ]
+    },
+    {
+        "index": 71,
+        "task": "Obtain any ballista piece",
+        "examples": "Monkey tail, ballista limbs/spring or light/heavy frame",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                332,
+                1226
+            ]
+        ]
+    },
+    {
+        "index": 70,
+        "task": "Obtain any clue for a Desert Treasure 2 boss",
+        "examples": "Easy, medium, hard or elite clue",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                182,
+                1226
+            ]
+        ]
+    },
+    {
+        "index": 69,
+        "task": "Obtain any talisman from the Abyssal Sire",
+        "examples": "Air, body, earth, fire, mind, water, cosmic, chaos or nature talisman",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                32,
+                1226
+            ]
+        ]
+    },
+    {
+        "index": 68,
+        "task": "Obtain any unique from K'ril Tsutsaroth",
+        "examples": "Zamorak hilt, steam battlestaff, zamorakian spear, staff of the dead, godsword shard 1/2/3 or pet K'ril Tsutsaroth",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                32,
+                1096
+            ]
+        ]
+    },
+    {
+        "index": 67,
+        "task": "Obtain a dark bow or a black mask",
+        "examples": "Dark bow or black mask (10)",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                182,
+                1096
+            ]
+        ]
+    },
+    {
+        "index": 66,
+        "task": "Slide down the snake to tile 28",
+        "move": -7,
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                332,
+                1096
+            ]
+        ]
+    },
+    {
+        "index": 65,
+        "task": "Obtain an ancient icon from the Phantom Muspah",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                482,
+                1096
+            ]
+        ]
+    },
+    {
+        "index": 64,
+        "task": "Obtain a dragon scimitar from Scorpia",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                632,
+                1096
+            ]
+        ]
+    },
+    {
+        "index": 63,
+        "task": "Obtain any unique from the thermonuclear smoke devil",
+        "examples": "Occult necklace, smoke battlestaff, dragon chainbody, jar of smoke or pet Smoke Devil",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                782,
+                1096
+            ]
+        ]
+    },
+    {
+        "index": 62,
+        "task": "Any helm from Barrows",
+        "examples": "Ahrim's hood, Dharok's helm, Guthan's helm, Karil's coif, Torag's helm or Verac's helm",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                932,
+                1096
+            ]
+        ]
+    },
+    {
+        "index": 61,
+        "task": "Climb the ladder to tile 43",
+        "move": 3,
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                1082,
+                1096
+            ]
+        ]
+    },
+    {
+        "index": 60,
+        "task": "Obtain any unique from Venenatis or Spindel",
+        "examples": "Dragon pickaxe/2h sword, fangs of Venenatis, treasonous ring, voidwaker gem or Venenatis spiderling",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                1082,
+                966
+            ]
+        ]
+    },
+    {
+        "index": 59,
+        "task": "Obtain any unique from Grotesque Guardians",
+        "examples": "Granite gloves/ring/hammer or black tourmaline core",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                932,
+                966
+            ]
+        ]
+    },
+    {
+        "index": 58,
+        "task": "Obtain any revenant statuette",
+        "examples": "Ancient emblem, totem, statuette, medallion, effigy or relic",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                782,
+                966
+            ]
+        ]
+    },
+    {
+        "index": 57,
+        "task": "Obtain any unique from Vet'ion or Calvar'ion",
+        "examples": "Dragon pickaxe/2h sword, skull of Vet'ion, ring of the gods, voidwaker blade or Vet'ion jr.",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                632,
+                966
+            ]
+        ]
+    },
+    {
+        "index": 56,
+        "task": "Slide down the snake to tile 37",
+        "move": -8,
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                482,
+                966
+            ]
+        ]
+    },
+    {
+        "index": 55,
+        "task": "Obtain any unique from Kree'arra",
+        "examples": "Armadyl hilt/helmet/chestplate/chainskirt, godsword shard 1/2/3 or pet Kree'arra",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                332,
+                966
+            ]
+        ]
+    },
+    {
+        "index": 54,
+        "task": "Obtain any unique from Kraken",
+        "examples": "Kraken tentacle, trident of the seas (full), jar of dirt or pet Kraken",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                182,
+                966
+            ]
+        ]
+    },
+    {
+        "index": 53,
+        "task": "Obtain a KBD head",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                32,
+                966
+            ]
+        ]
+    },
+    {
+        "index": 52,
+        "task": "Climb the ladder to tile 54",
+        "move": 5,
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                32,
+                836
+            ]
+        ]
+    },
+    {
+        "index": 51,
+        "task": "Obtain any unique from Callisto or Artio",
+        "examples": "Dragon pickaxe/2h sword, claws of Callisto, tyrannical ring, voidwaker hilt or Callisto cub.",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                182,
+                836
+            ]
+        ]
+    },
+    {
+        "index": 50,
+        "task": "Obtain a zenyte shard",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                332,
+                836
+            ]
+        ]
+    },
+    {
+        "index": 49,
+        "task": "Obtain an abyssal whip",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                482,
+                836
+            ]
+        ]
+    },
+    {
+        "index": 48,
+        "task": "Obtain any General Graardor unique",
+        "examples": "Bandos hilt/chestplate/tassets/boots, godsword shard 1/2/3 or pet General Graardor",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                632,
+                836
+            ]
+        ]
+    },
+    {
+        "index": 47,
+        "task": "Obtain a dragon chainbody",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                782,
+                836
+            ]
+        ]
+    },
+    {
+        "index": 46,
+        "task": "Obtain a mask of Ranul",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                932,
+                836
+            ]
+        ]
+    },
+    {
+        "index": 45,
+        "task": "Obtain a revenant weapon or the amulet of avarice",
+        "examples": "Craw's bow, Thammaron's sceptre, Viggora's chainmace or amulet of avarice",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                1082,
+                836
+            ]
+        ]
+    },
+    {
+        "index": 44,
+        "task": "Obtain all 4 rings from Dagannoth Kings",
+        "examples": "Archer's ring, Berserker's ring, Seer's ring and Warrior's ring",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                1082,
+                706
+            ]
+        ]
+    },
+    {
+        "index": 43,
+        "task": "Slide down the snake to tile 53",
+        "move": -5,
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                932,
+                706
+            ]
+        ]
+    },
+    {
+        "index": 42,
+        "task": "Obtain a blood quartz",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                782,
+                706
+            ]
+        ]
+    },
+    {
+        "index": 41,
+        "task": "Obtain a long bone from Giant Mole",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                632,
+                706
+            ]
+        ]
+    },
+    {
+        "index": 40,
+        "task": "Obtain a zamorakian spear",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                482,
+                706
+            ]
+        ]
+    },
+    {
+        "index": 39,
+        "task": "Obtain any elder chaos robe piece",
+        "examples": "Elder chaos hood, top or robe",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                332,
+                706
+            ]
+        ]
+    },
+    {
+        "index": 38,
+        "task": "Obtain any unique from Zulrah, other than the uncut onyx",
+        "examples": "Serpentine visage, tanzanite/magic fang, tanzanite/magma mutagen or pet snakeling",
+        "move": 3,
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                182,
+                706
+            ]
+        ]
+    },
+    {
+        "index": 37,
+        "task": "Obtain an ice quartz",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                32,
+                706
+            ]
+        ]
+    },
+    {
+        "index": 36,
+        "task": "Obtain blood essence from Nex",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                32,
+                576
+            ]
+        ]
+    },
+    {
+        "index": 35,
+        "task": "Obtain a smoke quartz",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                182,
+                576
+            ]
+        ]
+    },
+    {
+        "index": 34,
+        "task": "Climb the ladder to tile 70",
+        "move": 3,
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                332,
+                576
+            ]
+        ]
+    },
+    {
+        "index": 33,
+        "task": "Obtain any god wars dungeon armor piece",
+        "examples": "Armadyl helmet/chestplate/chainskirt, Bandos chestplate/tassets/boots or Torva platebody/platelegs/full helm",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                482,
+                576
+            ]
+        ]
+    },
+    {
+        "index": 32,
+        "task": "Obtain a shadow quartz",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                632,
+                576
+            ]
+        ]
+    },
+    {
+        "index": 31,
+        "task": "Obtain 3 different Cerberus crystals",
+        "examples": "3 of smouldering stone, primordial, pegasian or eternal crystals",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                782,
+                576
+            ]
+        ]
+    },
+    {
+        "index": 30,
+        "task": "Obtain any scroll from the Chambers of Xeric",
+        "examples": "Arcane, dexterous or torn prayer scroll",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                932,
+                576
+            ]
+        ]
+    },
+    {
+        "index": 29,
+        "task": "Obtain a Sarachnis Cudgel",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                1082,
+                576
+            ]
+        ]
+    },
+    {
+        "index": 28,
+        "task": "Obtain a purple from the Tombs of Amascut",
+        "examples": "Pet and kits do not count",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                1082,
+                446
+            ]
+        ]
+    },
+    {
+        "index": 27,
+        "task": "Obtain vials of blood and ore in the same chest from Theatre of Blood",
+        "examples": "[Runite, adamantite or gold ore] and vials of blood",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                932,
+                446
+            ]
+        ]
+    },
+    {
+        "index": 26,
+        "task": "Complete a malediction or an odium ward",
+        "examples": "All odium shards 1/2/3 or all malediction shards 1/2/3",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                782,
+                446
+            ]
+        ]
+    },
+    {
+        "index": 25,
+        "task": "Slide down the snake to tile 71",
+        "move": -5,
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                632,
+                446
+            ]
+        ]
+    },
+    {
+        "index": 24,
+        "task": "Obtain 3 unsired",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                482,
+                446
+            ]
+        ]
+    },
+    {
+        "index": 23,
+        "task": "Obtain a Saradomin light",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                332,
+                446
+            ]
+        ]
+    },
+    {
+        "index": 22,
+        "task": "Obtain an abyssal head",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                182,
+                446
+            ]
+        ]
+    },
+    {
+        "index": 21,
+        "task": "Obtain a purple from the Theatre of Blood",
+        "examples": "Pet and kits do not count",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                32,
+                446
+            ]
+        ]
+    },
+    {
+        "index": 20,
+        "task": "Slide down the snake to tile 78",
+        "move": -3,
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                32,
+                316
+            ]
+        ]
+    },
+    {
+        "index": 19,
+        "task": "Obtain 2 different soulreaper axe pieces",
+        "examples": "Leviathan's lure, siren's staff, Executioner's axe head or eye of the duke",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                182,
+                316
+            ]
+        ]
+    },
+    {
+        "index": 18,
+        "task": "Obtain an Osmumten's fang or a lightbearer",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                332,
+                316
+            ]
+        ]
+    },
+    {
+        "index": 17,
+        "task": "Obtain an hydra's claw or leather",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                482,
+                316
+            ]
+        ]
+    },
+    {
+        "index": 16,
+        "task": "Obtain 5 venator shards from the Phantom Muspash",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                632,
+                316
+            ]
+        ]
+    },
+    {
+        "index": 15,
+        "task": "Obtain 1 enhanced crystal weapon seed or 3 crystal armor seeds",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                782,
+                316
+            ]
+        ]
+    },
+    {
+        "index": 14,
+        "task": "Climb the ladder to tile 89",
+        "move": 2,
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                932,
+                316
+            ]
+        ]
+    },
+    {
+        "index": 13,
+        "task": "Obtain 3 brimstone ring pieces",
+        "examples": "Hydra's eye, fang or heart",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                1082,
+                316
+            ]
+        ]
+    },
+    {
+        "index": 12,
+        "task": "Obtain 3 chromium ingots",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                1082,
+                186
+            ]
+        ]
+    },
+    {
+        "index": 11,
+        "task": "Obtain a unique from Vorkath",
+        "examples": "Dragonbone necklace, draconic/skeletal visage, jar of decay or Vorki",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                932,
+                186
+            ]
+        ]
+    },
+    {
+        "index": 10,
+        "task": "Complete a full godsword, including a blade and hilt",
+        "examples": "All 3 godsword shards 1/2/3 and Bandos/Zamorak/Armadyl/Saradomin/Ancient hilt",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                782,
+                186
+            ]
+        ]
+    },
+    {
+        "index": 9,
+        "task": "Complete a blessed spirit shield",
+        "examples": "Spirit shield and holy elixir",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                632,
+                186
+            ]
+        ]
+    },
+    {
+        "index": 8,
+        "task": "Obtain any raid armor piece",
+        "examples": "Justiciar faceguard/chestguard/legguards, masori mask/body/chaps or ancestral hat/robe top/robe bottom",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                482,
+                186
+            ]
+        ]
+    },
+    {
+        "index": 7,
+        "task": "Complete 4 different barrows sets",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                332,
+                186
+            ]
+        ]
+    },
+    {
+        "index": 6,
+        "task": "Obtain any unique from Nex",
+        "examples": "Zaryte vambraces, nihil horn, Torva platebody/platelegs/full helm, ancient hilt or Nexling",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                182,
+                186
+            ]
+        ]
+    },
+    {
+        "index": 5,
+        "task": "Obtain any unique from the Nightmare or Phosani's Nightmare",
+        "examples": "Nightmare staff, inquisitor's mace/hauberk/plateskirt/great helm, eldritch/harmonised/volatile orb, parasite egg, jar of dreams or little Nightmare",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                32,
+                186
+            ]
+        ]
+    },
+    {
+        "index": 4,
+        "task": "Climb the ladder to tile 100",
+        "move": 3,
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                32,
+                56
+            ]
+        ]
+    },
+    {
+        "index": 3,
+        "task": "Obtain any purple from Chambers of Xeric, other than a scroll",
+        "examples": "Pet, arcane/dexterous scroll and kits do not count",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                182,
+                56
+            ]
+        ]
+    },
+    {
+        "index": 2,
+        "task": "Obtain a kit or dust from either CoX CM or ToB HM",
+        "examples": "Twisted ancestral colour kit, metamorphic dust, holy kit, sanguine kit or sanguine dust",
+        "type": 0,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                332,
+                56
+            ]
+        ]
+    },
+    {
+        "index": 1,
+        "task": "Obtain any weapon from the Theatre of Blood",
+        "examples": "Ghrazi rapier, sanguinesti staff or scythe of vitur",
+        "type": 2,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                482,
+                56
+            ]
+        ]
+    },
+    {
+        "index": 0,
+        "task": "Congratulations! You have completed the game",
+        "type": 4,
+        "pawn_offsets": [
+            60,
+            0
+        ],
+        "pawn_locations": [
+            [
+                632,
+                56
+            ]
+        ]
+    }
+]
