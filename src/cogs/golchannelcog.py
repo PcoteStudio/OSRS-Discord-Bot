@@ -3,7 +3,7 @@ import logging
 from nextcord.ext import commands, application_checks
 from internal import utils, constants
 from internal.gol import gameoflife, golchecks
-from database import gameoflifedb, teamdb
+from database.gol import gameoflifedb, teamdb
 
 
 class ChannelCog(commands.Cog):

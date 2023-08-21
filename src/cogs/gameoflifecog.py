@@ -11,7 +11,7 @@ from nextcord.ext import tasks, commands, application_checks
 from internal import choiceform, constants, utils
 from internal.gol import gameoflife, golchecks, golutils, liveboard, golstats
 from internal.gol.gameoflife import GameOfLife
-from database import teamdb, tilenodedb, gameoflifedb
+from database.gol import teamdb, tilenodedb, gameoflifedb
 
 
 class GameOfLifeCog(commands.Cog):
@@ -20,7 +20,7 @@ class GameOfLifeCog(commands.Cog):
         self.is_updating_boards = False
 
     @nextcord.slash_command()
-    async def gol(self, interaction, test):
+    async def gol(self, interaction: nextcord.Interaction):
         pass
 
     @gol.subcommand(description="Create a new GoL session on the server.")

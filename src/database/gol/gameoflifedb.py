@@ -1,5 +1,5 @@
 import logging
-from database import tilenodedb, teamdb
+from database import golteamdb, goltilenodedb
 from internal.databasemanager import instance
 from internal.gol.gameoflife import GameOfLife
 
@@ -25,8 +25,8 @@ async def update(game: GameOfLife):
 
 async def doc_to_game(doc):
     game = GameOfLife(doc['guild_id'], doc['name'], doc)
-    game.tiles = await tilenodedb.get_all_by_game_id(game._id)
-    game.teams = await teamdb.get_all_by_game_id(game._id)
+    game.tiles = await goltilenodedb.get_all_by_game_id(game._id)
+    game.teams = await golteamdb.get_all_by_game_id(game._id)
     return game
 
 
