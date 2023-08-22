@@ -16,13 +16,13 @@ class TeamCog(commands.Cog):
     async def team(self, interaction):
         pass
 
-    @team.subcommand(description="List all the teams participating in the current GoL session.")
+    @team.subcommand(description="List all the teams participating in the current SaL session.")
     @application_checks.guild_only()
     @salchecks.game_exists()
     async def list(self, interaction: nextcord.Interaction):
         game = snakesandladders.get_game(interaction.guild.id)
         if len(game.teams) == 0:
-            await interaction.send(f"{constants.EMOJI_INCORRECT} There is no team in the GoL session **{game.name}**.")
+            await interaction.send(f"{constants.EMOJI_INCORRECT} There is no team in the SaL session **{game.name}**.")
             return
         content = f"The following teams are registered to **{game.name}**:"
         for team in game.teams:
