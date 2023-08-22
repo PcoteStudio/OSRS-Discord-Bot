@@ -5,7 +5,7 @@ from nextcord.ext import commands, application_checks
 from internal import utils, constants
 from internal.gol.team import Team
 from internal.gol import gameoflife, golutils, golchecks
-from database import teamdb
+from database.gol import teamdb
 
 
 class TeamCog(commands.Cog):

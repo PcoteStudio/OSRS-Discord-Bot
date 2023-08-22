@@ -6,7 +6,7 @@ from ..src.internal.gol import boardgenerator
 from ..src.internal.gol.tilenode import TileType, TileNode
 
 
-class TestTileNode:
+class TestPoundTiles:
     game_id = ObjectId()
     tile_index = 3
     tile_doc = {
@@ -22,6 +22,13 @@ class TestTileNode:
         assert tile.index == self.tile_index
         assert tile.type == self.tile_doc["type"]
         assert tile.task == self.tile_doc["task"]
+
+    # def test_tiles_raids_qc(self):
+    #     nodes = boardgenerator.generate_board(self.game_id)
+    #     path = os.path.join(os.getcwd(), "src/tiles/raidsqc.json")
+    #     with open(path, 'r', encoding='utf-8') as doc:
+    #         content = json.load(doc)
+    #         boardgenerator.load_tiles(nodes, content)
 
     def test_tiles_pound(self):
         nodes = boardgenerator.generate_board(self.game_id)
