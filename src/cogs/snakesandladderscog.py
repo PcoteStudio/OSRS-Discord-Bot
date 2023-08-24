@@ -212,7 +212,7 @@ class SnakesAndLaddersCog(commands.Cog):
 
             cur_time = datetime.utcnow()
             diff_time = cur_time - cur_hist['time']
-            if diff_time < timedelta(0, 15):
+            if diff_time < timedelta(2):
                 await interaction.send("You can only skip a grind after being stuck on it for 48h.")
                 return
 

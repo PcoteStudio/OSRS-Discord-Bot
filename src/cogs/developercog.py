@@ -26,6 +26,7 @@ class DeveloperCog(commands.Cog):
         content += "\nTeam commands (during event)"
         content += "\n  /current            \tDisplay the team's current grind"
         content += "\n  /roll               \tRoll the team's next grind"
+        content += "\n  /skip               \tSkip your current grind (after 48h on same tile)"
         content += "\n```"
         await interaction.send(content)
 
