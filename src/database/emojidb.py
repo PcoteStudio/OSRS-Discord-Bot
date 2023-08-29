@@ -58,10 +58,11 @@ def emoji_to_doc(emoji: Emoji):
     return {
         '_id': emoji.emoji_id,
         'emoji_string': emoji.emoji_string,
+        'emoji_command': emoji.emoji_command,
         'animated': emoji.animated,
     }
 
 
 def doc_to_emoji(doc):
-    emoji = Emoji(doc['emoji_string'], doc['_id'], doc['animated'])
+    emoji = Emoji(doc['emoji_string'], doc['emoji_command'], doc['_id'], doc['animated'])
     return emoji

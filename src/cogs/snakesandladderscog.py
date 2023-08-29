@@ -381,7 +381,7 @@ class SnakesAndLaddersCog(commands.Cog):
                 game.is_board_updated = None
 
                 original_board_path = os.path.join(os.getcwd() + f"/src/boards/{game.file_name}.webp")
-                updated_board_path = liveboard.draw_game(game)
+                updated_board_path = await liveboard.draw_game(game)
                 channel = self.bot.get_channel(game.channel_board)
                 content = ["Reference board", "Updated board"]
                 files = [nextcord.File(original_board_path), nextcord.File(updated_board_path)]
