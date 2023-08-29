@@ -96,7 +96,8 @@ async def draw_game(game: SnakesAndLadders):
                 borderSize = 20
                 color = tuple(team.color)
                 border = Image.new('RGBA', emoji_img.size, color=color)
-                border.putalpha(emoji_img.getchannel('A'))
+                if 'A' in emoji_img.mode:
+                    border.putalpha(emoji_img.getchannel('A'))
 
                 border = border.resize((border.size[0] + borderSize, border.size[1] + borderSize))
                 border.paste(emoji_img, (int(borderSize / 2), int(borderSize / 2)), mask=emoji_img)
