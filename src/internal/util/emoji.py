@@ -45,7 +45,7 @@ async def fetch_image(emoji_id, animated):
     image_extension = 'webp'  # 'gif' if animated else 'webp'
     image_url = build_url(emoji_id, image_extension)
 
-    path_image = await image_path(emoji_id, animated)
+    path_image = image_path(emoji_id, animated)
     os.makedirs(os.path.dirname(path_image), exist_ok=True)
 
     async with aiohttp.ClientSession() as session:
