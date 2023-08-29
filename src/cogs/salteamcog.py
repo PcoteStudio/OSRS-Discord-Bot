@@ -6,6 +6,7 @@ from internal import utils, constants
 from internal.sal.team import Team
 from internal.sal import snakesandladders, salutils, salchecks
 from database.sal import teamdb
+from internal.util.emoji import Emoji
 
 
 class TeamCog(commands.Cog):
@@ -35,7 +36,8 @@ class TeamCog(commands.Cog):
     @salchecks.game_exists()
     async def create(self, interaction: nextcord.Interaction, name: str, emoji: str, users: str):
         salutils.validate_team_name(name)
-        salutils.validate_emoji(emoji)
+        emoji = await Emoji.load_emoji(emoji)
+
         game = snakesandladders.get_game(interaction.guild.id)
         members = await utils.convert_mentions_string_into_members(interaction.guild, users)
         salutils.validate_team_users(members)
@@ -46,7 +48,7 @@ class TeamCog(commands.Cog):
                     await interaction.send(f"{constants.EMOJI_INCORRECT} <@{m.id}> is already in team {salutils.format_team(t)}.")
                     return
 
-        team = Team(game._id, name, emoji)
+        team = Team(game._id, name, emoji.emoji_string)
         team.add_members(members)
         game.add_team(team)
         await teamdb.insert(team)
@@ -146,10 +148,11 @@ class TeamCog(commands.Cog):
     @salchecks.player_is_in_team()
     @salchecks.command_is_in_team_channel()
     async def emoji(self, interaction: nextcord.Interaction, emoji: str):
-        salutils.validate_emoji(emoji)
+        emoji = await Emoji.load_emoji(emoji)
+
         game = snakesandladders.get_game(interaction.guild.id)
         team = game.get_team_by_player_id(interaction.user.id)
-        team.emoji = emoji
+        team.emoji = emoji.emoji_string
         await teamdb.update(team)
 
         game.is_board_updated = False

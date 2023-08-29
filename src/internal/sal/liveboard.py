@@ -12,6 +12,8 @@ from PIL import Image, ImageFont, ImageDraw
 from os import listdir
 from os.path import isfile, join
 
+from internal.util.emoji import Emoji
+
 
 async def __open_resize_image(path, width, height):
     frame = Image.open(path)
@@ -50,7 +52,7 @@ async def generate_animation(game: SnakesAndLadders):
     return path_out
 
 
-def draw_game(game: SnakesAndLadders):
+async def draw_game(game: SnakesAndLadders):
     path_board = os.path.join(os.getcwd() + f"/src/boards/{game.file_name}.webp")
     path_font = os.path.join(os.getcwd() + "/src/fonts/SEGUIEMJ.TTF")
     unixtime = calendar.timegm(datetime.utcnow().utctimetuple())
@@ -82,7 +84,29 @@ def draw_game(game: SnakesAndLadders):
             loc_index = res[1]
             loc = pop_tile.pawn_locations[loc_index]
             offsets = pop_tile.pawn_offsets
-            drawn.text((loc[0] + loc_depth * offsets[0], loc[1] + loc_depth *
-                        offsets[1]), team.emoji[0], fill=tuple(team.color), font=mf)
+
+            emoji = await Emoji.load_emoji(team.emoji)
+            if emoji.emoji_id is None:
+                drawn.text((loc[0] + loc_depth * offsets[0], loc[1] + loc_depth *
+                offsets[1]), team.emoji[0], fill=tuple(team.color), font=mf)
+            else:
+                emoji_img = Image.open(emoji.get_path())
+
+                # add border
+                borderSize = 20
+                color = tuple(team.color)
+                border = Image.new('RGBA', emoji_img.size, color=color)
+                border.putalpha(emoji_img.getchannel('A'))
+
+                border = border.resize((border.size[0] + borderSize, border.size[1] + borderSize))
+                border.paste(emoji_img, (int(borderSize / 2), int(borderSize / 2)), mask=emoji_img)
+                emoji_img = border
+
+                # resize to 70px height
+                ratio = 70 / emoji_img.size[1]
+                emoji_img = emoji_img.resize((int(emoji_img.size[0] * ratio), int(emoji_img.size[1] * ratio)), resample=Image.NEAREST)
+
+                img.paste(emoji_img, (loc[0] - 10 + loc_depth * offsets[0], loc[1] + loc_depth *
+                            offsets[1]), mask=emoji_img)
     img.save(path_out)
     return path_out
