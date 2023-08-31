@@ -83,7 +83,7 @@ def get_formatted_team_stats(game: SnakesAndLadders, team: Team):
     avg_total_roll = get_team_avg_total_roll(team)
     tiles_speed = get_team_tiles_speed(team, game.tiles)
     tiles_before_end = get_team_tiles_before_end(team, game.tiles)
-    content = f"Team **{team.name}** {team.emoji} statistics\n```"
+    content = f"Team **{team.name}** statistics\n```"
     content += f"\nAverage roll: {'N/A' if avg_total_roll[0] is None else avg_total_roll[0]}"
     content += f"\nTotal grinds completed: {0 if avg_total_roll[1] is None else avg_total_roll[1]} grinds"
     content += f"\nNumber of tiles away from board completion: {tiles_before_end} tiles"
@@ -110,9 +110,9 @@ def format_all_total_rolls(all_average_total_rolls):
     content = "**Total grinds completed**```"
     for team, rolls in all_average_total_rolls:
         if (rolls[1] is None):
-            content += f"\n- Team {team.name} {team.emoji}: 0"
+            content += f"\n- Team {team.name}: 0"
         else:
-            content += f"\n- Team {team.name} {team.emoji}: {rolls[1]} grinds"
+            content += f"\n- Team {team.name}: {rolls[1]} grinds"
     content += "\n```\n"
     return content
 
@@ -121,9 +121,9 @@ def format_all_average_rolls(all_average_total_rolls):
     content = "**Average roll**```"
     for team, rolls in all_average_total_rolls:
         if (rolls[0] is None):
-            content += f"\n- Team {team.name} {team.emoji}: N/A"
+            content += f"\n- Team {team.name}: N/A"
         else:
-            content += f"\n- Team {team.name} {team.emoji}: {rolls[0]}"
+            content += f"\n- Team {team.name}: {rolls[0]}"
     content += "\n```\n"
     return content
 
@@ -132,9 +132,9 @@ def format_all_tiles_before_end(all_tiles_before_end):
     content = "**Number of tiles away from board completion**```"
     for team, tiles in all_tiles_before_end:
         if (tiles is None):
-            content += f"\n- Team {team.name} {team.emoji}: N/A"
+            content += f"\n- Team {team.name}: N/A"
         else:
-            content += f"\n- Team {team.name} {team.emoji}: {tiles} tiles"
+            content += f"\n- Team {team.name}: {tiles} tiles"
     content += "\n```\n"
     return content
 
@@ -146,13 +146,13 @@ def format_all_tiles_speed(all_tiles_speed):
         slowest = speeds[1]
         fastest = speeds[0]
         if (slowest[1] is not None):
-            content_slow += f"\n- Team {team.name} {team.emoji}: [{format_timespan(slowest[0])}] {slowest[1].task}"
+            content_slow += f"\n- Team {team.name}: [{format_timespan(slowest[0])}] {slowest[1].task}"
         else:
-            content_slow += f"\n- Team {team.name} {team.emoji}: N/A"
+            content_slow += f"\n- Team {team.name}: N/A"
         if (fastest[1] is not None):
-            content_fast += f"\n- Team {team.name} {team.emoji}: [{format_timespan(fastest[0])}] {fastest[1].task}"
+            content_fast += f"\n- Team {team.name}: [{format_timespan(fastest[0])}] {fastest[1].task}"
         else:
-            content_fast += f"\n- Team {team.name} {team.emoji}: N/A"
+            content_fast += f"\n- Team {team.name}: N/A"
     content_slow += "\n```\n"
     content_fast += "\n```\n"
     return content_slow + content_fast
