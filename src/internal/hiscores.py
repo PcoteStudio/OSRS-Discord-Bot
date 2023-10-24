@@ -33,6 +33,8 @@ class Hiscores():
         return topX
 
     async def getTopXFromMetrics(self, metrics: list, names: list, x: int):
+        if (metrics == 'league_points'):
+            x = 10
         metric_top_x = []
         for i, metric in enumerate(metrics):
             hiscore = await self.getHiscore(metric, self.displayed_top_x)

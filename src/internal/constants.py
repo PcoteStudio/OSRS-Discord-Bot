@@ -85,5 +85,5 @@ BOSS_METRICS = ['abyssal_sire', 'alchemical_hydra', 'artio', 'barrows_chests', '
                 'wintertodt', 'zalcano', 'zulrah']
 CLUE_DISPLAY_NAMES = ['All Clues', 'Beginner Clues', 'Easy Clues', 'Medium Clues', 'Hard Clues', 'Elite Clues', 'Master Clues']
 CLUE_METRICS = ['clue_scrolls_all', 'clue_scrolls_beginner', 'clue_scrolls_easy', 'clue_scrolls_medium', 'clue_scrolls_hard', 'clue_scrolls_elite', 'clue_scrolls_master']
-ACTIVITY_DISPLAY_NAMES=['LMS Score', 'Soul Wars Zeal', 'Rifts Closed']
-ACTIVITY_METRICS=['last_man_standing', 'soul_wars_zeal', 'guardians_of_the_rift']
+ACTIVITY_DISPLAY_NAMES=['LMS Score', 'Soul Wars Zeal', 'Rifts Closed', 'League Points']
+ACTIVITY_METRICS=['last_man_standing', 'soul_wars_zeal', 'guardians_of_the_rift', 'league_points']
