@@ -62,7 +62,7 @@ async def fetch_image(emoji_id, animated):
 
 def image_path(emoji_id, animated):
     image_extension = 'webp'  # 'gif' if animated else 'webp'
-    path_image = os.path.join(os.getcwd() + f"/src/memoji/{emoji_id}.{image_extension}")
+    path_image = os.path.join(os.getcwd() + f"/memoji/{emoji_id}.{image_extension}")
     return path_image
 
 async def find_emoji(emoji_id):
