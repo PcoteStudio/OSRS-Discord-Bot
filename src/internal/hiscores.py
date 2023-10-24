@@ -38,7 +38,7 @@ class Hiscores():
         for i, metric in enumerate(metrics):
             if (metric == 'league_points'):
                 x = 10
-            hiscore = await self.getHiscore(metric, self.displayed_top_x)
+            hiscore = await self.getHiscore(metric, x)
             topX = self.findTopX(hiscore, x)
             metric_top_x.append({'displayName': names[i], 'topX': topX})
             x = initial_x
