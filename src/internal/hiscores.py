@@ -3,12 +3,13 @@ from internal import constants
 
 
 class Hiscores():
-    def __init__(self, WOM_API_KEY: str, wom_group: int, channel_id: int,
+    def __init__(self, WOM_API_KEY: str, wom_group: int, channel_id: int, league_channel_id: int,
                  displayed_top_x: int, update_frequency_min: int, server_name: str,
                  display_boss: bool, display_clue: bool, display_activity: bool):
         self.WOM_API_KEY = WOM_API_KEY
         self.wom_group = wom_group
         self.channel_id = channel_id
+        self.league_channel_id = league_channel_id
         self.update_frequency_min = update_frequency_min
         self.server_name = server_name
         self.displayed_top_x = displayed_top_x
@@ -37,7 +38,7 @@ class Hiscores():
         initial_x = x
         for i, metric in enumerate(metrics):
             if (metric == 'league_points'):
-                x = 10
+                x = 15
             hiscore = await self.getHiscore(metric, x)
             topX = self.findTopX(hiscore, x)
             metric_top_x.append({'displayName': names[i], 'topX': topX})
@@ -99,6 +100,23 @@ class Hiscores():
                     post += f"\n{i+1}. {data['displayName']}: {data['kills']}"
                 post += " ```\n"
         return post
+
+    def formatLeagueTopX(self, all_activities_top_x):
+        post = "**Trailblazer Reloaded - Community Hiscores**\n"
+        for act in all_activities_top_x:
+            if act['displayName'] != "League Points":
+                continue
+            post += f"{act['displayName']}```"
+            for i, data in enumerate(act['topX']):
+                post += f"\n{i+1}. {data['displayName']}: {data['kills']}"
+            post += " ```\n"
+        return post
+
+    async def getUpdatedLeagueHiscoresToPost(self):
+        activities_top_x = [] if (self.display_activity == False) else await self.getTopXFromMetrics(
+            constants.ACTIVITY_METRICS, constants.ACTIVITY_DISPLAY_NAMES, self.displayed_top_x)
+        content = self.formatLeagueTopX(activities_top_x)
+        return content
 
     async def getUpdatedHiscoresToPost(self, split_length):
         bosses_top_x = [] if (self.display_boss == False) else await self.getTopXFromMetrics(constants.BOSS_METRICS, constants.BOSS_DISPLAY_NAMES, self.displayed_top_x)

@@ -18,9 +18,12 @@ class HiscoresCog(commands.Cog):
         for entry in hs_config:
             if entry['enabled'] == False:
                 continue
+            if entry.get('discord_league_channel') == None:
+                entry['discord_league_channel'] = None
             self.hiscores.append(Hiscores(config.get('WOM_API_KEY'),
                                           entry['wom_group'],
                                           entry['discord_channel'],
+                                          entry['discord_league_channel'],
                                           entry['displayed_top_x'],
                                           entry['update_frequency_min'],
                                           entry['server_name'],
@@ -51,10 +54,39 @@ class HiscoresCog(commands.Cog):
             logging.error(f"An error occurred while updating HS for {hs.server_name}: {str(e)}")
             traceback.print_exception(*sys.exc_info())
 
+    async def update_league_hs_channel(self, hs):
+        try:
+            if not hs.league_channel_id:
+                return
+
+            logging.info(f"Updating League HS for {hs.server_name}...")
+            channel = self.bot.get_channel(hs.league_channel_id)
+            botMsgs = [msg async for msg in channel.history() if msg.author.id == self.bot.user.id]
+            content = [await hs.getUpdatedLeagueHiscoresToPost()]
+
+            i = 0
+            for msg in reversed(botMsgs):
+                if (i >= len(content)):
+                    await msg.delete()
+                else:
+                    await msg.edit(content=content[i])
+                i += 1
+
+            for j in range(i, len(content)):
+                await channel.send(content[j])
+
+            logging.info(f"Updated League HS for {hs.server_name}.")
+        except Exception as e:
+            logging.error(f"An error occurred while updating League HS for {hs.server_name}: {str(e)}")
+            traceback.print_exception(*sys.exc_info())
+
     @commands.Cog.listener()
     async def on_ready(self):
         if (len(self.started_tasks) == 0):
             for hs in self.hiscores:
+                tl = tasks.loop(minutes=hs.update_frequency_min / 3)(self.update_league_hs_channel)
+                self.started_tasks.append(tl)
+                tl.start(hs)
                 t = tasks.loop(minutes=hs.update_frequency_min)(self.update_hs_channel)
                 self.started_tasks.append(t)
                 t.start(hs)
