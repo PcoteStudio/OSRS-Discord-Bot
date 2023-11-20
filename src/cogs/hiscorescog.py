@@ -51,7 +51,8 @@ class HiscoresCog(commands.Cog):
 
             logging.info(f"Updated HS for {hs.server_name}.")
         except Exception as e:
-            logging.error(f"An error occurred while updating HS for {hs.server_name}: {str(e)}")
+            logging.error(
+                f"An error occurred while updating HS for {hs.server_name}: {str(e)}")
             traceback.print_exception(*sys.exc_info())
 
     async def update_league_hs_channel(self, hs):
@@ -77,17 +78,20 @@ class HiscoresCog(commands.Cog):
 
             logging.info(f"Updated League HS for {hs.server_name}.")
         except Exception as e:
-            logging.error(f"An error occurred while updating League HS for {hs.server_name}: {str(e)}")
+            logging.error(
+                f"An error occurred while updating League HS for {hs.server_name}: {str(e)}")
             traceback.print_exception(*sys.exc_info())
 
     @commands.Cog.listener()
     async def on_ready(self):
         if (len(self.started_tasks) == 0):
             for hs in self.hiscores:
-                tl = tasks.loop(minutes=hs.update_frequency_min / 3)(self.update_league_hs_channel)
+                tl = tasks.loop(minutes=hs.update_frequency_min /
+                                3)(self.update_league_hs_channel)
                 self.started_tasks.append(tl)
                 tl.start(hs)
-                t = tasks.loop(minutes=hs.update_frequency_min)(self.update_hs_channel)
+                t = tasks.loop(minutes=hs.update_frequency_min)(
+                    self.update_hs_channel)
                 self.started_tasks.append(t)
                 t.start(hs)
 
