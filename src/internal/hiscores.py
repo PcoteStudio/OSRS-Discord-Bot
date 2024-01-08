@@ -19,7 +19,7 @@ class Hiscores():
 
     async def getHiscore(self, metric: str, top_x: int):
         async with aiohttp.ClientSession(headers={"x-api-key": self.WOM_API_KEY}) as session:
-            async with session.get(f"https://api.wiseoldman.net/league/groups/{self.wom_group}/hiscores?metric={metric}&limit={top_x}") as resp:
+            async with session.get(f"https://api.wiseoldman.net/v2/groups/{self.wom_group}/hiscores?metric={metric}&limit={top_x}") as resp:
                 boss_hiscore = await resp.json()
                 return boss_hiscore
 
